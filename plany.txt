@@ -1,0 +1,17 @@
+1. zwykły użytkownik może zostać dodany do konwersacji tylko przez super użytkownika
+
+2. zwykły użytkownik w konwersacji może jedynie odczytywać wiadomości,
+a super użytkownik może odczytywać i dodawać wiadomości
+
+3. Można zrobić też coś takiego, że konwersacja ma swoją bazę plików, 
+które zostały udostępnione i udostępniać pliki może tylko super użytkownik,
+a zwykły może je tylko odczytywać albo pisać wiadomości 
+
+4. Zwykły użytkownik może napisać do każdego wiadomość, 
+ale pokazuje sie to tak jak na fb w folderze inne i drugi użytkownik musi to zaakceptować.
+Natomiast super użytkownik może pisać do wszystkich i w normalnym folderze wiadomości się to pojawi
+
+5. Jest sobie parę takich użytkowników - właścicieli apki
+i oni mogą wysyłać komunikaty dot. apki do każdeog użytkownika
+np. że jest jakaś aktualizacja
+albo że będzie przerwa techniczna
