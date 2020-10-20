@@ -1,3 +1,9 @@
+Provider bazy danych - AWS 
+
+
+
+Zalożenia dotyczące bezpieczeństwa (to czego nam niby brakowało :v):
+
 1. zwykły użytkownik może zostać dodany do konwersacji tylko przez super użytkownika
 
 2. zwykły użytkownik w konwersacji może jedynie odczytywać wiadomości,
