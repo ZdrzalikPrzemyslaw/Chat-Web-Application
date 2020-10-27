@@ -1,0 +1,22 @@
+Opis Projektu
+Strona użytkownika:
+•	GUI
+•	Przesłanie danych na serwer
+•	Rejestracja i logowanie
+•	Szyfrowanie danych przesyłanych między użytkownikami 
+•	Informacja o poziomie dostępu do aplikacji
+•	Wyszukiwanie innych użytkowników aplikacji
+•	Tworzenie czatów
+Strona serwera:
+•	Bazuje na AWS
+•	Przechowywanie danych
+•	Odpowiedź na zapytania o istnienie innych użytkowników
+•	Weryfikacja pochodzenia danych oraz poprawności rejestracji i logowania użytkowników
+•	Tworzenie kopii zapasowych danych dla bezpieczeństwa i przechowywanie ich
+•	Posiada informacje o poziomach dostępów
+Rozwiązania z zakresu bezpieczeństwa:
+•	Szyfrowanie wiadomości 
+•	Rejestracja użytkowników
+•	Kopie zapasowe danych
+•	Poziomy dostępu
+
