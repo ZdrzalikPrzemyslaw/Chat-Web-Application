@@ -2,13 +2,25 @@ Enkrypcja wiadomości:
 
 Każdy użytkownik posiada swój klucz prywatny i publiczny.
 Klucze generowane są na podstawie hasła użytkownika, co pozwala na dostęp do wiadomości z każdego miejsca na ziemi.
+
 Problem: co w przypadku zmiany hasła?
-Każdy czat (również czaty 1 na 1) posiada swoje klucze symetryczne, generowane przez osoby tworzącą czat. Klucz jest szyfrowany przy użyciu kluczy publicznych wszystkich członków czatu i rozesłany do nich. Wiadomości w czacie są szyfrowane i deszyfrowane kluczem symetrycznym, przechowywane są w bazie danych w wersji zaszyfrowanej. 
-W momencie dołączenia do czatu kolejnego użytkownika jest
-a)	Generowany nowy klucz symetryczny, nowe wiadomości są szyfrowane nowym kluczem, dołączony użytkownik nie ma dostępu do historii czatu.
-b)	Użytkownikowi jest przesyłany poprzedni klucz symetryczny.
+
+Każdy czat (również czaty 1 na 1) posiada swoje klucze symetryczne, generowane przez osoby tworzącą czat. 
+Klucz jest szyfrowany przy użyciu kluczy publicznych wszystkich członków czatu i rozesłany do nich. 
+Wiadomości w czacie są szyfrowane i deszyfrowane kluczem symetrycznym, przechowywane są w bazie danych w wersji zaszyfrowanej. 
+
+W momencie dołączenia do czatu kolejnego użytkownika jest:
+  a)	Generowany nowy klucz symetryczny, nowe wiadomości są szyfrowane nowym kluczem, dołączony użytkownik nie ma dostępu do historii czatu.
+  b)	Użytkownikowi jest przesyłany poprzedni klucz symetryczny.
 W momencie opuszczenia czatu generowany jest nowy klucz symetryczny, nowe wiadomości są szyfrowane nowym kluczem.
+
 Problem: Co z poprzednimi wiadomościami? Jak przechowywać klucze? Jak oznaczać które wiadomości były zaszyfrowane którym kluczem? 
-Możliwe rozwiązanie: Utworzenie dla każdego użytkownika tabeli ‘pęku kluczy’, zaszyfrowanych jego kluczem. Każdy klucz w tabeli posiada swój nr i czat w którym jest używany (np. czat grupowy miał w swojej historii 5 kluczy, użytkownik ma dostęp do 3 z nich, wiadomości są oznaczone którym kluczem były szyfrowane, użytkownik może odszyfrować jedynie te wiadomości, do których posiada pasujący klucz)
+
+Możliwe rozwiązanie: Utworzenie dla każdego użytkownika tabeli ‘pęku kluczy’, zaszyfrowanych jego kluczem. 
+Każdy klucz w tabeli posiada swój nr i czat w którym jest używany (np. czat grupowy miał w swojej historii 5 kluczy, 
+użytkownik ma dostęp do 3 z nich, wiadomości są oznaczone którym kluczem były szyfrowane, 
+użytkownik może odszyfrować jedynie te wiadomości, do których posiada pasujący klucz)
+
 Możliwe rozwiązanie problemu zmiany hasła:
-W trakcie procedury zmiany hasła użytkownik odszyfrowuje po kolei swoje klucze, generuje nowe zaszyfrowane klucze i zapisuje je w bazie danych, po czym dawne klucze są usuwane.
+W trakcie procedury zmiany hasła użytkownik odszyfrowuje po kolei swoje klucze, 
+generuje nowe zaszyfrowane klucze i zapisuje je w bazie danych, po czym dawne klucze są usuwane.
