@@ -57,7 +57,7 @@
           <subscriptionId>3e8180d4-9840-48a6-8ebe-183c2e75e2b2</subscriptionId>  
           <resourceGroup>CzatMat</resourceGroup>  
           <appName>CzatMat</appName>  
-          <pricingTier>B1</pricingTier>  
+          <pricingTier>F1</pricingTier>
           <region>westeurope</region>  
           <runtime> 
             <os>Windows</os>  
