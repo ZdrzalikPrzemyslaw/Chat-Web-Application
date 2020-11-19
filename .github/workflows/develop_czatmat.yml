@@ -13,7 +13,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@develop
 
     - name: Set up Java version
       uses: actions/setup-java@v1
@@ -21,7 +21,7 @@ jobs:
         java-version: '11'
 
     - name: Build with Maven
-      run: mvn clean install --file ${{ github.workspace }}/App/gs-spring-boot/initial/pom.xml
+      run: mvn clean install --file ${{ github.workspace }}/App/gs-spring-boot/complete/pom.xml
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
@@ -29,4 +29,4 @@ jobs:
         app-name: 'czatmat'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_7d5c22b18d2c46fe9a7212438f517339 }}
-        package: '${{ github.workspace }}/App/gs-spring-boot/initial/target/*.jar'
+        package: '${{ github.workspace }}/App/gs-spring-boot/initial/complete/*.jar'
