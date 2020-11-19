@@ -13,7 +13,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@develop
+    - uses: actions/checkout@master
 
     - name: Set up Java version
       uses: actions/setup-java@v1
