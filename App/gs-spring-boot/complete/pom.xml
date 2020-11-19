@@ -13,10 +13,10 @@
   <artifactId>spring-boot</artifactId>  
   <version>0.0.1-SNAPSHOT</version>  
   <name>spring-boot</name>  
-  <description>Demo project for Spring Boot</description>
-  <properties>
-    <java.version>8</java.version>
-  </properties>
+  <description>Demo project for Spring Boot</description>  
+  <properties> 
+    <java.version>11</java.version> 
+  </properties>  
   <dependencies> 
     <dependency> 
       <groupId>org.springframework.boot</groupId>  
@@ -57,11 +57,11 @@
           <subscriptionId>3e8180d4-9840-48a6-8ebe-183c2e75e2b2</subscriptionId>  
           <resourceGroup>CzatMat</resourceGroup>  
           <appName>CzatMat</appName>  
-          <pricingTier>F1</pricingTier>
+          <pricingTier>F1</pricingTier>  
           <region>westeurope</region>  
           <runtime> 
             <os>Windows</os>  
-            <javaVersion>Java 8</javaVersion>
+            <javaVersion>Java 11</javaVersion>  
             <webContainer>Java SE</webContainer> 
           </runtime>  
           <deployment> 
