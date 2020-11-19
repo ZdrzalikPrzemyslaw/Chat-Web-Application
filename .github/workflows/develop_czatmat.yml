@@ -21,7 +21,7 @@ jobs:
         java-version: '8'
 
     - name: Build with Maven
-      run: mvn clean install
+      run: mvn clean install --file ${{ github.workspace }}/App/gs-spring-boot/complete/pom.xml
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
@@ -29,4 +29,4 @@ jobs:
         app-name: 'czatmat'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_a5a6b7c7359f49d8a42bddffb2146e0e }}
-        package: '${{ github.workspace }}/target/*.jar'
+        package: '${{ github.workspace }}/App/gs-spring-boot/complete/target/*.jar'
