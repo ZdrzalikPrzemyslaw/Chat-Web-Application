@@ -21,13 +21,13 @@ npm run lint
 ```
 
 ### Deploys
-## Comandline
+#### Comandline
 ```
 az login
 az webapp up --name FrontEndChatMat --html
 ```
 
-## VS Code
+#### VS Code
 * Install plugins: 
   * Azure Account
   * Azure App Service
