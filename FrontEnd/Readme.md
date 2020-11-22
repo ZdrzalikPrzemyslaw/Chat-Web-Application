@@ -34,7 +34,7 @@ az webapp up --name FrontEndChatMat --html
 * Show all comnands: Ctrl + Shift + P 
   * Azure App Service: Deploy to web app...
   * Browse - select dist dir
-  * FrontEndCzatMat - choose our app
+  * FrontEndChatMat - choose our app
 * Deploy - click
 
 ### Customize configuration
