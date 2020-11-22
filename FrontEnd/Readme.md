@@ -20,5 +20,22 @@ npm run build
 npm run lint
 ```
 
+### Deploys
+#### Comandline
+```
+az login
+az webapp up --name FrontEndChatMat --html
+```
+
+#### VS Code
+* Install plugins: 
+  * Azure Account
+  * Azure App Service
+* Show all comnands: Ctrl + Shift + P 
+  * Azure App Service: Deploy to web app...
+  * Browse - select dist dir
+  * FrontEndCzatMat - choose our app
+* Deploy - click
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
