@@ -1,5 +1,5 @@
 <template>
-  <LoginForm/>
+  <LoginForm  class="justify-center"/>
 </template>
 
 <script>

@@ -8,7 +8,7 @@
           type="text"
           v-model="username"
           name="username"
-          class="form-control mx-sm-3"
+          class="form-control sm-3"
         />
         <div v-show="submitted && !username" class="invalid-feedback">
           Username is required
@@ -20,7 +20,7 @@
           type="password"
           v-model="password"
           name="password"
-          class="form-control mx-sm-3"
+          class="form-control sm-3"
           :class="{ 'is-invalid': submitted && !password }"
         />
         <div v-show="submitted && !password" class="invalid-feedback">
@@ -50,5 +50,10 @@ export default {
 <style scoped>
 #login {
   width: 20%;
+  margin: auto;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 10px 30px;
+  background: #DCDCDC;
 }
 </style>
