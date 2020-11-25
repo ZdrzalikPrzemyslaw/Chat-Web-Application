@@ -2,17 +2,20 @@
 <!--  <img alt="Vue logo" src="./assets/logo.png">-->
 <!--  <HelloWorld msg="Welcome to Your Vue.js App"/>-->
   <ChatsList/>
+  <ConversationView />
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue'
 import ChatsList from "@/components/ChatsList";
+import ConversationView from "@/components/ConversationView"
 
 export default {
   name: 'App',
   components: {
     // HelloWorld,
     ChatsList,
+    ConversationView,
   }
 }
 </script>
