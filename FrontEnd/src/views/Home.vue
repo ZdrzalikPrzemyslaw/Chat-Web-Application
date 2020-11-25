@@ -1,13 +1,16 @@
 <template>
   <ChatsList/>
+  <ConversationView/>
 </template>
 
 <script>
 import ChatsList from "../components/ChatsList";
+import ConversationView from "../components/ConversationView"
 export default {
   name: 'Home',
   components: {
     ChatsList,
+    ConversationView
   }
 }
 </script>
