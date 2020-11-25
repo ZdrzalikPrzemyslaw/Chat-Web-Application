@@ -1,5 +1,25 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <LoginForm/>
 </template>
+
+<script>
+// import HelloWorld from './components/HelloWorld.vue'
+import LoginForm from "../components/LoginForm";
+export default {
+  name: 'Login',
+  components: {
+    LoginForm
+  }
+}
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+</style>
