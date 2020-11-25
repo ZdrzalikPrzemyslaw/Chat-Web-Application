@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary">Login</button>
+        <button class="btn btn-primary" v-on:click="this.$router.push('/')">Login</button>
       </div>
     </form>
   </div>

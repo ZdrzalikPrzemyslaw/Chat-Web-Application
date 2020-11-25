@@ -3,12 +3,10 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import ChatsList from "../components/ChatsList";
 export default {
   name: 'Home',
   components: {
-    // HelloWorld,
     ChatsList,
   }
 }
