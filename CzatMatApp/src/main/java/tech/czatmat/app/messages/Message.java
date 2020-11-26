@@ -18,6 +18,10 @@ public class Message {
         this.messageId = messageId;
     }
 
+    public int getMessageId() {
+        return messageId;
+    }
+
     public String getUserName() {
         return userName;
     }
