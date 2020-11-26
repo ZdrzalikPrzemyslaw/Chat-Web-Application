@@ -3,6 +3,7 @@ package tech.czatmat.app;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import tech.czatmat.app.messages.Message;
 
 import java.util.ArrayList;
 import java.util.Date;

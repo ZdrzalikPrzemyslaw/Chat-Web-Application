@@ -1,4 +1,4 @@
-package tech.czatmat.app;
+package tech.czatmat.app.util;
 
 public class Pair<T, T1> {
 
