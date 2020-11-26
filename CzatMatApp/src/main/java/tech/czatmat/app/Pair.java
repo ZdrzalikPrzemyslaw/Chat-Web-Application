@@ -19,8 +19,10 @@ public class Pair<T, T1> {
         return second;
     }
 
-    public static <T, T1> Pair <T, T1> of(T a, T1 b){
+    public static <T, T1> Pair <T, T1> of(T a, T1 b) {
         return new Pair<>(a, b);
     }
 
 }
+
+

@@ -14,7 +14,11 @@ public class ExampleChatController {
     public List<Pair<String, String>> index() {
         List<Pair<String, String>> list = new ArrayList<>();
         Pair<String, String> pair = Pair.of("Julia", "Masakra");
+        Pair<String, String> pair1 = Pair.of("Przemek", "Nauuura");
+        Pair<String, String> pair2 = Pair.of("Oskar", "Zrobie to jutro!");
         list.add(pair);
+        list.add(pair1);
+        list.add(pair2);
         return list;
     }
 
