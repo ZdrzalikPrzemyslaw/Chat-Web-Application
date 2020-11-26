@@ -35,6 +35,7 @@
 
 
 <script>
+import axios from 'axios'
 export default {
   name: "ConversationView",
   data() {
@@ -65,15 +66,13 @@ export default {
 // },
 
   mounted() {
-    this.$https.get("https://czatmat.azurewebsites.net/przyklad").then(
-      (response) => {
-        this.messages = response.body;
-        console.log(response.body);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    axios.get("https://czatmat.azurewebsites.net/przyklad")
+    .then(function (response) {
+      console.log(response.data)
+    })
+    .catch(function (error){
+      console.log(error)
+    })
   },
 };
 </script>
