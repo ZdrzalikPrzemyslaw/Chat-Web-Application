@@ -3,11 +3,7 @@
     <img src="../assets/profile_pic.jpg" />
     <p id="user_name"></p>
 
-    <template v-for="oneMessage in messages">
-      <div
-        v-for="(userName, message, date) in oneMessage"
-        :key="userName"
-      >
+    <div v-for="oneMessage in messages" :key="">
         <div v-if="userName === 'Julia'" class="container">
           <p>{{ message }}</p>
           <p>{{ date }}</p>
@@ -17,8 +13,7 @@
           <p>{{ message }}</p>
           <p>{{ date }}</p>
         </div>
-      </div>
-    </template>
+    </div>
 
     <!-- <div v-for="message in messages" v-bind:key="message">
       <div v-if="message[2] == 0" class="container">
@@ -41,21 +36,15 @@ export default {
   data() {
     return {
       messages: [],
-      userN: "",
     };
   },
 
   created() {
+    let self = this;
     axios.get("https://czatmat.azurewebsites.net/przyklad")
     .then(function (response) {
-      let temp = response.data;
-      let userName = response.data[0].userName;
-      console.log(userName);
-      this.userN = userName;
-      console.log(this.userN);
-      console.log(temp);
-      this.messages = temp;
-      console.log(this.messages);
+      console.log(response.data);
+      self.messages = response.data;
     })
     .catch(function (error){
       console.log(error);
