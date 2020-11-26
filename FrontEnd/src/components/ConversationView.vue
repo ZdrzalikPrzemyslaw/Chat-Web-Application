@@ -5,7 +5,7 @@
 
     <template v-for="oneMessage in messages">
       <div
-        v-for="(userName, message, date) in getMoviesByGenre(oneMessage)"
+        v-for="(userName, message, date) in oneMessage"
         :key="userName"
       >
         <div v-if="userName === 'Julia'" class="container">
@@ -41,37 +41,24 @@ export default {
   data() {
     return {
       messages: [],
+      userN: "",
     };
   },
 
-// created() {
-//   // GET request using fetch with error handling
-//   fetch("https://czatmat.azurewebsites.net/przyklad")
-//     .then(async response => {
-//       const data = await response.json();
-
-//       // check for error response
-//       if (!response.ok) {
-//         // get error message from body or default to response statusText
-//         const error = (data && data.message) || response.statusText;
-//         return Promise.reject(error);
-//       }
-
-//       this.messages = data.total;
-//     })
-//     .catch(error => {
-//       this.errorMessage = error;
-//       console.error("There was an error!", error);
-//     });
-// },
-
-  mounted() {
+  created() {
     axios.get("https://czatmat.azurewebsites.net/przyklad")
     .then(function (response) {
-      console.log(response.data)
+      let temp = response.data;
+      let userName = response.data[0].userName;
+      console.log(userName);
+      this.userN = userName;
+      console.log(this.userN);
+      console.log(temp);
+      this.messages = temp;
+      console.log(this.messages);
     })
     .catch(function (error){
-      console.log(error)
+      console.log(error);
     })
   },
 };
