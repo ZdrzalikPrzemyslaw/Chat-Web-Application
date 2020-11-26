@@ -3,15 +3,15 @@
     <img src="../assets/profile_pic.jpg" />
     <p id="user_name"></p>
 
-    <div v-for="oneMessage in messages" :key="">
-        <div v-if="userName === 'Julia'" class="container">
-          <p>{{ message }}</p>
-          <p>{{ date }}</p>
+    <div v-for="(message, index, key) in messages" :key="key">
+        <div v-if="message.userName === 'Julia'" class="container">
+          <p>{{ message.message }}</p>
+          <p>{{ message.date }}</p>
         </div>
         <div v-else class="container darker">
-          <p>{{ userName }}</p>
-          <p>{{ message }}</p>
-          <p>{{ date }}</p>
+          <p>{{ message.userName }}</p>
+          <p>{{ message.message }}</p>
+          <p>{{ message.date }}</p>
         </div>
     </div>
 
