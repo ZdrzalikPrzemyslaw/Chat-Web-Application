@@ -1,7 +1,7 @@
 <template>
-  <div class=".container">
-    <div class="col sm-3" v-for="chat in this.chats" v-bind:key="chat" id="OneChat" @click="this.onClickChat">
-      <div class="row" id="UserName">
+  <div class="container" id="main_container">
+    <div class="row" v-for="chat in this.chats" v-bind:key="chat" id="OneChat" @click="this.onClickChat">
+      <div class="col" id="UserName">
         {{ chat[0] }}
       </div>
       <div class="row" id="LastMessage">
@@ -32,7 +32,7 @@ export default {
   padding: 20px;
   text-align: left;
   cursor: pointer;
-  width: 10%;
+  width: 100%;
   background: #D4D4D4;
   margin: 5px;
   border-radius: 10px;
@@ -46,4 +46,10 @@ export default {
 #LastMessage {
   opacity: 0.9;
 }
+
+#main_container {
+  float: left;
+  width: 10%;
+}
+ 
 </style>
