@@ -4,7 +4,7 @@
       <div class="col" id="UserName">
         {{ chat[0] }}
       </div>
-      <div class="col" id="LastMessage">
+      <div class="row" id="LastMessage">
         {{ chat[1] }}
       </div>
     </div>
@@ -29,12 +29,12 @@ export default {
 
 <style scoped>
 #OneChat {
-  padding: 15px;
+  padding: 20px;
   text-align: left;
   cursor: pointer;
   width: 100%;
   background: #D4D4D4;
-  margin: 2px;
+  margin: 5px;
   border-radius: 10px;
 }
 
