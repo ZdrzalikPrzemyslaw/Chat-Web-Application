@@ -8,12 +8,14 @@ public class Message {
     private final String message;
     private final Date date;
     private final int chatId;
+    private final int messageId;
 
-    private Message(String userName, String message, Date date, int chatId) {
+    private Message(String userName, String message, Date date, int chatId, int messageId) {
         this.userName = userName;
         this.message = message;
         this.date = date;
         this.chatId = chatId;
+        this.messageId = messageId;
     }
 
     public String getUserName() {
@@ -32,7 +34,7 @@ public class Message {
         return chatId;
     }
 
-    public static Message of(String userName, String message, Date date, int chatId) {
-        return new Message(userName, message, date, chatId);
+    public static Message of(String userName, String message, Date date, int chatId, int messageId) {
+        return new Message(userName, message, date, chatId, messageId);
     }
 }
