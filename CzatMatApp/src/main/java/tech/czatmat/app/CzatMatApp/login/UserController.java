@@ -20,9 +20,14 @@ public class UserController {
         return userRepository.save(user);
     }
 
-    @GetMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
     public Iterable<User> getUsers() {
         return userRepository.findAll();
+    }
+
+    @RequestMapping(value = "/przyklad", method = RequestMethod.GET, produces = "application/json")
+    public String getPrzyklad() {
+        return "Siema Login";
     }
 
 }
