@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/registration")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RegistrationController {
     private final UserRepository userRepository;
 
