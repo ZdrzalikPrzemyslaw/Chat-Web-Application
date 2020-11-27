@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/login")
+// TODO: 27.11.2020 fix class
 public class UserController {
 
     private final UserRepository userRepository;
