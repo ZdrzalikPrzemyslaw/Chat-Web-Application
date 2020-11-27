@@ -76,7 +76,7 @@ export default {
 .container img {
   float: left;
   max-width: 50px;
-  width: 100%;
+  /* width: 100%; */
   margin-right: 20px;
   border-radius: 50%;
 }
@@ -93,11 +93,9 @@ export default {
   font-size: 15px;
 }
 
-#main_container {
-  float: left;
-  margin-left: 40px;
-  width: 80%;
-}
+/* #main_container {
+  /* margin-left: 40px; */
+/* } */ 
 
 #user_name {
   text-align: left;
