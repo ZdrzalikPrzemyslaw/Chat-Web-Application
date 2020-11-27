@@ -28,7 +28,15 @@
         </div>
       </div>
       <div class="form-group">
-        <button class="btn btn-primary" v-on:click="this.$router.push('/')">Login</button>
+        <button class="btn btn-primary" v-on:click="this.$router.push('/')">
+          Login
+        </button>
+        <button
+          class="btn btn-secondary"
+          v-on:click="this.$router.push('/registration')"
+        >
+          Go To Registration
+        </button>
       </div>
     </form>
   </div>
@@ -54,6 +62,6 @@ export default {
   border: 1px solid gray;
   border-radius: 10px;
   padding: 10px 30px;
-  background: #DCDCDC;
+  background: #dcdcdc;
 }
 </style>

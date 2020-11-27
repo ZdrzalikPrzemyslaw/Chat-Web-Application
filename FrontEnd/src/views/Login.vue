@@ -3,7 +3,6 @@
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import LoginForm from "../components/LoginForm";
 export default {
   name: 'Login',
