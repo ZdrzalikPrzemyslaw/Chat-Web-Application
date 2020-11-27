@@ -21,13 +21,14 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
+    // TODO: 27.11.2020 Return token
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public void loginUser(@RequestBody Users users, HttpServletResponse response) {
         if (!userRepository.existsByLogin(users.getLogin())) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
-        if (VerifyUser.mockVerify(users.getLogin(), users.getPassword())) {
+        if(VerifyUser.Verify(users.getLogin(), users.getPassword(), userRepository, passwordEncoder)){
             response.setStatus(HttpServletResponse.SC_ACCEPTED);
         } else {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
