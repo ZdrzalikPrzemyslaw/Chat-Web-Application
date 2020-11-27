@@ -13,14 +13,14 @@ public class RegistrationController {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+    public Users createUser(@RequestBody Users users) {
+        return userRepository.save(users);
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
-    public Iterable<User> getUsers() {
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
+    public Iterable<Users> getUsers() {
         return userRepository.findAll();
     }
 

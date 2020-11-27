@@ -3,7 +3,7 @@ package tech.czatmat.app.CzatMatApp.login;
 import io.micrometer.core.lang.Nullable;
 import org.springframework.data.annotation.Id;
 
-public class User {
+public class Users {
 
     @Id
     private int ID;
@@ -14,10 +14,10 @@ public class User {
     private String surname;
     private String email;
 
-    public User() {
+    public Users() {
     }
 
-    public User(String login, String password, String name, String surname, @Nullable String email) {
+    public Users(String login, String password, String name, String surname, @Nullable String email) {
         this.login = login;
         this.password = password;
         this.name = name;

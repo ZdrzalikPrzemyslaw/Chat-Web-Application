@@ -15,13 +15,13 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/")
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public Boolean loginUser(@RequestBody User user) {
-        if (!userRepository.existsByLogin(user.getLogin())) {
+    public Boolean loginUser(@RequestBody Users users) {
+        if (!userRepository.existsByLogin(users.getLogin())) {
             return false;
         }
-        return VerifyUser.mockVerify(user.getLogin(), user.getPassword());
+        return VerifyUser.mockVerify(users.getLogin(), users.getPassword());
     }
 
 
