@@ -1,11 +1,11 @@
 <template>
-  <div class="container" id="main_container">
-    <div class="row" v-for="chat in this.chats" v-bind:key="chat" id="OneChat" @click="this.onClickChat">
-      <div class="col" id="UserName">
-        {{ chat[0] }}
+  <div class=".container" id="main_container">
+    <div class="col sm-3" v-for="chat in this.chats" v-bind:key="chat" id="OneChat" @click="this.onClickChat">
+      <div class="row" id="UserName">
+        {{ chat.user }}
       </div>
       <div class="row" id="LastMessage">
-        {{ chat[1] }}
+        {{ chat.message }}
       </div>
     </div>
   </div>
@@ -16,7 +16,9 @@ export default {
   name: "ChatsList",
   data() {
     return {
-      chats: [["Julia Szymanska", "Dobranoc"], ["Martyna Piasecka", "Do zobaczenia"], ["Przemyslaw Zdrzalik", "Zrobimy to jutro!"], ["Huber Gawłowski", "Kiedy wychodzimy?"], ["Kamil Kiszko-Zgierski", "Ok"]],
+      chats: [{user: "Julia Szymanska", message: "Dobranoc"}, {user: "Martyna Piasecka", message: "Do zobaczenia"}, 
+      {user: "Przemyslaw Zdrzalik", message: "Zrobimy to jutro!"}, {user: "Huber Gawłowski", message: "Kiedy wychodzimy?"}, 
+      {user: "Kamil Kiszko-Zgierski", message: "Ok"}]
     }
   },
   methods: {
@@ -47,9 +49,8 @@ export default {
   opacity: 0.9;
 }
 
-#main_container {
-  float: left;
-  width: 10%;
-}
+/* #main_container {
+  
+} */
  
 </style>

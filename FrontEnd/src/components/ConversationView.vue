@@ -4,15 +4,15 @@
     <p id="user_name"></p>
 
     <div v-for="(message, index, key) in messages" :key="key">
-        <div v-if="message.userName === 'Julia'" class="container">
-          <p>{{ message.message }}</p>
-          <p>{{ message.date }}</p>
-        </div>
-        <div v-else class="container darker">
-          <p>{{ message.userName }}</p>
-          <p>{{ message.message }}</p>
-          <p>{{ message.date }}</p>
-        </div>
+      <div v-if="message.userName === 'Julia'" class="container">
+        <p>{{ message.message }}</p>
+        <p>{{ message.date }}</p>
+      </div>
+      <div v-else class="container darker">
+        <p>{{ message.userName }}</p>
+        <p>{{ message.message }}</p>
+        <p>{{ message.date }}</p>
+      </div>
     </div>
 
     <!-- <div v-for="message in messages" v-bind:key="message">
@@ -28,9 +28,8 @@
   </div>
 </template>
 
-
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   name: "ConversationView",
   data() {
@@ -40,15 +39,21 @@ export default {
   },
 
   created() {
-    let self = this;
-    axios.get("https://czatmat.azurewebsites.net/przyklad")
-    .then(function (response) {
-      console.log(response.data);
-      self.messages = response.data;
-    })
-    .catch(function (error){
-      console.log(error);
-    })
+    this.getPrzyklad();
+  },
+  methods: {
+    getPrzyklad: function() {
+      let self = this;
+      axios
+        .get(process.env.VUE_APP_BACKEND_URL + "/przyklad")
+        .then(function(response) {
+          console.log(response.data);
+          self.messages = response.data;
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
@@ -76,7 +81,7 @@ export default {
 .container img {
   float: left;
   max-width: 50px;
-  width: 100%;
+  /* width: 100%; */
   margin-right: 20px;
   border-radius: 50%;
 }
@@ -93,11 +98,9 @@ export default {
   font-size: 15px;
 }
 
-#main_container {
-  float: left;
-  margin-left: 40px;
-  width: 80%;
-}
+/* #main_container {
+  /* margin-left: 40px; */
+/* } */
 
 #user_name {
   text-align: left;

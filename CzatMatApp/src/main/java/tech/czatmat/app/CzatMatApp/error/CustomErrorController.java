@@ -1,6 +1,7 @@
-package tech.czatmat.app.error;
+package tech.czatmat.app.CzatMatApp.error;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 @RestController
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CustomErrorController implements ErrorController {
 
     @RequestMapping("/error")

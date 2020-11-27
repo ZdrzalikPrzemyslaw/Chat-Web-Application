@@ -3,11 +3,13 @@ import Home from '../views/Home.vue'
 
 const routes = [
   {
+    path: '/registration',
+    name: 'Registration',
+    component: () => import(/* webpackChunkName: "about" */ '../views/Registration.vue')
+  },
+  {
     path: '/login',
     name: 'Login',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
   },
   {
@@ -15,11 +17,34 @@ const routes = [
     name: 'Home',
     component: Home
   },
+  {
+    path: "/:catchAll(.*)",
+    name: "NotFound", 
+    // TODO: add page not found page
+    redirect: '/'
+  }
 ]
+
+
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  // redirect to login page if not logged in and trying to access a restricted page
+  const publicPages = ['/login', '/registration'];
+  const authRequired = !publicPages.includes(to.path);
+  // TODO:
+  // const loggedIn = localStorage.getItem('user');
+  const loggedIn = true;
+
+  if (authRequired && !loggedIn) {
+    return next('/login');
+  }
+
+  next();
 })
 
 export default router

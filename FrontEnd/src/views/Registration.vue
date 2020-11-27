@@ -1,13 +1,13 @@
 <template>
-  <LoginForm  class="justify-center"/>
+  <RegistrationForm  class="justify-center"/>
 </template>
 
 <script>
-import LoginForm from "../components/LoginForm";
+import RegistrationForm from "../components/RegistrationForm";
 export default {
-  name: 'Login',
+  name: 'Registration',
   components: {
-    LoginForm
+    RegistrationForm
   }
 }
 </script>

@@ -1,40 +1,47 @@
 <template>
   <div id="login">
     <h2>Login</h2>
-    <form @submit.prevent="handleSubmit">
-      <div class="form-group sm-3">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          v-model="username"
-          name="username"
-          class="form-control sm-3"
-        />
-        <div v-show="submitted && !username" class="invalid-feedback">
-          Username is required
-        </div>
+    <div class="form-group sm-3">
+      <label for="username">Username</label>
+      <input
+        type="text"
+        v-model="username"
+        name="username"
+        class="form-control sm-3"
+      />
+      <div v-show="submitted && !username" class="invalid-feedback">
+        Username is required
       </div>
-      <div class="form-group">
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          v-model="password"
-          name="password"
-          class="form-control sm-3"
-          :class="{ 'is-invalid': submitted && !password }"
-        />
-        <div v-show="submitted && !password" class="invalid-feedback">
-          Password is required
-        </div>
+    </div>
+    <div class="form-group">
+      <label htmlFor="password">Password</label>
+      <input
+        type="password"
+        v-model="password"
+        name="password"
+        class="form-control sm-3"
+        :class="{ 'is-invalid': submitted && !password }"
+      />
+      <div v-show="submitted && !password" class="invalid-feedback">
+        Password is required
       </div>
-      <div class="form-group">
-        <button class="btn btn-primary" v-on:click="this.$router.push('/')">Login</button>
-      </div>
-    </form>
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" v-on:click="this.login">
+        Login
+      </button>
+      <button
+        class="btn btn-secondary"
+        v-on:click="this.$router.push('/registration')"
+      >
+        Go To Registration
+      </button>
+    </div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "LoginForm",
   data() {
@@ -43,6 +50,23 @@ export default {
       password: "",
       submitted: false,
     };
+  },
+  methods: {
+    login: function() {
+      let self = this;
+      axios
+        .post(process.env.VUE_APP_BACKEND_URL + "/login", {
+          login: self.username,
+          password: self.password,
+        })
+        .then(function(response) {
+          console.log(response.data);
+          self.$router.push("/");
+        })
+        .catch(function(error) {
+          console.log(error.response);
+        });
+    },
   },
 };
 </script>
@@ -54,6 +78,6 @@ export default {
   border: 1px solid gray;
   border-radius: 10px;
   padding: 10px 30px;
-  background: #DCDCDC;
+  background: #dcdcdc;
 }
 </style>

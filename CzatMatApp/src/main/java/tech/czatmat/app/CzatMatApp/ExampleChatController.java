@@ -1,10 +1,10 @@
-package tech.czatmat.app;
+package tech.czatmat.app.CzatMatApp;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import tech.czatmat.app.messages.Message;
+import tech.czatmat.app.CzatMatApp.messages.Message;
 
 import java.util.ArrayList;
 import java.util.Date;

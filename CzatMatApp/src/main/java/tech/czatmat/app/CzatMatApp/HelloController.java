@@ -1,4 +1,4 @@
-package tech.czatmat.app;
+package tech.czatmat.app.CzatMatApp;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
