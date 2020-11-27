@@ -1,4 +1,5 @@
 <template>
+  <Settings/>
   <ChatsList/>
   <ConversationView/>
 </template>
@@ -6,9 +7,12 @@
 <script>
 import ChatsList from "../components/ChatsList";
 import ConversationView from "../components/ConversationView"
+import Settings from "../components/Settings"
+
 export default {
   name: 'Home',
   components: {
+    Settings,
     ChatsList,
     ConversationView
   }
