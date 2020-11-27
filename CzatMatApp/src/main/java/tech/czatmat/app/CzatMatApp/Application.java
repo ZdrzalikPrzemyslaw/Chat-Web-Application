@@ -1,4 +1,4 @@
-package tech.czatmat.app;
+package tech.czatmat.app.CzatMatApp;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

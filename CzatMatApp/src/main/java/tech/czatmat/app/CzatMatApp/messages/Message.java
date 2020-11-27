@@ -1,4 +1,4 @@
-package tech.czatmat.app.messages;
+package tech.czatmat.app.CzatMatApp.messages;
 
 import java.util.Date;
 

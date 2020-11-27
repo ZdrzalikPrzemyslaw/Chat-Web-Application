@@ -1,4 +1,4 @@
-package tech.czatmat.app.error;
+package tech.czatmat.app.CzatMatApp.error;
 
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.web.bind.annotation.RequestMapping;
