@@ -97,10 +97,16 @@ export default {
     register: function() {
       let self = this;
       axios
-        .post(process.env.VUE_APP_BACKEND_URL + "/registration/")
+        .post(process.env.VUE_APP_BACKEND_URL + "/registration", {
+            login: self.username,
+            password: self.password,
+            name: self.name,
+            surname: self.surname,
+            email: self.email
+        })
         .then(function(response) {
           console.log(response.data);
-          self.$router.push("/");
+          self.$router.push("/login");
         })
         .catch(function(error) {
           console.log(error.response);

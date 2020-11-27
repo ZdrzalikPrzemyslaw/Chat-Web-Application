@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/registration")
+
+// TODO: 27.11.2020 : https://www.codebyamir.com/blog/user-account-registration-with-spring-boot
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RegistrationController {
     private final UserRepository userRepository;

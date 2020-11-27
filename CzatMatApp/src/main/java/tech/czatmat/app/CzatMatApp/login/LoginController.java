@@ -1,7 +1,8 @@
 package tech.czatmat.app.CzatMatApp.login;
 
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/login")
@@ -16,12 +17,16 @@ public class LoginController {
     }
 
     @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Boolean loginUser(@RequestBody Users users) {
+    public void loginUser(@RequestBody Users users, HttpServletResponse response) {
         if (!userRepository.existsByLogin(users.getLogin())) {
-            return false;
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+            return;
         }
-        return VerifyUser.mockVerify(users.getLogin(), users.getPassword());
+        if (VerifyUser.mockVerify(users.getLogin(), users.getPassword())) {
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
+        } else {
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        }
     }
 
 
