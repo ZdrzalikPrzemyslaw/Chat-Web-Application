@@ -4,17 +4,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/login")
-// TODO: 27.11.2020 fix class
-public class UserController {
-
+@RequestMapping("/registration")
+public class RegistrationController {
     private final UserRepository userRepository;
 
-    public UserController(UserRepository userRepository) {
+    public RegistrationController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("/")
+    @RequestMapping(value = "/", method = RequestMethod.POST, produces = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
     public User createUser(@RequestBody User user) {
         return userRepository.save(user);
@@ -27,7 +25,6 @@ public class UserController {
 
     @RequestMapping(value = "/przyklad", method = RequestMethod.GET, produces = "application/json")
     public String getPrzyklad() {
-        return "Siema Login";
+        return "Siema Registration";
     }
-
 }
