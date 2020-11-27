@@ -1,5 +1,7 @@
 package tech.czatmat.app.CzatMatApp.login;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 // TODO: 27.11.2020 fix class
 public class LoginController {
+    // TODO: 27.11.2020 https://bezkoder.com/spring-boot-jwt-authentication/
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     private final UserRepository userRepository;
 
@@ -16,7 +21,7 @@ public class LoginController {
         this.userRepository = userRepository;
     }
 
-    @PostMapping("")
+    @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public void loginUser(@RequestBody Users users, HttpServletResponse response) {
         if (!userRepository.existsByLogin(users.getLogin())) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
