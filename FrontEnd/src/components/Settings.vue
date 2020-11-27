@@ -1,64 +1,84 @@
 <template>
 		<div id="mainContainer" class="container-fluid">
-			<div id="settingsIcon">
-				<button onclick="document.getElementById('menu').style.display = 'block'" style="background: #9C35F2;" class="settings_btn btn">
+			<div id="settingsIcon" class="d-flex justify-content-left">
+				<button v-on:click="showMenu('.menu')" class="settings_btn btn">
 					<i style="color: white;" class="fas fa-user-cog"></i>
 				</button>
 			</div>
-			<div id="menu">
+			<div class="menu menu--active justify-content-left">
 				<div>
-					<div class="desc">Imię i nazwisko</div>
-					<div class="desc1">Kamil Kiszko-Zgierski</div>
-					<div class="desc2">
-						<button style="border: none; background-color: #D1B5E8; cursor: pointer;">
-							<i class="fas fa-pencil-alt pen-icon-color"></i>
-						</button>
-					</div>
-						<div style="display: none" id="myDialog">
-							<form>
-                                <div class="form-group">
-                                    <label>Imię</label>
-                                    <input type="text"/>
-                                    <label>Nazwisko</label>
-                                    <input type="text"/>
-                                    <input type="button" value="Potwierdź"/>
-                                </div>
-							</form>
-						</div>
-				</div>
-					<hr>
-					<div class="desc">Login</div>
-					<div class="desc1">Kamil99125</div>
-					<div class="desc2">
-						<button onclick="document.getElementById('myDialog1').style.display = 'block'" style="border: none; background-color: #D1B5E8; cursor: pointer; color: orange;">
-							<i class="fas fa-pencil-alt pen-icon-color"></i>
-						</button>
-					</div>
-					<div style="display: none" id="myDialog1">
-						<form>
-                            <div class="form-group row">
-                                <label for="login" class="col-form-label col-sm-4">Nowy login</label>
-                                <input type="text" id="login" class="form-control col-sm-5 md-sm-5 col-12"/>
-                                <input class="btn btn-primary col-sm-3 md-sm-5 col-12" type="button" value="Potwierdź"/>
+                    <div class="row pl-sm-2">
+                        <div class="col-sm-4 desc text-left">Imię i nazwisko</div>
+                        <div class="col-sm-6 text-left">{{name}} {{surname}}</div>
+                        <div class="col-sm-1">
+                            <button v-on:click="showMenu('.name-block')" class="pen-icon">
+                                <i class="fas fa-pencil-alt pen-icon-color"></i>
+                            </button>
+                        </div>
+                    </div>
+					<div class="name-block menu--active">
+						<form role="form">
+                            <div class="form-group form-row">
+                                <label for="name" class="col-form-label text-left col-md-4 desc">Imię</label>
+                                <input v-model="name" type="text" id="name" class="form-control col-md-6 ml-md-2"/>
                             </div>
+                            <div class="form-group form-row">
+                                <label for="surname" class="col-form-label text-left col-md-4 desc">Nazwisko</label>
+                                <input v-model="surname" type="text" id="surname" class="form-control col-md-6 ml-md-2"/>
+                            </div>
+                            <div class="text-right">
+                                <input class="btn btn-primary" type="submit" value="Potwierdź"/>   
+                            </div>    
 						</form>
 					</div>
-					<hr>
-					<div class="desc">Email</div>
-					<div class="desc1">kamilkiszkozgierski@gmail.com</div>
-					<div class="desc2">
-						<button style="border: none; background-color: #D1B5E8; cursor: pointer; color: orange;">
-							<i class="fas fa-pencil-alt pen-icon-color"></i>
-						</button>
-					</div>
-					<div style="display: none" id="myDialog1">
-						<form>
-							<label>Nowy email</label>
-							<input type="text"/>
-							<input type="button" value="Potwierdź"/>
+				</div>
+				<hr>
+                <div>
+                    <div class="row pl-sm-2">
+                        <div class="col-sm-4 desc text-left">Login</div>
+                        <div class="col-sm-6 text-left">{{login}}</div>
+                        <div class="col-sm-1">
+                            <button v-on:click="showMenu('.login-block')" class="pen-icon">
+                                <i class="fas fa-pencil-alt pen-icon-color"></i>
+                            </button>
+                        </div>
+                    </div>
+					<div class="login-block menu--active">
+						<form role="form">
+                            <div class="form-group form-row">
+                                <label for="login" class="col-form-label text-left col-md-4 desc">Nowy login</label>
+                                <input type="text" id="login" class="form-control col-md-6 ml-md-2"/>
+                            </div>
+                            <div class="text-right">
+                                <input class="btn btn-primary" type="submit" value="Potwierdź"/>   
+                            </div>    
 						</form>
 					</div>
-					<hr>
+                </div>    
+				<hr>
+                <div>
+                    <div class="row pl-sm-2">
+                        <div class="col-sm-4 desc text-left">Email</div>
+                        <div class="col-sm-6 text-left">{{email}}</div>
+                        <div class="col-sm-1">
+                            <button v-on:click="showMenu('.email-block')" class="pen-icon">
+                                <i class="fas fa-pencil-alt pen-icon-color"></i>
+                            </button>
+                        </div>
+                    </div>
+					<div class="email-block menu--active">
+						<form role="form">
+                            <div class="form-group form-row">
+                                <label for="email" class="col-form-label text-left col-md-4 desc">Nowy email</label>
+                                <input type="email" id="email" class="form-control col-md-6 ml-md-2"/>
+                            </div>
+                            <div class="text-right">
+                                <input class="btn btn-primary" type="submit" value="Potwierdź"/>   
+                            </div>    
+						</form>
+					</div>
+				</div>
+                <hr>
 					<div>Zmień hasło</div>
 					<div style="display: none">
 						<form>
@@ -78,6 +98,18 @@ export default {
   name: 'HelloWorld',
   data() {
       return {
+        name: 'Jacek',
+        surname: 'Rogowski',
+        login: 'Wrrrr',
+        email: 'jacekrogowski1@p.lodz.pl'
+      }
+  },
+  methods: {
+      showMenu: function(managedClass) {
+          const menuButton = document.querySelector(managedClass);
+          menuButton.classList.toggle('menu--active');
+      },
+      confirmChange: function() {
 
       }
   }
@@ -88,42 +120,36 @@ export default {
 <style scoped>
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css");
  .settings_btn {
-  background-color: DodgerBlue; /* Blue background */
-  border: none; /* Remove borders */
-  color: white; /* White text */
+  background-color: #9C35F2;
+  border: none; 
+  color: white; 
   padding: 10px;
-  font-size: 22px; /* Set a font size */
-  cursor: pointer; /* Mouse pointer on hover */
-  margin-bottom: 0px;
+  font-size: 22px; 
+  cursor: pointer; 
+  margin: 0; 
 }
 
-#menu {
+.menu {
 	position: absolute;
-	display: none;
-	margin: 0;
 	background-color: #D1B5E8;
 	width: 420px;
 	padding: 10px;
     z-index: 1000;
 }
+
+.name-block, .login-block, .email-block {
+    padding: 10px;
+}
+
+.menu--active {
+    display: none;
+}
+
 .desc {
-	width: 130px;
 	font-weight: 700;
-	display: inline-block;
-    text-align: left;
-    margin: 0;
-    padding: 0;
 }
-.desc1 {
-	width: 230px;
-	display: inline-block;
-    text-align: left;
-}
-.desc2 {
-	width: 20px;
-	display: inline-block;
-}
-.pen_icon {
+
+.pen-icon {
     border: none; 
     background-color: #D1B5E8; 
     cursor: pointer;
