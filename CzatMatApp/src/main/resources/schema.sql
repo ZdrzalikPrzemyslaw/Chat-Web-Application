@@ -1,3 +1,4 @@
+-- TODO dodać lokalna baze danych uzywana w trakcie developmentu lokalnego, tak aby nie psuć bazy danych w chmurze
 DROP TABLE IF EXISTS authorities;
 DROP TABLE IF EXISTS users;
 CREATE TABLE users
