@@ -1,7 +1,7 @@
 package tech.czatmat.app.CzatMatApp.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 // TODO: 27.11.2020 fix class
 public class LoginController {
     // TODO: 27.11.2020 https://bezkoder.com/spring-boot-jwt-authentication/
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+//    @Autowired
+//    private PasswordEncoder passwordEncoder;
 
     private final UserRepository userRepository;
 
@@ -28,11 +28,12 @@ public class LoginController {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
         }
-        if(VerifyUser.Verify(users.getLogin(), users.getPassword(), userRepository, passwordEncoder)){
-            response.setStatus(HttpServletResponse.SC_ACCEPTED);
-        } else {
-            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        }
+        response.setStatus(HttpServletResponse.SC_ACCEPTED);
+//        if(VerifyUser.Verify(users.getLogin(), users.getPassword(), userRepository, passwordEncoder)){
+//            response.setStatus(HttpServletResponse.SC_ACCEPTED);
+//        } else {
+//            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//        }
     }
 
 
