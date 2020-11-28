@@ -2,23 +2,23 @@ package tech.czatmat.app.CzatMatApp.users.authorities;
 
 public class Authorities {
 
-    private String login;
+    private String username;
     private String authority;
 
     public Authorities() {
     }
 
-    public Authorities(String login, String authority) {
-        this.login = login;
+    public Authorities(String username, String authority) {
+        this.username = username;
         this.authority = authority;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getAuthority() {

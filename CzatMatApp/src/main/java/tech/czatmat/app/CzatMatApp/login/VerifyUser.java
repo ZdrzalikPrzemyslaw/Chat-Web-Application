@@ -12,7 +12,7 @@ public class VerifyUser {
     }
 
     public static boolean Verify(String login, String password, UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        Users user = userRepository.getUsersByLogin(login);
+        Users user = userRepository.getUsersByUsername(login);
         return passwordEncoder.matches(password, user.getPassword());
     }
 

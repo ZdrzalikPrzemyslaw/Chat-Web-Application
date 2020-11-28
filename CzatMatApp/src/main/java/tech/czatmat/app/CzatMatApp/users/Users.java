@@ -7,7 +7,7 @@ public class Users {
 
     @Id
     private int ID;
-    private String login;
+    private String username;
     // Password as a hash, not plain text
     private String password;
     private String name;
@@ -17,8 +17,8 @@ public class Users {
     public Users() {
     }
 
-    public Users(String login, String password, String name, String surname, @Nullable String email) {
-        this.login = login;
+    public Users(String username, String password, String name, String surname, @Nullable String email) {
+        this.username = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
@@ -33,12 +33,12 @@ public class Users {
         this.ID = ID;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {

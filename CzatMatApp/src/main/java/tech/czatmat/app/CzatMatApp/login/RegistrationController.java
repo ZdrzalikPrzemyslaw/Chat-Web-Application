@@ -29,7 +29,7 @@ public class RegistrationController {
     // TODO: 27.11.2020 Sprawdzać czy udało się dodać usera
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public String createUser(@RequestBody Users users, HttpServletResponse response) {
-        if (userRepository.existsByLogin(users.getLogin())) {
+        if (userRepository.existsByUsername(users.getUsername())) {
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             // TODO: 27.11.2020 Make throw exepction?
             return ("User By That Login Already Exists");
@@ -41,7 +41,7 @@ public class RegistrationController {
     }
 
     // TODO: 27.11.2020 Ograniczyć możliwość używania zapytania
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/get_users", method = RequestMethod.GET, produces = "application/json")
     public Iterable<Users> getUsers() {
         return userRepository.findAll();
     }
