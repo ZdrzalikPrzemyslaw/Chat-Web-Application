@@ -1,7 +1,7 @@
 package tech.czatmat.app.CzatMatApp.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 public class VerifyUser {
 
@@ -10,9 +10,9 @@ public class VerifyUser {
         return true;
     }
 
-//    public static boolean Verify(String login, String password, UserRepository userRepository, PasswordEncoder passwordEncoder) {
-//        Users user = userRepository.getUsersByLogin(login);
-//        return passwordEncoder.matches(password, user.getPassword());
-//    }
+    public static boolean Verify(String login, String password, UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        Users user = userRepository.getUsersByLogin(login);
+        return passwordEncoder.matches(password, user.getPassword());
+    }
 
 }
