@@ -1,4 +1,4 @@
-package tech.czatmat.app.CzatMatApp.login;
+package tech.czatmat.app.CzatMatApp.users;
 
 import io.micrometer.core.lang.Nullable;
 import org.springframework.data.annotation.Id;

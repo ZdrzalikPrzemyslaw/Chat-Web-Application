@@ -1,4 +1,4 @@
-package tech.czatmat.app.CzatMatApp.login;
+package tech.czatmat.app.CzatMatApp.users;
 
 import org.springframework.data.repository.CrudRepository;
 

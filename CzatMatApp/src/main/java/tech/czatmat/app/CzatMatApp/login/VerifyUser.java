@@ -1,7 +1,8 @@
 package tech.czatmat.app.CzatMatApp.login;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import tech.czatmat.app.CzatMatApp.users.UserRepository;
+import tech.czatmat.app.CzatMatApp.users.Users;
 
 public class VerifyUser {
 
