@@ -1,7 +1,10 @@
 package tech.czatmat.app.CzatMatApp.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RegistrationController {
 
-    private final UserRepository userRepository;
     @Autowired
-//    private PasswordEncoder passwordEncoder;
+    private PasswordEncoder passwordEncoder;
+
+    private final UserRepository userRepository;
 
     public RegistrationController(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -31,7 +35,7 @@ public class RegistrationController {
             // TODO: 27.11.2020 Make throw exepction?
             return ("User By That Login Already Exists");
         }
-//        users.setPassword(passwordEncoder.encode(users.getPassword()));
+        users.setPassword(passwordEncoder.encode(users.getPassword()));
         userRepository.save(users);
         response.setStatus(HttpServletResponse.SC_CREATED);
         return ("User successfully created");
