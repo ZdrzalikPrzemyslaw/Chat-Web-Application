@@ -1,33 +1,30 @@
 <template>
 <div class=".container-fluid">
   <div class="row">
-    <div class="col-2">
-      <Search/>
-      <ChatsList/>
+    <div class="col-1">
+      <Settings/>
     </div>
-     <div class="col-1">
+    <div class="col-2">
+      <ChatsList/>
     </div>
     <div class="col-9">
       <ConversationView/>
     </div>
   </div>
 </div>
-
-
-  
-  
 </template>
 
 <script>
 import ChatsList from "../components/ChatsList";
 import ConversationView from "../components/ConversationView"
-import Search from "../components/Search"
+import Settings from "../components/Settings"
+
 export default {
   name: 'Home',
   components: {
+    Settings,
     ChatsList,
-    ConversationView,
-    Search
+    ConversationView
   }
 }
 </script>
