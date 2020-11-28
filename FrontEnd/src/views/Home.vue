@@ -2,6 +2,7 @@
 <div class=".container-fluid">
   <div class="row">
     <div class="col-2">
+      <Search/>
       <ChatsList/>
     </div>
      <div class="col-1">
@@ -20,11 +21,13 @@
 <script>
 import ChatsList from "../components/ChatsList";
 import ConversationView from "../components/ConversationView"
+import Search from "../components/Search"
 export default {
   name: 'Home',
   components: {
     ChatsList,
-    ConversationView
+    ConversationView,
+    Search
   }
 }
 </script>
