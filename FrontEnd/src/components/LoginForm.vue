@@ -56,7 +56,7 @@ export default {
       let self = this;
       axios
         .post(process.env.VUE_APP_BACKEND_URL + "/login", {
-          login: self.username,
+          username: self.username,
           password: self.password,
         })
         .then(function(response) {

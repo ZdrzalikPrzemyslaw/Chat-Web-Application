@@ -98,7 +98,7 @@ export default {
       let self = this;
       axios
         .post(process.env.VUE_APP_BACKEND_URL + "/registration", {
-            login: self.username,
+            username: self.username,
             password: self.password,
             name: self.name,
             surname: self.surname,

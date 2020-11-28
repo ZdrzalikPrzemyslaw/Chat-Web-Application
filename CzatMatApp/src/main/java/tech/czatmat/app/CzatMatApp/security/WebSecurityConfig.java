@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import javax.sql.DataSource;
 
+// TODO: 28.11.2020 https://octoperf.com/blog/2018/03/08/securing-rest-api-spring-security/
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -23,8 +25,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().antMatchers("/").permitAll()
-                .antMatchers("/przyklad").hasAnyRole("USER", "ADMIN")
-                .and().formLogin().loginPage("/login").permitAll()
-                .and().logout().permitAll().and().csrf().disable().cors().disable();
+                .antMatchers("/przyklad").permitAll()
+                .antMatchers("/login").permitAll()
+                .and()
+                .csrf().disable()
+                .formLogin().disable()
+                .httpBasic().disable()
+                .logout().disable();
     }
 }
+

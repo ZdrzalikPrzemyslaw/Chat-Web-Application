@@ -2,6 +2,7 @@ package tech.czatmat.app.CzatMatApp.users;
 
 import io.micrometer.core.lang.Nullable;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.sql.In;
 
 public class Users {
 
@@ -13,16 +14,39 @@ public class Users {
     private String name;
     private String surname;
     private String email;
+    private Integer enabled;
 
     public Users() {
     }
 
-    public Users(String username, String password, String name, String surname, @Nullable String email) {
+    @Override
+    public String toString() {
+        return "Users{" +
+                "ID=" + ID +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", enabled=" + enabled +
+                '}';
+    }
+
+    public Users(String username, String password, String name, String surname, @Nullable String email, Integer enabled) {
         this.username = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.email = email;
+        this.enabled = enabled;
+    }
+
+    public boolean isEnabled() {
+        return enabled == 1;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
     }
 
     public int getID() {

@@ -1,8 +1,9 @@
-package tech.czatmat.app.CzatMatApp.login;
+package tech.czatmat.app.CzatMatApp.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import tech.czatmat.app.CzatMatApp.login.VerifyUser;
 import tech.czatmat.app.CzatMatApp.users.UserRepository;
 import tech.czatmat.app.CzatMatApp.users.Users;
 
@@ -26,6 +27,7 @@ public class LoginController {
     // TODO: 27.11.2020 Return token
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public void loginUser(@RequestBody Users users, HttpServletResponse response) {
+        System.out.println(users);
         if (!userRepository.existsByUsername(users.getUsername())) {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             return;
