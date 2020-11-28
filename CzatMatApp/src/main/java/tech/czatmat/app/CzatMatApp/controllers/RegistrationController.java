@@ -1,11 +1,10 @@
-package tech.czatmat.app.CzatMatApp.login;
+package tech.czatmat.app.CzatMatApp.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpStatus;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import tech.czatmat.app.CzatMatApp.users.UserRepository;
+import tech.czatmat.app.CzatMatApp.users.Users;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -14,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping("/registration")
 
 // TODO: 27.11.2020 : https://www.codebyamir.com/blog/user-account-registration-with-spring-boot
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class RegistrationController {
 
     @Autowired
@@ -28,9 +26,12 @@ public class RegistrationController {
 
     // TODO: 27.11.2020 Nie jestem pewien implementacji
     // TODO: 27.11.2020 Sprawdzać czy udało się dodać usera
+
+    // TODO: 28.11.2020 Obsługiwać brak kolumn i zwracac odpowiedni error
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public String createUser(@RequestBody Users users, HttpServletResponse response) {
-        if (userRepository.existsByLogin(users.getLogin())) {
+        users.setEnabled(1);
+        if (userRepository.existsByUsername(users.getUsername())) {
             response.setStatus(HttpServletResponse.SC_CONFLICT);
             // TODO: 27.11.2020 Make throw exepction?
             return ("User By That Login Already Exists");
@@ -42,7 +43,7 @@ public class RegistrationController {
     }
 
     // TODO: 27.11.2020 Ograniczyć możliwość używania zapytania
-    @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/get_users", method = RequestMethod.GET, produces = "application/json")
     public Iterable<Users> getUsers() {
         return userRepository.findAll();
     }

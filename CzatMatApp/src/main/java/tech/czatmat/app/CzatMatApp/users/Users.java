@@ -1,28 +1,52 @@
-package tech.czatmat.app.CzatMatApp.login;
+package tech.czatmat.app.CzatMatApp.users;
 
 import io.micrometer.core.lang.Nullable;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.sql.In;
 
 public class Users {
 
     @Id
     private int ID;
-    private String login;
+    private String username;
     // Password as a hash, not plain text
     private String password;
     private String name;
     private String surname;
     private String email;
+    private Integer enabled;
 
     public Users() {
     }
 
-    public Users(String login, String password, String name, String surname, @Nullable String email) {
-        this.login = login;
+    @Override
+    public String toString() {
+        return "Users{" +
+                "ID=" + ID +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", email='" + email + '\'' +
+                ", enabled=" + enabled +
+                '}';
+    }
+
+    public Users(String username, String password, String name, String surname, @Nullable String email, Integer enabled) {
+        this.username = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.email = email;
+        this.enabled = enabled;
+    }
+
+    public boolean isEnabled() {
+        return enabled == 1;
+    }
+
+    public void setEnabled(Integer enabled) {
+        this.enabled = enabled;
     }
 
     public int getID() {
@@ -33,12 +57,12 @@ public class Users {
         this.ID = ID;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
