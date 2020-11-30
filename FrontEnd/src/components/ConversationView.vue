@@ -1,7 +1,11 @@
 <template>
   <div class="container" id="main_container">
-    <img src="../assets/profile_pic.jpg" />
-    <p id="user_name"></p>
+    <div class="row">
+      <div class="col">
+        <img src="../assets/profile_pic.jpg" id="image" />
+        <p id="user_name">Julia</p>
+      </div>
+    </div>
 
     <div v-for="(message, index, key) in messages" :key="key">
       <div v-if="message.userName === 'Julia'" class="container">
@@ -42,15 +46,15 @@ export default {
     this.getPrzyklad();
   },
   methods: {
-    getPrzyklad: function() {
+    getPrzyklad: function () {
       let self = this;
       axios
         .get(process.env.VUE_APP_BACKEND_URL + "/przyklad")
-        .then(function(response) {
+        .then(function (response) {
           console.log(response.data);
           self.messages = response.data;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -68,15 +72,15 @@ export default {
 }
 
 .darker {
-  border-color: rgb(47, 0, 255);
+  border-color: rgb(97, 95, 95);
   background-color: #ddd;
 }
 
-.container::after {
+/* .container::after {
   content: "";
   clear: both;
   display: table;
-}
+} */
 
 .container img {
   float: left;
@@ -86,23 +90,20 @@ export default {
   border-radius: 50%;
 }
 
-.time-right {
+/* .time-right {
   float: right;
   color: #aaa;
   font-size: 15px;
-}
+} */
 
-.time-left {
+/* .time-left {
   float: left;
   color: #aaa;
   font-size: 15px;
-}
-
-/* #main_container {
-  /* margin-left: 40px; */
-/* } */
+} */
 
 #user_name {
   text-align: left;
+  margin: auto;
 }
 </style>

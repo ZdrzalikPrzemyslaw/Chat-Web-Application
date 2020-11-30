@@ -1,5 +1,5 @@
 <template>
-  <div class=".containter" id="main_container">
+  <div class="containter" id="main_container">
     <form>
       <div class="form-group">
         <!-- zrobiłam taki rozmiar jak ChatList.vue, bo nie wiedziałam jaki jest koncept -->
