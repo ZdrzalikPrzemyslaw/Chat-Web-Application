@@ -70,11 +70,9 @@
       </div>
     </div>
 
-    <div class="form-group">
       <button class="btn btn-primary" v-on:click="this.register">
         Register
       </button>
-    </div>
   </div>
 </template>
 

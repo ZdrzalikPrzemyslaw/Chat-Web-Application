@@ -48,9 +48,5 @@ export default {
 #LastMessage {
   opacity: 0.9;
 }
-
-/* #main_container {
-  
-} */
  
 </style>
