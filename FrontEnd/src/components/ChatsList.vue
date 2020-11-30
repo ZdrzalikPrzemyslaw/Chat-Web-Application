@@ -14,26 +14,18 @@
 <script>
 export default {
   name: "ChatsList",
+  props: {
+    chats: Array
+  },
   data() {
     return {
-      chats: [{user: "Julia Szymanska", message: "Dobranoc"},
-        {user: "Martyna Piasecka", message: "Do zobaczenia"},
-      {user: "Przemyslaw Zdrzalik", message: "Zrobimy to jutro!"},
-        {user: "Huber Gawłowski", message: "Kiedy wychodzimy?"},
-      {user: "Kamil Kiszko-Zgierski", message: "Ok"}]
     }
   },
   methods: {
     onClickChat: function () {
     //    Tutaj trzeba będzie zrobić metodę onClick
-    },
-    /*emitData: function () {
-      this.emitter.emit('sendData', this.chats);
-    }*/
-  }/*,
-  mounted() {
-    this.emitData();
-  }*/
+    }
+  }
 }
 </script>
 

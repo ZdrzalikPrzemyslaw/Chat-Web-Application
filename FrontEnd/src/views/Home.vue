@@ -5,7 +5,8 @@
       <Settings/>
     </div>
     <div class="col-2">
-      <ChatsList/>
+      <Search @search-event="handleAppEvent"/>
+      <ChatsList :chats='eventData'/>
     </div>
     <div class="col-9">
       <ConversationView/>
@@ -18,13 +19,26 @@
 import ChatsList from "../components/ChatsList";
 import ConversationView from "../components/ConversationView"
 import Settings from "../components/Settings"
+import Search from "../components/Search";
 
 export default {
   name: 'Home',
   components: {
+    Search,
     Settings,
     ChatsList,
     ConversationView
+  },
+  data() {
+    return {
+      eventData: Array
+    }
+  },
+  methods: {
+    handleAppEvent: function (data) {
+      this.eventData = data;
+      console.log('event received');
+    }
   }
 }
 </script>
