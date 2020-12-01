@@ -1,14 +1,14 @@
 <template>
 		<div id="mainContainer" class="container-fluid">
-			<div id="settingsIcon" class="d-flex justify-content-left">
+			<div id="settingsIcon" class="d-flex justify-content-right">
 				<button v-on:click="showMenu('.menu')" class="settings_btn btn">
 					<i style="color: white;" class="fas fa-user-cog"></i>
 				</button>
 			</div>
-			<div class="menu menu--active justify-content-left">
+			<div class="menu menu--active justify-content-right">
 				<div>
                     <div class="row pl-sm-2">
-                        <div class="col-sm-4 desc text-left">Imię i nazwisko</div>
+                        <div class="col-sm-4 desc text-left">Name and surname</div>
                         <div class="col-sm-6 text-left">{{name}} {{surname}}</div>
                         <div class="col-sm-1">
                             <button v-on:click="showMenu('.name-block')" class="pen-icon">
@@ -19,15 +19,15 @@
 					<div class="name-block menu--active">
 						<form role="form">
                             <div class="form-group form-row">
-                                <label for="name" class="col-form-label text-left col-md-4 desc">Imię</label>
+                                <label for="name" class="col-form-label text-left col-md-4 desc">Name</label>
                                 <input v-model="name" type="text" id="name" class="form-control col-md-6 ml-md-2"/>
                             </div>
                             <div class="form-group form-row">
-                                <label for="surname" class="col-form-label text-left col-md-4 desc">Nazwisko</label>
+                                <label for="surname" class="col-form-label text-left col-md-4 desc">Surname</label>
                                 <input v-model="surname" type="text" id="surname" class="form-control col-md-6 ml-md-2"/>
                             </div>
                             <div class="text-right">
-                                <input class="btn btn-primary" type="submit" value="Potwierdź"/>   
+                                <input class="btn btn-primary" type="submit" value="Submit"/>   
                             </div>    
 						</form>
 					</div>
@@ -46,11 +46,11 @@
 					<div class="login-block menu--active">
 						<form role="form">
                             <div class="form-group form-row">
-                                <label for="login" class="col-form-label text-left col-md-4 desc">Nowy login</label>
+                                <label for="login" class="col-form-label text-left col-md-4 desc">New login</label>
                                 <input type="text" id="login" class="form-control col-md-6 ml-md-2"/>
                             </div>
                             <div class="text-right">
-                                <input class="btn btn-primary" type="submit" value="Potwierdź"/>   
+                                <input class="btn btn-primary" type="submit" value="Submit"/>   
                             </div>    
 						</form>
 					</div>
@@ -69,24 +69,24 @@
 					<div class="email-block menu--active">
 						<form role="form">
                             <div class="form-group form-row">
-                                <label for="email" class="col-form-label text-left col-md-4 desc">Nowy email</label>
+                                <label for="email" class="col-form-label text-left col-md-4 desc">New email</label>
                                 <input type="email" id="email" class="form-control col-md-6 ml-md-2"/>
                             </div>
                             <div class="text-right">
-                                <input class="btn btn-primary" type="submit" value="Potwierdź"/>   
+                                <input class="btn btn-primary" type="submit" value="Submit"/>   
                             </div>    
 						</form>
 					</div>
 				</div>
                 <hr>
-					<div>Zmień hasło</div>
+					<div>Change password</div>
 					<div style="display: none">
 						<form>
-							<input type="password" placeholder="Stare hasło"/>
-							<input type="text" placeholder="Nowe hasło"/>
-							<input type="text" placeholder="Powtórz nowe hasło" />
-							<input type="checkbox" value="Pokaż haslo" />
-							<input type="button" value="Potwierdź"/>
+							<input type="password" placeholder="Ols password"/>
+							<input type="text" placeholder="New password"/>
+							<input type="text" placeholder="Reapet new password" />
+							<input type="checkbox" value="Show password" />
+							<input type="button" value="Submit"/>
 						</form>
 					</div>
 				</div>
@@ -98,10 +98,10 @@ export default {
   name: 'HelloWorld',
   data() {
       return {
-        name: 'Jacek',
-        surname: 'Rogowski',
-        login: 'Wrrrr',
-        email: 'jacekrogowski1@p.lodz.pl'
+        name: 'Jan',
+        surname: 'Nowak',
+        login: 'JanLogin',
+        email: 'jannowak@p.lodz.pl'
       }
   },
   methods: {
