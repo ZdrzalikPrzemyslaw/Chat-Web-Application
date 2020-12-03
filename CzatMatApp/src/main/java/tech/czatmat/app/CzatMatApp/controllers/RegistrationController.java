@@ -14,9 +14,6 @@ import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
 import tech.czatmat.app.CzatMatApp.payload.request.RegistrationRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.MessageResponse;
-import tech.czatmat.app.CzatMatApp.security.JwtUtils;
-
-import javax.servlet.http.HttpServletResponse;
 import java.util.HashSet;
 import java.util.Set;
 

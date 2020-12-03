@@ -13,9 +13,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.annotation.Resource;
-import javax.sql.DataSource;
-
 // TODO: 28.11.2020 https://octoperf.com/blog/2018/03/08/securing-rest-api-spring-security/
 
 @Configuration
@@ -26,11 +23,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImplementation userDetailsServiceImplementation;
 
-    // TODO: 03.12.2020 NIE DZIALA : ( 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService((UserDetailsService) userDetailsServiceImplementation).passwordEncoder(encoder());
-//    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService((UserDetailsService) userDetailsServiceImplementation).passwordEncoder(encoder());
+    }
 
     @Bean
     public static PasswordEncoder encoder() {
