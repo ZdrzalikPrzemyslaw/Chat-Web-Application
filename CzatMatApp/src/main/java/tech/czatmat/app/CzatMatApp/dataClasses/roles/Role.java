@@ -1,9 +1,9 @@
 package tech.czatmat.app.CzatMatApp.dataClasses.roles;
 
 import org.springframework.data.annotation.Id;
-import javax.persistence.Table;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Table(name = "roles")
+@Table("roles")
 public class Role {
 
     @Id

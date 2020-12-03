@@ -49,7 +49,7 @@ public class RegistrationController {
     // TODO: 28.11.2020 Obsługiwać brak kolumn i zwracac odpowiedni error
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> createUser(@RequestBody RegistrationRequest request) {
-        System.out.println("TUTAJ USER : D");
+        System.out.println(request);
         if (userRepository.existsByUsername(request.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("User By That Login Already Exists"));
         }
@@ -95,10 +95,11 @@ public class RegistrationController {
                 }
             });
         }
+        userRepository.save(user);
+
         for (var i : roles) {
             authoritiesRepository.save(new Authority(user.getUsername(), i.getName()));
         }
-        userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

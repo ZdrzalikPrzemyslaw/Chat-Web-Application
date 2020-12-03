@@ -1,18 +1,34 @@
 package tech.czatmat.app.CzatMatApp.dataClasses.authorities;
-import javax.persistence.Table;
 
-@Table(name="authorities")
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
+
+
+@Table("authorities")
 public class Authority {
 
+    public Long getID() {
+        return ID;
+    }
+
+    public void setID(Long ID) {
+        this.ID = ID;
+    }
+
+    @Id
+    private Long ID;
+
     private String username;
-    private String authority;
+
+    private String role_name;
 
     public Authority() {
     }
 
-    public Authority(String username, String authority) {
+    public Authority(String username, String role_name) {
         this.username = username;
-        this.authority = authority;
+        this.role_name = role_name;
     }
 
     public String getUsername() {
@@ -23,12 +39,12 @@ public class Authority {
         this.username = username;
     }
 
-    public String getAuthority() {
-        return authority;
+    public String getRole_name() {
+        return role_name;
     }
 
-    public void setAuthority(String authority) {
-        this.authority = authority;
+    public void setRole_name(String role_name) {
+        this.role_name = role_name;
     }
 }
 

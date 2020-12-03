@@ -2,9 +2,9 @@ package tech.czatmat.app.CzatMatApp.dataClasses.users;
 
 import io.micrometer.core.lang.Nullable;
 import org.springframework.data.annotation.Id;
-import javax.persistence.Table;
+import org.springframework.data.relational.core.mapping.Table;
 
-@Table(name="users")
+@Table("users")
 public class User {
 
     @Id

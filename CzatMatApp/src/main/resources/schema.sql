@@ -22,12 +22,13 @@ CREATE TABLE roles
 
 CREATE TABLE authorities
 (
+    ID        int identity primary key,
     username  varchar(30) not null,
     role_name varchar(30) not null,
     foreign key (username) references [users] (username),
-    foreign key (role_name) references [roles] (name)
-)
+    foreign key (role_name) references [roles] (name),
 
+)
 
 
 -- TODO

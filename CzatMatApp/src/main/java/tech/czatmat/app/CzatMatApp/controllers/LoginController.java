@@ -45,7 +45,11 @@ public class LoginController {
 
     // TODO: 27.11.2020 Return token
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<?> loginUser(@RequestBody User user, LoginRequest loginRequest) {
+    public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
+
+        System.out.println(loginRequest);
+
+        System.out.println("DEBUGGER SUCKS LOL");
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
