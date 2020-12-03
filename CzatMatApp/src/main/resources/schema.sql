@@ -13,6 +13,13 @@ CREATE TABLE [users]
     enabled  int                 not null default 1,
 )
 
+CREATE TABLE roles
+(
+    id   int         not null identity primary key,
+    name varchar(30) not null unique,
+    CONSTRAINT check_name CHECK (name IN ('ROLE_USER', 'ROLE_SUPER_USER', 'ROLE_ADMIN'))
+)
+
 CREATE TABLE authorities
 (
     username  int not null,
@@ -21,12 +28,6 @@ CREATE TABLE authorities
     foreign key (role_name) references [users] (name)
 )
 
-CREATE TABLE roles
-(
-    id   int         not null identity primary key,
-    name varchar(30) not null unique,
-    CONSTRAINT check_name CHECK (name IN ('ROLE_USER', 'ROLE_SUPER_USER', 'ROLE_ADMIN'))
-)
 
 
 -- TODO
