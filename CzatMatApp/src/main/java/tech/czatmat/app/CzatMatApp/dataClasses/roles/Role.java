@@ -4,16 +4,16 @@ import org.springframework.data.annotation.Id;
 import javax.persistence.Table;
 
 @Table(name = "roles")
-public class Roles {
+public class Role {
 
     @Id
     private Integer id;
     private String name;
 
-    public Roles() {
+    public Role() {
     }
 
-    public Roles(String name) {
+    public Role(String name) {
         this.name = name;
     }
 

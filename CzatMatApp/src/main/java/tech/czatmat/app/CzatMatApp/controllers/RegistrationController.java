@@ -6,12 +6,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import tech.czatmat.app.CzatMatApp.dataClasses.authorities.AuthoritiesRepository;
-import tech.czatmat.app.CzatMatApp.dataClasses.authorities.Authorities;
-import tech.czatmat.app.CzatMatApp.dataClasses.roles.Roles;
-import tech.czatmat.app.CzatMatApp.dataClasses.roles.RolesRepository;
+import tech.czatmat.app.CzatMatApp.dataClasses.authorities.Authority;
+import tech.czatmat.app.CzatMatApp.dataClasses.roles.Role;
+import tech.czatmat.app.CzatMatApp.dataClasses.roles.RoleRepository;
 import tech.czatmat.app.CzatMatApp.dataClasses.roles.RoleSource;
-import tech.czatmat.app.CzatMatApp.dataClasses.users.Users;
-import tech.czatmat.app.CzatMatApp.dataClasses.users.UsersRepository;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
 import tech.czatmat.app.CzatMatApp.payload.request.RegistrationRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.MessageResponse;
 import java.util.HashSet;
@@ -31,16 +31,16 @@ public class RegistrationController {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private final UsersRepository usersRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     private AuthoritiesRepository authoritiesRepository;
 
     @Autowired
-    private RolesRepository rolesRepository;
+    private RoleRepository roleRepository;
 
-    public RegistrationController(UsersRepository usersRepository) {
-        this.usersRepository = usersRepository;
+    public RegistrationController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     // TODO: 27.11.2020 Nie jestem pewien implementacji
@@ -50,67 +50,63 @@ public class RegistrationController {
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> createUser(@RequestBody RegistrationRequest request) {
         System.out.println("TUTAJ USER : D");
-        if (usersRepository.existsByUsername(request.getUsername())) {
+        if (userRepository.existsByUsername(request.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("User By That Login Already Exists"));
         }
-        if (usersRepository.existsByEmail(request.getEmail())) {
+        if (userRepository.existsByEmail(request.getEmail())) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
-        Users users = new Users(request.getUsername(),
+        User user = new User(request.getUsername(),
                 passwordEncoder.encode(request.getPassword()),
                 request.getName(),
                 request.getSurname(),
                 request.getEmail(),
-                Users.ENABLED
+                User.ENABLED
         );
         Set<String> strRoles = request.getRole();
-        Set<Roles> roles = new HashSet<>();
+        Set<Role> roles = new HashSet<>();
 
 
         if (strRoles == null) {
-            Roles userRoles = rolesRepository.findByName(RoleSource.ROLE_USER)
+            Role userRole = roleRepository.findByName(RoleSource.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRoles);
+            roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
                     case RoleSource.ROLE_ADMIN:
-                        Roles adminRoles = rolesRepository.findByName(RoleSource.ROLE_ADMIN)
+                        Role adminRole = roleRepository.findByName(RoleSource.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRoles);
+                        roles.add(adminRole);
 
                         break;
                     case RoleSource.ROLE_SUPER_USER:
-                        Roles supRoles = rolesRepository.findByName(RoleSource.ROLE_SUPER_USER)
+                        Role supRole = roleRepository.findByName(RoleSource.ROLE_SUPER_USER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(supRoles);
+                        roles.add(supRole);
 
                         break;
                     default:
-                        Roles userRoles = rolesRepository.findByName(RoleSource.ROLE_USER)
+                        Role userRole = roleRepository.findByName(RoleSource.ROLE_USER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRoles);
+                        roles.add(userRole);
                 }
             });
         }
-        usersRepository.save(users);
-
         for (var i : roles) {
-            Authorities authorities = new Authorities(users.getUsername(), i.getName());
-            System.out.println(authorities.getRole_name());
-            System.out.println(authorities.getUsername());
-            authoritiesRepository.save(authorities);
+            authoritiesRepository.save(new Authority(user.getUsername(), i.getName()));
         }
+        userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
     // TODO: 27.11.2020 Ograniczyć możliwość używania zapytania
     @RequestMapping(value = "/get_users", method = RequestMethod.GET, produces = "application/json")
-    public Iterable<Users> getUsers() {
-        return usersRepository.findAll();
+    public Iterable<User> getUsers() {
+        return userRepository.findAll();
     }
 
     @RequestMapping(value = "/przyklad", method = RequestMethod.GET, produces = "application/json")

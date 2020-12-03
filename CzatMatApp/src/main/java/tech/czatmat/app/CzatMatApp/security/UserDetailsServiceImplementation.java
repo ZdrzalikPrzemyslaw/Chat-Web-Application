@@ -6,21 +6,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import tech.czatmat.app.CzatMatApp.dataClasses.authorities.AuthoritiesRepository;
-import tech.czatmat.app.CzatMatApp.dataClasses.users.Users;
-import tech.czatmat.app.CzatMatApp.dataClasses.users.UsersRepository;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
 
 @Service
 public class UserDetailsServiceImplementation implements UserDetailsService {
     @Autowired
-    UsersRepository usersRepository;
+    UserRepository userRepository;
 
     @Autowired
     AuthoritiesRepository authoritiesRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users users = usersRepository.getUsersByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found with name " + username));
+        User user = userRepository.getUsersByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found with name " + username));
         var authorities = authoritiesRepository.getAllByUsername(username);
-        return UserDetailsImplementation.build(users, authorities);
+        return UserDetailsImplementation.build(user, authorities);
     }
 }
