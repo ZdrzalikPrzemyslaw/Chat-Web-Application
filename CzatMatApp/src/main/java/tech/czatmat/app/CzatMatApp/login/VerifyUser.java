@@ -1,8 +1,8 @@
 package tech.czatmat.app.CzatMatApp.login;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
-import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.UsersRepository;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.Users;
 
 import java.util.Optional;
 
@@ -13,11 +13,11 @@ public class VerifyUser {
         return true;
     }
 
-    public static boolean Verify(String login, String password, UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        Optional<User> optionalUser = userRepository.getUsersByUsername(login);
+    public static boolean Verify(String login, String password, UsersRepository usersRepository, PasswordEncoder passwordEncoder) {
+        Optional<Users> optionalUser = usersRepository.getUsersByUsername(login);
         if (optionalUser.isPresent()) {
-            User user = optionalUser.get();
-            return passwordEncoder.matches(password, user.getPassword());
+            Users users = optionalUser.get();
+            return passwordEncoder.matches(password, users.getPassword());
         }
         return false;
     }

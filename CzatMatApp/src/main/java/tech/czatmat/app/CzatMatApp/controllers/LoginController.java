@@ -9,15 +9,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import tech.czatmat.app.CzatMatApp.login.VerifyUser;
-import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
-import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.Users;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.UsersRepository;
 import tech.czatmat.app.CzatMatApp.payload.request.LoginRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.JwtResponse;
 import tech.czatmat.app.CzatMatApp.security.JwtUtils;
 import tech.czatmat.app.CzatMatApp.security.UserDetailsImplementation;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,15 +35,15 @@ public class LoginController {
     private JwtUtils jwtUtils;
 
     @Autowired
-    private final UserRepository userRepository;
+    private final UsersRepository usersRepository;
 
-    public LoginController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public LoginController(UsersRepository usersRepository) {
+        this.usersRepository = usersRepository;
     }
 
     // TODO: 27.11.2020 Return token
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<?> loginUser(@RequestBody User user, LoginRequest loginRequest) {
+    public ResponseEntity<?> loginUser(@RequestBody Users users, LoginRequest loginRequest) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));

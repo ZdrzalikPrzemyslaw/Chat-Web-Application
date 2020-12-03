@@ -3,8 +3,8 @@ package tech.czatmat.app.CzatMatApp.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import tech.czatmat.app.CzatMatApp.dataClasses.authorities.Authority;
-import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
+import tech.czatmat.app.CzatMatApp.dataClasses.authorities.Authorities;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.Users;
 
 import java.util.Collection;
 import java.util.List;
@@ -33,12 +33,12 @@ public class UserDetailsImplementation implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static UserDetailsImplementation build(User user, List<Authority> authority) {
+    public static UserDetailsImplementation build(Users users, List<Authorities> authority) {
         List<GrantedAuthority> authorities = authority.stream()
-                .map(role -> new SimpleGrantedAuthority(role.getAuthority()))
+                .map(role -> new SimpleGrantedAuthority(role.getRole_name()))
                 .collect(Collectors.toList());
 
-        return new UserDetailsImplementation(user.getID(), user.getUsername(), user.getPassword(), user.getName(), user.getSurname(), user.getEmail(), user.isEnabled(), authorities);
+        return new UserDetailsImplementation(users.getID(), users.getUsername(), users.getPassword(), users.getName(), users.getSurname(), users.getEmail(), users.isEnabled(), authorities);
     }
 
     @Override

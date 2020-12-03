@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface RoleRepository extends CrudRepository<Role, Long> {
-    Optional<Role> findByName(String name);
+public interface RolesRepository extends CrudRepository<Roles, Long> {
+    Optional<Roles> findByName(String name);
 }

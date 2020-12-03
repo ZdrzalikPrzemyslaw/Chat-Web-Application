@@ -22,12 +22,12 @@ CREATE TABLE roles
 
 CREATE TABLE authorities
 (
+    id        int         not null identity primary key,
     username  varchar(30) not null,
     role_name varchar(30) not null,
     foreign key (username) references [users] (username),
-    foreign key (role_name) references [roles] (name)
+    foreign key (role_name) references [roles] (name),
 )
-
 
 
 -- TODO
@@ -47,7 +47,7 @@ insert into authorities(username, role_name)
 values ('admin', 'ROLE_ADMIN')
 
 insert into [users] (username, password, name, surname, email, enabled)
-values ('user_zwykly', 'zwykly_user', 'Uzytnik', 'Uzywajacy', 'user@user.pl', 1)
+values ('user_zwykly', 'zwykly_user', 'Uzytnik', 'Uzywajacy', 'users@users.pl', 1)
 
 insert into authorities(username, role_name)
 values ('user_zwykly', 'ROLE_USER')

@@ -1,12 +1,11 @@
 package tech.czatmat.app.CzatMatApp.dataClasses.users;
 
 import org.springframework.data.repository.CrudRepository;
-import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 
 import java.util.Optional;
 
-public interface UserRepository extends CrudRepository<User, Long> {
+public interface UsersRepository extends CrudRepository<Users, Long> {
     boolean existsByUsername(String username);
-    Optional<User> getUsersByUsername(String username);
+    Optional<Users> getUsersByUsername(String username);
     boolean existsByEmail(String email);
 }

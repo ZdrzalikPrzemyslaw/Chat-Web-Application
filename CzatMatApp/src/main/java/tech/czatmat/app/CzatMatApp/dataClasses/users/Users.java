@@ -2,10 +2,12 @@ package tech.czatmat.app.CzatMatApp.dataClasses.users;
 
 import io.micrometer.core.lang.Nullable;
 import org.springframework.data.annotation.Id;
+
+import javax.persistence.Entity;
 import javax.persistence.Table;
 
-@Table(name="users")
-public class User {
+@Entity(name = "users")
+public class Users {
 
     @Id
     private int ID;
@@ -19,7 +21,7 @@ public class User {
     public static final int ENABLED = 1;
     public static final int DISABLED = 0;
 
-    public User() {
+    public Users() {
     }
 
     @Override
@@ -35,7 +37,7 @@ public class User {
                 '}';
     }
 
-    public User(String username, String password, String name, String surname, @Nullable String email, Integer enabled) {
+    public Users(String username, String password, String name, String surname, @Nullable String email, Integer enabled) {
         this.username = username;
         this.password = password;
         this.name = name;
