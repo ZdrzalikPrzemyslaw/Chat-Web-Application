@@ -29,8 +29,6 @@ CREATE TABLE authorities
     foreign key (role_name) references [roles] (name),
 
 )
-
-
 -- TODO
 insert into roles (name)
 values ('ROLE_USER')
@@ -42,7 +40,7 @@ insert into roles (name)
 values ('ROLE_ADMIN')
 
 insert into [users] (username, password, name, surname, email, enabled)
-values ('admin', 'admin', 'Administrator', 'Administracyjny', 'admin@admin.pl', 1)
+values ('admin', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS', 'Administrator', 'Administracyjny', 'admin@admin.pl', 1)
 
 insert into authorities(username, role_name)
 values ('admin', 'ROLE_ADMIN')
