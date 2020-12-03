@@ -25,7 +25,7 @@ CREATE TABLE authorities
     username  int not null,
     role_name int not null,
     foreign key (username) references [users] (username),
-    foreign key (role_name) references [users] (name)
+    foreign key (role_name) references [roles] (name)
 )
 
 
