@@ -17,6 +17,7 @@ public class UserDetailsImplementation implements UserDetails {
     private final String surname;
     private final String email;
     private final boolean enabled;
+
     public UserDetailsImplementation(int id, String username, String password, String surname, String email,
                                      boolean enabled, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
@@ -38,17 +39,44 @@ public class UserDetailsImplementation implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return this.authorities;
     }
 
     @Override
-    public String getPassword() {
-        return null;
+    public int hashCode() {
+        return id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        UserDetailsImplementation that = (UserDetailsImplementation) o;
+
+        return id == that.id;
+    }
+
+    public int getId() {
+        return id;
     }
 
     @Override
     public String getUsername() {
-        return null;
+        return username;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getEmail() {
+        return email;
     }
 
     @Override
@@ -68,6 +96,6 @@ public class UserDetailsImplementation implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true;
+        return this.enabled;
     }
 }
