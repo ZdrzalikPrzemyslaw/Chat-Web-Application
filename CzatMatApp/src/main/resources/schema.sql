@@ -22,8 +22,8 @@ CREATE TABLE roles
 
 CREATE TABLE authorities
 (
-    username  int not null,
-    role_name int not null,
+    username  varchar(30) not null,
+    role_name varchar(30) not null,
     foreign key (username) references [users] (username),
     foreign key (role_name) references [roles] (name)
 )
