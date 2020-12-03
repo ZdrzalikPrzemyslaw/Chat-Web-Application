@@ -3,9 +3,11 @@ package tech.czatmat.app.CzatMatApp.security;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import io.jsonwebtoken.*;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+@Component
 public class JwtUtils {
 
     @Value("${tech.czatMat.app.CzatMapApp.jwtSecret}")
