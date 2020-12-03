@@ -47,10 +47,6 @@ public class LoginController {
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
 
-        System.out.println(loginRequest);
-
-        System.out.println("DEBUGGER SUCKS LOL");
-
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -61,6 +57,7 @@ public class LoginController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
+
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 (long) userDetails.getId(),
