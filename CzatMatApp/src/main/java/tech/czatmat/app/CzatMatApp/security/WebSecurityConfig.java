@@ -26,6 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserDetailsServiceImplementation userDetailsServiceImplementation;
 
+    // TODO: 03.12.2020 NIE DZIALA : ( 
 //    @Override
 //    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 //        auth.userDetailsService((UserDetailsService) userDetailsServiceImplementation).passwordEncoder(encoder());
