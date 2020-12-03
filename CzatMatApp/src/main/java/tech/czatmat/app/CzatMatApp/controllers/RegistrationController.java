@@ -42,9 +42,6 @@ public class RegistrationController {
     @Autowired
     private RoleRepository roleRepository;
 
-    @Autowired
-    private JwtUtils jwtUtils;
-
     public RegistrationController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -54,10 +51,8 @@ public class RegistrationController {
 
     // TODO: 28.11.2020 Obsługiwać brak kolumn i zwracac odpowiedni error
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<?> createUser(@RequestBody RegistrationRequest request, HttpServletResponse response) {
+    public ResponseEntity<?> createUser(@RequestBody RegistrationRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
-            response.setStatus(HttpServletResponse.SC_CONFLICT);
-            // TODO: 27.11.2020 Make throw exepction?
             return ResponseEntity.badRequest().body(new MessageResponse("User By That Login Already Exists"));
         }
         if (userRepository.existsByEmail(request.getEmail())) {

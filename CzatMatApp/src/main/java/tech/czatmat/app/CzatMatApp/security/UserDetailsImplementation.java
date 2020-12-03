@@ -15,15 +15,18 @@ public class UserDetailsImplementation implements UserDetails {
     private final int id;
     private final String username;
     private final String password;
+    private final String name;
     private final String surname;
     private final String email;
     private final boolean enabled;
 
-    public UserDetailsImplementation(int id, String username, String password, String surname, String email,
+
+    public UserDetailsImplementation(int id, String username, String password, String name, String surname, String email,
                                      boolean enabled, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.password = password;
+        this.name = name;
         this.surname = surname;
         this.email = email;
         this.enabled = enabled;
@@ -35,7 +38,7 @@ public class UserDetailsImplementation implements UserDetails {
                 .map(role -> new SimpleGrantedAuthority(role.getAuthority()))
                 .collect(Collectors.toList());
 
-        return new UserDetailsImplementation(user.getID(), user.getUsername(), user.getPassword(), user.getSurname(), user.getEmail(), user.isEnabled(), authorities);
+        return new UserDetailsImplementation(user.getID(), user.getUsername(), user.getPassword(), user.getName(), user.getSurname(), user.getEmail(), user.isEnabled(), authorities);
     }
 
     @Override
@@ -65,6 +68,10 @@ public class UserDetailsImplementation implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public String getName() {
+        return name;
     }
 
     @Override
