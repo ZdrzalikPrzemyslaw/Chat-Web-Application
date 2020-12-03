@@ -38,13 +38,13 @@ values ('ROLE_SUPER_USER')
 insert into roles (name)
 values ('ROLE_ADMIN')
 
-insert into user (username, password, name, surname, email, enabled)
+insert into [user] (username, password, name, surname, email, enabled)
 values ('admin', 'admin', 'Administrator', 'Administracyjny', 'admin@admin.pl', 1)
 
 insert into authorities(username, role_name)
 values ('admin', 'ROLE_ADMIN')
 
-insert into user (username, password, name, surname, email, enabled)
+insert into [user] (username, password, name, surname, email, enabled)
 values ('user_zwykly', 'zwykly_user', 'Uzytnik', 'Uzywajacy', 'user@user.pl', 1)
 
 insert into authorities(username, role_name)
