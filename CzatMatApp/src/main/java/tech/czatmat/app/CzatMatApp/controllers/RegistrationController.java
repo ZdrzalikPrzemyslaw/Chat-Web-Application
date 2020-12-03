@@ -6,11 +6,12 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import tech.czatmat.app.CzatMatApp.dataClasses.authorities.AuthoritiesRepository;
+import tech.czatmat.app.CzatMatApp.dataClasses.authorities.Authority;
 import tech.czatmat.app.CzatMatApp.dataClasses.roles.Role;
 import tech.czatmat.app.CzatMatApp.dataClasses.roles.RoleRepository;
+import tech.czatmat.app.CzatMatApp.dataClasses.roles.RoleSource;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
-import tech.czatmat.app.CzatMatApp.messages.Message;
 import tech.czatmat.app.CzatMatApp.payload.request.RegistrationRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.MessageResponse;
 import tech.czatmat.app.CzatMatApp.security.JwtUtils;
@@ -76,42 +77,37 @@ public class RegistrationController {
 
 
         if (strRoles == null) {
-            Role userRole = authoritiesRepository.findByName(ERole.ROLE_USER)
+            Role userRole = roleRepository.findByName(RoleSource.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
             roles.add(userRole);
         } else {
             strRoles.forEach(role -> {
                 switch (role) {
-                    case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                    case RoleSource.ROLE_ADMIN:
+                        Role adminRole = roleRepository.findByName(RoleSource.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
 
                         break;
-                    case "mod":
-                        Role modRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
+                    case RoleSource.ROLE_SUPER_USER:
+                        Role supRole = roleRepository.findByName(RoleSource.ROLE_SUPER_USER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(modRole);
+                        roles.add(supRole);
 
                         break;
                     default:
-                        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                        Role userRole = roleRepository.findByName(RoleSource.ROLE_USER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(userRole);
                 }
             });
         }
-
-        user.setRoles(roles);
+        for (var i : roles) {
+            authoritiesRepository.save(new Authority(user.getUsername(), i.getName()));
+        }
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
-
-
-        request.setPassword(passwordEncoder.encode(request.getPassword()));
-        userRepository.save(request);
-        response.setStatus(HttpServletResponse.SC_CREATED);
-        return ("User successfully created");
     }
 
     // TODO: 27.11.2020 Ograniczyć możliwość używania zapytania
