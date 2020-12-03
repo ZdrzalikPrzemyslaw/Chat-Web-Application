@@ -4,12 +4,12 @@ DROP TABLE IF EXISTS user;
 CREATE TABLE user
 (
     id       int identity primary key,
-    username varchar(30) unique not null,
-    password varchar(512)       not null,
-    name     varchar(50)        not null,
-    surname  varchar(50)        not null,
-    email    varchar(100)       not null,
-    enabled  int                not null default 1,
+    username varchar(30) unique  not null,
+    password varchar(512)        not null,
+    name     varchar(50)         not null,
+    surname  varchar(50)         not null,
+    email    varchar(100) unique not null,
+    enabled  int                 not null default 1,
 )
 
 CREATE TABLE authorities
@@ -22,7 +22,7 @@ CREATE TABLE authorities
 
 CREATE TABLE roles
 (
-    id int not null identity primary key,
+    id   int         not null identity primary key,
     name varchar(30) not null unique,
     CONSTRAINT check_name CHECK (name IN ('ROLE_USER', 'ROLE_SUPER_USER', 'ROLE_ADMIN'))
 )

@@ -16,6 +16,8 @@ public class User {
     private String surname;
     private String email;
     private Integer enabled;
+    public static final int ENABLED = 1;
+    public static final int DISABLED = 0;
 
     public User() {
     }
