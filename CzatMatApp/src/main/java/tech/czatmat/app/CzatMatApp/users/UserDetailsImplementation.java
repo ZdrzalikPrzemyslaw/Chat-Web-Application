@@ -1,26 +1,22 @@
 package tech.czatmat.app.CzatMatApp.users;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import tech.czatmat.app.CzatMatApp.users.authorities.Authority;
 
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserDetailsImplementation implements UserDetails {
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
-    }
-
-    private Collection<? extends GrantedAuthority> authorities;
-    private int id;
-    private String username;
-    private String password;
-    private String surname;
-    private String email;
-    private boolean enabled;
-
+    private final Collection<? extends GrantedAuthority> authorities;
+    private final int id;
+    private final String username;
+    private final String password;
+    private final String surname;
+    private final String email;
+    private final boolean enabled;
     public UserDetailsImplementation(int id, String username, String password, String surname, String email,
                                      boolean enabled, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
@@ -32,8 +28,17 @@ public class UserDetailsImplementation implements UserDetails {
         this.authorities = authorities;
     }
 
-    public static UserDetailsImplementation build(User user, Authority authority){
-        return new UserDetailsImplementation(user.getID(), user.getUsername(), user.getPassword(), user.getSurname(), user.getEmail(), authority);
+    public static UserDetailsImplementation build(User user, List<Authority> authority) {
+        List<GrantedAuthority> authorities = authority.stream()
+                .map(role -> new SimpleGrantedAuthority(role.getAuthority()))
+                .collect(Collectors.toList());
+
+        return new UserDetailsImplementation(user.getID(), user.getUsername(), user.getPassword(), user.getSurname(), user.getEmail(), user.isEnabled(), authorities);
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
     @Override
