@@ -2,8 +2,10 @@ package tech.czatmat.app.CzatMatApp.users;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+import tech.czatmat.app.CzatMatApp.users.authorities.Authority;
 
 import java.util.Collection;
+import java.util.Collections;
 
 public class UserDetailsImplementation implements UserDetails {
     @Override
@@ -11,6 +13,7 @@ public class UserDetailsImplementation implements UserDetails {
         return null;
     }
 
+    private Collection<? extends GrantedAuthority> authorities;
     private int id;
     private String username;
     private String password;
@@ -18,22 +21,19 @@ public class UserDetailsImplementation implements UserDetails {
     private String email;
     private boolean enabled;
 
-    public UserDetailsImplementation(User user){
-        this.id = user.getID();
-        this.username = user.getUsername();
-        this.password = user.getPassword();
-        this.email = user.getEmail();
-        this.surname = user.getSurname();
-        this.enabled = user.isEnabled();
-    }
-
-    public UserDetailsImplementation(int id, String username, String password, String surname, String email, boolean enabled) {
+    public UserDetailsImplementation(int id, String username, String password, String surname, String email,
+                                     boolean enabled, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.surname = surname;
         this.email = email;
         this.enabled = enabled;
+        this.authorities = authorities;
+    }
+
+    public static UserDetailsImplementation build(User user, Authority authority){
+        return new UserDetailsImplementation(user.getID(), user.getUsername(), user.getPassword(), user.getSurname(), user.getEmail(), authority);
     }
 
     @Override
