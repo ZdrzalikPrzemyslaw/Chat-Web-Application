@@ -4,7 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import tech.czatmat.app.CzatMatApp.dataClasses.authorities.AuthoritiesRepository;
 import tech.czatmat.app.CzatMatApp.dataClasses.authorities.Authority;
 import tech.czatmat.app.CzatMatApp.dataClasses.roles.Role;
@@ -14,25 +17,21 @@ import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
 import tech.czatmat.app.CzatMatApp.payload.request.RegistrationRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.MessageResponse;
+
 import java.util.HashSet;
 import java.util.Set;
 
 
 @RestController
 @RequestMapping("/registration")
-
-// TODO: 27.11.2020 : https://www.codebyamir.com/blog/user-account-registration-with-spring-boot
 public class RegistrationController {
 
     @Autowired
+    private final UserRepository userRepository;
+    @Autowired
     AuthenticationManager authenticationManager;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private final UserRepository userRepository;
-
     @Autowired
     private AuthoritiesRepository authoritiesRepository;
 
@@ -43,13 +42,8 @@ public class RegistrationController {
         this.userRepository = userRepository;
     }
 
-    // TODO: 27.11.2020 Nie jestem pewien implementacji
-    // TODO: 27.11.2020 Sprawdzać czy udało się dodać usera
-
-    // TODO: 28.11.2020 Obsługiwać brak kolumn i zwracac odpowiedni error
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> createUser(@RequestBody RegistrationRequest request) {
-        System.out.println(request);
         if (userRepository.existsByUsername(request.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("User By That Login Already Exists"));
         }

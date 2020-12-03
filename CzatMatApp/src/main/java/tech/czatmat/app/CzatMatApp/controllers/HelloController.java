@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class HelloController {
 
-	@RequestMapping("/")
-	public String index() {
-		return "Siema Dzulka";
-	}
+    @RequestMapping("/")
+    public String index() {
+        return "Siema Dzulka";
+    }
 
 }

@@ -28,14 +28,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthorityEntryPointJwt unauthorizedHandler;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService((UserDetailsService) userDetailsServiceImplementation).passwordEncoder(encoder());
-    }
-
     @Bean
     public static PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService((UserDetailsService) userDetailsServiceImplementation).passwordEncoder(encoder());
     }
 
     @Bean

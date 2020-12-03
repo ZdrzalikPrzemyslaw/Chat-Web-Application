@@ -4,23 +4,12 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
 
-
 @Table("authorities")
 public class Authority {
 
-    public Long getID() {
-        return ID;
-    }
-
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
-
     @Id
     private Long ID;
-
     private String username;
-
     private String role_name;
 
     public Authority() {
@@ -29,6 +18,14 @@ public class Authority {
     public Authority(String username, String role_name) {
         this.username = username;
         this.role_name = role_name;
+    }
+
+    public Long getID() {
+        return ID;
+    }
+
+    public void setID(Long ID) {
+        this.ID = ID;
     }
 
     public String getUsername() {

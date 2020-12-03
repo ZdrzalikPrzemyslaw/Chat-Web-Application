@@ -7,6 +7,8 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table("users")
 public class User {
 
+    public static final int ENABLED = 1;
+    public static final int DISABLED = 0;
     @Id
     private int ID;
     private String username;
@@ -16,10 +18,17 @@ public class User {
     private String surname;
     private String email;
     private Integer enabled;
-    public static final int ENABLED = 1;
-    public static final int DISABLED = 0;
 
     public User() {
+    }
+
+    public User(String username, String password, String name, String surname, @Nullable String email, Integer enabled) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.enabled = enabled;
     }
 
     @Override
@@ -33,15 +42,6 @@ public class User {
                 ", email='" + email + '\'' +
                 ", enabled=" + enabled +
                 '}';
-    }
-
-    public User(String username, String password, String name, String surname, @Nullable String email, Integer enabled) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.enabled = enabled;
     }
 
     public boolean isEnabled() {

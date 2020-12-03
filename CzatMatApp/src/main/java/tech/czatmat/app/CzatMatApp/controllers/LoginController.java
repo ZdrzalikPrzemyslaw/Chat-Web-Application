@@ -7,17 +7,12 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import tech.czatmat.app.CzatMatApp.login.VerifyUser;
-import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
-import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 import tech.czatmat.app.CzatMatApp.payload.request.LoginRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.JwtResponse;
 import tech.czatmat.app.CzatMatApp.security.JwtUtils;
 import tech.czatmat.app.CzatMatApp.security.UserDetailsImplementation;
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,8 +22,6 @@ import java.util.stream.Collectors;
 // TODO: 27.11.2020 fix class
 public class LoginController {
     // TODO: 27.11.2020 https://bezkoder.com/spring-boot-jwt-authentication/
-    @Autowired
-    private PasswordEncoder passwordEncoder;
 
     @Autowired
     AuthenticationManager authenticationManager;
@@ -36,14 +29,10 @@ public class LoginController {
     @Autowired
     private JwtUtils jwtUtils;
 
-    @Autowired
-    private final UserRepository userRepository;
 
-    public LoginController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public LoginController() {
     }
 
-    // TODO: 27.11.2020 Return token
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
 
@@ -68,10 +57,5 @@ public class LoginController {
                 roles));
     }
 
-
-    @RequestMapping(value = "/przyklad", method = RequestMethod.GET, produces = "application/json")
-    public String getPrzyklad() {
-        return "Siema Login";
-    }
 
 }
