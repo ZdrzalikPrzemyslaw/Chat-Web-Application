@@ -1,4 +1,4 @@
-package tech.czatmat.app.CzatMatApp.users.authorities;
+package tech.czatmat.app.CzatMatApp.dataClasses.authorities;
 import javax.persistence.Table;
 
 @Table(name="authorities")

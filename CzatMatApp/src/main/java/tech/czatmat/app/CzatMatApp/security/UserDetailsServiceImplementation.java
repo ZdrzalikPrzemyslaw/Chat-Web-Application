@@ -1,13 +1,17 @@
-package tech.czatmat.app.CzatMatApp.users;
+package tech.czatmat.app.CzatMatApp.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import tech.czatmat.app.CzatMatApp.users.authorities.AuthoritiesRepository;
+import tech.czatmat.app.CzatMatApp.dataClasses.authorities.AuthoritiesRepository;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
+import tech.czatmat.app.CzatMatApp.security.UserDetailsImplementation;
+import tech.czatmat.app.CzatMatApp.security.UserDetailsService;
 
 @Service
-public class UserDetailsServiceImplementation implements UserDetailsService{
+public class UserDetailsServiceImplementation implements UserDetailsService {
     @Autowired
     UserRepository userRepository;
 

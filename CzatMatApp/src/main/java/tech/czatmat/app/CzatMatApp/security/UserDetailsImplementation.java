@@ -1,9 +1,10 @@
-package tech.czatmat.app.CzatMatApp.users;
+package tech.czatmat.app.CzatMatApp.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import tech.czatmat.app.CzatMatApp.users.authorities.Authority;
+import tech.czatmat.app.CzatMatApp.dataClasses.authorities.Authority;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 
 import java.util.Collection;
 import java.util.List;

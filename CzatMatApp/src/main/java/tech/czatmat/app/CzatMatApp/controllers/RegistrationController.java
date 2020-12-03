@@ -3,8 +3,8 @@ package tech.czatmat.app.CzatMatApp.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import tech.czatmat.app.CzatMatApp.users.User;
-import tech.czatmat.app.CzatMatApp.users.UserRepository;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
 
 import javax.servlet.http.HttpServletResponse;
 

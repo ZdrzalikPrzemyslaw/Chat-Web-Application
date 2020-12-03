@@ -1,6 +1,7 @@
-package tech.czatmat.app.CzatMatApp.users;
+package tech.czatmat.app.CzatMatApp.dataClasses.users;
 
 import org.springframework.data.repository.CrudRepository;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 
 import java.util.Optional;
 

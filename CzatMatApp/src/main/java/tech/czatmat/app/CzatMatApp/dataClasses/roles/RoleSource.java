@@ -1,4 +1,4 @@
-package tech.czatmat.app.CzatMatApp.users.authorities.roles;
+package tech.czatmat.app.CzatMatApp.dataClasses.roles;
 
 public class RoleSource {
 

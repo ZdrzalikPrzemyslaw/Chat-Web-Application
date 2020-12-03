@@ -1,8 +1,8 @@
 package tech.czatmat.app.CzatMatApp.login;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
-import tech.czatmat.app.CzatMatApp.users.UserRepository;
-import tech.czatmat.app.CzatMatApp.users.User;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 
 import java.util.Optional;
 

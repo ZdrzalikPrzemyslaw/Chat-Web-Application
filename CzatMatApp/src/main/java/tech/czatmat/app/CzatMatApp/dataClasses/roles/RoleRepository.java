@@ -1,4 +1,4 @@
-package tech.czatmat.app.CzatMatApp.users.authorities.roles;
+package tech.czatmat.app.CzatMatApp.dataClasses.roles;
 
 import org.springframework.data.repository.CrudRepository;
 

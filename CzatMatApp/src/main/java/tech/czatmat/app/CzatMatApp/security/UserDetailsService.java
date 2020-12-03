@@ -1,4 +1,4 @@
-package tech.czatmat.app.CzatMatApp.users;
+package tech.czatmat.app.CzatMatApp.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
