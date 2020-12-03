@@ -1,7 +1,7 @@
 -- TODO dodać lokalna baze danych uzywana w trakcie developmentu lokalnego, tak aby nie psuć bazy danych w chmurze
 DROP TABLE IF EXISTS authorities;
-DROP TABLE IF EXISTS user;
-CREATE TABLE user
+DROP TABLE IF EXISTS [user];
+CREATE TABLE [user]
 (
     id       int identity primary key,
     username varchar(30) unique  not null,
@@ -16,8 +16,8 @@ CREATE TABLE authorities
 (
     username  int not null,
     role_name int not null,
-    foreign key (username) references user (username),
-    foreign key (role_name) references user (name)
+    foreign key (username) references [user] (username),
+    foreign key (role_name) references [user] (name)
 )
 
 CREATE TABLE roles
