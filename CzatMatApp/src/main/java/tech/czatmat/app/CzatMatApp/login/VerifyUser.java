@@ -4,6 +4,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import tech.czatmat.app.CzatMatApp.users.UserRepository;
 import tech.czatmat.app.CzatMatApp.users.User;
 
+import java.util.Optional;
+
 public class VerifyUser {
 
     // TODO: 27.11.2020 https://www.baeldung.com/spring-security-registration-password-encoding-bcrypt
@@ -12,8 +14,12 @@ public class VerifyUser {
     }
 
     public static boolean Verify(String login, String password, UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        User user = userRepository.getUsersByUsername(login);
-        return passwordEncoder.matches(password, user.getPassword());
+        Optional<User> optionalUser = userRepository.getUsersByUsername(login);
+        if (optionalUser.isPresent()) {
+            User user = optionalUser.get();
+            return passwordEncoder.matches(password, user.getPassword());
+        }
+        return false;
     }
 
 }
