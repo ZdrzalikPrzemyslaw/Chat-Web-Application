@@ -10,11 +10,11 @@ import java.util.Date;
 @Component
 public class JwtUtils {
 
-    @Value("${tech.czatMat.app.CzatMapApp.jwtSecret}")
-    private String jwtSecret;
+//    @Value("${tech.czatMat.app.CzatMapApp.jwtSecret}")
+    private final String jwtSecret = "superScisleTajnyKlucz";
 
-    @Value("${tech.czatMat.app.CzatMapApp.jwtExpirationMs}")
-    private int jwtExpirationMs;
+//    @Value("${tech.czatMat.app.CzatMapApp.jwtExpirationMs}")
+    private int jwtExpirationMs = 86400000;
 
     public String generateJwtToken(Authentication authentication) {
 
