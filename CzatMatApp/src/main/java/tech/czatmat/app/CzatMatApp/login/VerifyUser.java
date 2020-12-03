@@ -2,7 +2,7 @@ package tech.czatmat.app.CzatMatApp.login;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import tech.czatmat.app.CzatMatApp.users.UserRepository;
-import tech.czatmat.app.CzatMatApp.users.Users;
+import tech.czatmat.app.CzatMatApp.users.User;
 
 public class VerifyUser {
 
@@ -12,7 +12,7 @@ public class VerifyUser {
     }
 
     public static boolean Verify(String login, String password, UserRepository userRepository, PasswordEncoder passwordEncoder) {
-        Users user = userRepository.getUsersByUsername(login);
+        User user = userRepository.getUsersByUsername(login);
         return passwordEncoder.matches(password, user.getPassword());
     }
 

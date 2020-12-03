@@ -1,14 +1,16 @@
 package tech.czatmat.app.CzatMatApp.users.authorities;
+import javax.persistence.Table;
 
-public class Authorities {
+@Table(name="authorities")
+public class Authority {
 
     private String username;
     private String authority;
 
-    public Authorities() {
+    public Authority() {
     }
 
-    public Authorities(String username, String authority) {
+    public Authority(String username, String authority) {
         this.username = username;
         this.authority = authority;
     }

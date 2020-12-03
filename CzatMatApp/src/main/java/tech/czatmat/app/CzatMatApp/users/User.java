@@ -2,9 +2,10 @@ package tech.czatmat.app.CzatMatApp.users;
 
 import io.micrometer.core.lang.Nullable;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.sql.In;
+import javax.persistence.Table;
 
-public class Users {
+@Table(name="users")
+public class User {
 
     @Id
     private int ID;
@@ -16,7 +17,7 @@ public class Users {
     private String email;
     private Integer enabled;
 
-    public Users() {
+    public User() {
     }
 
     @Override
@@ -32,7 +33,7 @@ public class Users {
                 '}';
     }
 
-    public Users(String username, String password, String name, String surname, @Nullable String email, Integer enabled) {
+    public User(String username, String password, String name, String surname, @Nullable String email, Integer enabled) {
         this.username = username;
         this.password = password;
         this.name = name;
