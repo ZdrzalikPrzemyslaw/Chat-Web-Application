@@ -18,6 +18,10 @@ public class Message {
         this.messageId = messageId;
     }
 
+    public static Message of(String userName, String message, Date date, int chatId, int messageId) {
+        return new Message(userName, message, date, chatId, messageId);
+    }
+
     public int getMessageId() {
         return messageId;
     }
@@ -36,9 +40,5 @@ public class Message {
 
     public int getChatId() {
         return chatId;
-    }
-
-    public static Message of(String userName, String message, Date date, int chatId, int messageId) {
-        return new Message(userName, message, date, chatId, messageId);
     }
 }

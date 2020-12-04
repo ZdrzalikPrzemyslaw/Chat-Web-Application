@@ -1,11 +1,14 @@
-package tech.czatmat.app.CzatMatApp.users;
+package tech.czatmat.app.CzatMatApp.dataClasses.users;
 
 import io.micrometer.core.lang.Nullable;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.sql.In;
+import org.springframework.data.relational.core.mapping.Table;
 
-public class Users {
+@Table("users")
+public class User {
 
+    public static final int ENABLED = 1;
+    public static final int DISABLED = 0;
     @Id
     private int ID;
     private String username;
@@ -16,7 +19,16 @@ public class Users {
     private String email;
     private Integer enabled;
 
-    public Users() {
+    public User() {
+    }
+
+    public User(String username, String password, String name, String surname, @Nullable String email, Integer enabled) {
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.enabled = enabled;
     }
 
     @Override
@@ -30,15 +42,6 @@ public class Users {
                 ", email='" + email + '\'' +
                 ", enabled=" + enabled +
                 '}';
-    }
-
-    public Users(String username, String password, String name, String surname, @Nullable String email, Integer enabled) {
-        this.username = username;
-        this.password = password;
-        this.name = name;
-        this.surname = surname;
-        this.email = email;
-        this.enabled = enabled;
     }
 
     public boolean isEnabled() {

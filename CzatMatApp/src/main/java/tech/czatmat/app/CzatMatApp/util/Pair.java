@@ -6,9 +6,13 @@ public class Pair<T, T1> {
     public final T1 second;
 
 
-    private Pair(T first, T1 second){
+    private Pair(T first, T1 second) {
         this.first = first;
         this.second = second;
+    }
+
+    public static <T, T1> Pair<T, T1> of(T a, T1 b) {
+        return new Pair<>(a, b);
     }
 
     public T getFirst() {
@@ -17,10 +21,6 @@ public class Pair<T, T1> {
 
     public T1 getSecond() {
         return second;
-    }
-
-    public static <T, T1> Pair <T, T1> of(T a, T1 b) {
-        return new Pair<>(a, b);
     }
 
 }

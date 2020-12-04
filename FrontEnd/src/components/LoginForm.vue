@@ -26,16 +26,16 @@
         Password is required
       </div>
     </div>
-    <div class="form-group">
-      <button class="btn btn-primary" v-on:click="this.login">
-        Login
-      </button>
-      <button
-        class="btn btn-secondary"
-        v-on:click="this.$router.push('/registration')"
-      >
-        Go To Registration
-      </button>
+    <div class="container text-center" id="buttons">
+        <button class="btn btn-primary" v-on:click="this.login">
+          Login
+        </button>
+        <button
+          class="btn btn-secondary"
+          v-on:click="this.$router.push('/registration')"
+        >
+          Go To Registration
+        </button>
     </div>
   </div>
 </template>
@@ -79,5 +79,10 @@ export default {
   border-radius: 10px;
   padding: 10px 30px;
   background: #dcdcdc;
+}
+#buttons > button {
+  width: 60%;
+  margin: 3px;
+  text-align: center;
 }
 </style>
