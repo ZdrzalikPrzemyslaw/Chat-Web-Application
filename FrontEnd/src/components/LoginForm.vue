@@ -61,7 +61,7 @@ export default {
         })
         .then(function(response) {
           console.log(response.data);
-          self.$router.push("/");
+          self.$router.push("/home");
         })
         .catch(function(error) {
           console.log(error.response);

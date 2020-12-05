@@ -6,5 +6,5 @@ import router from './router'
 
 // createApp(App).use(vueResource)
 createApp(App).use(router).mount('#app')
-router.replace({ path: '/login', redirect: '/' })
+// router.replace({ path: '/login', redirect: '/' })
 export default router
