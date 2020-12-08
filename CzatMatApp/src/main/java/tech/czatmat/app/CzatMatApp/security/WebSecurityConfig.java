@@ -17,6 +17,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 // TODO: 28.11.2020 https://octoperf.com/blog/2018/03/08/securing-rest-api-spring-security/
 
+// TODO: 08.12.2020 https://medium.com/@beladiyahardik7/spring-security-custom-oauth2exception-in-spring-b35a62af4d34
+
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
