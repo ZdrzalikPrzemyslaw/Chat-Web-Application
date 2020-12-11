@@ -20,14 +20,14 @@
 						<form role="form">
                             <div class="form-group form-row">
                                 <label for="name" class="col-form-label text-left col-md-4 desc">Name</label>
-                                <input v-model="name" type="text" id="name" class="form-control col-md-6 ml-md-2"/>
+                                <input v-model="newName" type="text" id="name" class="form-control col-md-6 ml-md-2"/>
                             </div>
                             <div class="form-group form-row">
                                 <label for="surname" class="col-form-label text-left col-md-4 desc">Surname</label>
-                                <input v-model="surname" type="text" id="surname" class="form-control col-md-6 ml-md-2"/>
+                                <input v-model="newSurname" type="text" id="surname" class="form-control col-md-6 ml-md-2"/>
                             </div>
                             <div class="text-right">
-                                <input class="btn btn-primary" type="submit" value="Submit"/>   
+                                <input v-on:click="changeNames()" class="btn btn-primary" type="button" value="Submit"/>   
                             </div>    
 						</form>
 					</div>
@@ -35,8 +35,8 @@
 				<hr>
                 <div>
                     <div class="row pl-sm-2">
-                        <div class="col-sm-4 desc text-left">Login</div>
-                        <div class="col-sm-6 text-left">{{login}}</div>
+                        <div class="col-sm-4 desc text-left">Username</div>
+                        <div class="col-sm-6 text-left">{{username}}</div>
                         <div class="col-sm-1">
                             <button v-on:click="showMenu('.login-block')" class="pen-icon">
                                 <i class="fas fa-pencil-alt pen-icon-color"></i>
@@ -47,10 +47,10 @@
 						<form role="form">
                             <div class="form-group form-row">
                                 <label for="login" class="col-form-label text-left col-md-4 desc">New login</label>
-                                <input type="text" id="login" class="form-control col-md-6 ml-md-2"/>
+                                <input v-model="newUsername" type="text" id="login" class="form-control col-md-6 ml-md-2"/>
                             </div>
                             <div class="text-right">
-                                <input class="btn btn-primary" type="submit" value="Submit"/>   
+                                <input v-on:click="changeUsername()" class="btn btn-primary" type="button" value="Submit"/>   
                             </div>    
 						</form>
 					</div>
@@ -70,10 +70,10 @@
 						<form role="form">
                             <div class="form-group form-row">
                                 <label for="email" class="col-form-label text-left col-md-4 desc">New email</label>
-                                <input type="email" id="email" class="form-control col-md-6 ml-md-2"/>
+                                <input v-model="newEmail" type="email" id="email" class="form-control col-md-6 ml-md-2" />
                             </div>
                             <div class="text-right">
-                                <input class="btn btn-primary" type="submit" value="Submit"/>   
+                                <input v-on:click="changeEmail()" class="btn btn-primary" type="button" value="Submit"/>   
                             </div>    
 						</form>
 					</div>
@@ -82,9 +82,9 @@
 					<div>Change password</div>
 					<div style="display: none">
 						<form>
-							<input type="password" placeholder="Ols password"/>
+							<input type="password" placeholder="Old password"/>
 							<input type="text" placeholder="New password"/>
-							<input type="text" placeholder="Reapet new password" />
+							<input type="text" placeholder="Repeat new password" />
 							<input type="checkbox" value="Show password" />
 							<input type="button" value="Submit"/>
 						</form>
@@ -94,14 +94,19 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
-  name: 'HelloWorld',
   data() {
       return {
         name: 'Jan',
         surname: 'Nowak',
-        login: 'JanLogin',
-        email: 'jannowak@p.lodz.pl'
+        username: 'JanLogin',
+        email: 'jannowak@p.lodz.pl',
+        newName: 'Jan',
+        newSurname: 'Nowak',
+        newEmail: '',
+        newUsername: ''
       }
   },
   methods: {
@@ -109,8 +114,58 @@ export default {
           const menuButton = document.querySelector(managedClass);
           menuButton.classList.toggle('menu--active');
       },
-      confirmChange: function() {
-
+      changeNames: function() {
+        let self = this;
+        axios
+        .post(process.env.VUE_APP_BACKEND_URL + '/update/names', {
+            username: self.username,
+            newName: self.newName,
+            newSurname: self.newSurname
+        })
+        .then(function(response) {
+          console.log(response.data);
+          self.name = self.newName;
+          self.surname = self.newSurname;
+        })
+        .catch(function(error) {
+          console.log(error.response);
+          self.newName = self.name;
+          self.newSurname = self.surname;
+        });
+      },
+      changeEmail: function() {
+        let self = this;
+        axios
+        .post(process.env.VUE_APP_BACKEND_URL + '/update/email', {
+            username: self.username,
+            email: self.newEmail
+        })
+        .then(function(response) {
+          console.log(response.data);
+          self.email = self.newEmail;
+          self.newEmail = '';
+        })
+        .catch(function(error) {
+          console.log(error.response);
+          self.newEmail = '';
+        });
+      },
+      changeUsername: function() {
+        let self = this;
+        axios
+        .post(process.env.VUE_APP_BACKEND_URL + '/update/username', {
+            username: self.username,
+            newUsername: self.newUsername
+        })
+        .then(function(response) {
+          console.log(response.data);
+          self.username = self.newUsername;
+          self.newUsername = '';
+        })
+        .catch(function(error) {
+          console.log(error.response);
+          self.newUsername = '';
+        });
       }
   }
 }
