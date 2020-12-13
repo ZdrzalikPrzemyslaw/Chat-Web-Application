@@ -16,7 +16,7 @@
                             </button>
                         </div>
                     </div>
-					<div class="name-block menu--active">
+					<div class="name-block menu--active pl-sm-2">
 						<form role="form">
                             <div class="form-group form-row">
                                 <label for="name" class="col-form-label text-left col-md-4 desc">Name</label>
@@ -28,9 +28,10 @@
                             </div>
                             <div class="text-right">
                                 <input v-on:click="changeNames()" class="btn btn-primary" type="button" value="Submit"/>   
-                            </div>    
+                            </div>   
 						</form>
 					</div>
+                    <div id="namesAlert" class="alert alert-box"></div> 
 				</div>
 				<hr>
                 <div>
@@ -43,10 +44,10 @@
                             </button>
                         </div>
                     </div>
-					<div class="login-block menu--active">
+					<div class="login-block menu--active pl-sm-2">
 						<form role="form">
                             <div class="form-group form-row">
-                                <label for="login" class="col-form-label text-left col-md-4 desc">New login</label>
+                                <label for="login" class="col-form-label text-left col-md-4 desc">New username</label>
                                 <input v-model="newUsername" type="text" id="login" class="form-control col-md-6 ml-md-2"/>
                             </div>
                             <div class="text-right">
@@ -54,6 +55,7 @@
                             </div>    
 						</form>
 					</div>
+                    <div id="usernameAlert" class="alert alert-box"></div> 
                 </div>    
 				<hr>
                 <div>
@@ -66,7 +68,7 @@
                             </button>
                         </div>
                     </div>
-					<div class="email-block menu--active">
+					<div class="email-block menu--active pl-sm-2">
 						<form role="form">
                             <div class="form-group form-row">
                                 <label for="email" class="col-form-label text-left col-md-4 desc">New email</label>
@@ -77,24 +79,46 @@
                             </div>    
 						</form>
 					</div>
+                    <div id="emailAlert" class="alert alert-box"></div> 
 				</div>
                 <hr>
-					<div>Change password</div>
-					<div style="display: none">
-						<form>
-							<input type="password" placeholder="Old password"/>
-							<input type="text" placeholder="New password"/>
-							<input type="text" placeholder="Repeat new password" />
-							<input type="checkbox" value="Show password" />
-							<input type="button" value="Submit"/>
+                <div>
+                    <div class="row pl-sm-2">
+                        <div class="col-sm-10 desc text-left">Password</div>
+                        <div class="col-sm-1">
+                            <button v-on:click="showMenu('.password-block')" class="pen-icon">
+                                <i class="fas fa-pencil-alt pen-icon-color"></i>
+                            </button>
+                        </div>
+                    </div>
+					<div class="password-block menu--active mt-sm-3 pl-sm-2">
+						<form role="form">
+                            <div class="form-group form-row">
+                                <label for="oldPassword" class="col-form-label text-left col-md-4 desc text-left">Old password</label>
+                                <input v-model="oldPasswd" type="password" id="oldPassword" class="form-control col-md-6 ml-md-2" />
+                            </div>
+                            <div class="form-group form-row">
+                                <label for="newPassword1" class="col-form-label text-left col-md-4 desc text-left">New password</label>
+                                <input v-model="newPasswd1" type="password" id="newPassword1" class="form-control col-md-6 ml-md-2" />
+                            </div>
+                            <div class="form-group form-row">
+                                <label for="newPassword2" class="col-form-label text-left col-md-4 desc text-left">Repeat new password</label>
+                                <input v-model="newPasswd2" type="password" id="newPassword2" class="form-control col-md-6 ml-md-2" />
+                            </div>
+                            <div class="text-right mr-sm-3">
+                                <input v-on:click="changePassword()" class="btn btn-primary" type="button" value="Submit"/>   
+                            </div>    
 						</form>
 					</div>
+                    <div id="passwordAlert" class="alert alert-box"></div> 
 				</div>
 			</div>
+		</div>
 </template>
 
 <script>
 import axios from "axios";
+import $ from "jquery";
 
 export default {
   data() {
@@ -106,13 +130,29 @@ export default {
         newName: 'Jan',
         newSurname: 'Nowak',
         newEmail: '',
-        newUsername: ''
+        newUsername: '',
+        oldPasswd: '',
+        newPasswd1: '',
+        newPasswd2: ''
       }
   },
   methods: {
       showMenu: function(managedClass) {
           const menuButton = document.querySelector(managedClass);
           menuButton.classList.toggle('menu--active');
+      },
+      checkPassword: function(passwd1, passwd2) {
+          if (passwd1 == passwd2) {
+              return true;
+          } else {
+              return false;
+          }
+      },
+      showAlertBox: function(id, type, message) {
+        $(id).addClass(type);
+        $(id).empty();
+        $(id).append(message);
+        $(id).show("slow").delay(5000).hide("slow");
       },
       changeNames: function() {
         let self = this;
@@ -126,11 +166,13 @@ export default {
           console.log(response.data);
           self.name = self.newName;
           self.surname = self.newSurname;
+          self.showAlertBox("#namesAlert", "alert-success", "Name and surname updated successfully");
         })
         .catch(function(error) {
           console.log(error.response);
           self.newName = self.name;
           self.newSurname = self.surname;
+          self.showAlertBox("#namesAlert", "alert-danger", "Unable to update name and surname");
         });
       },
       changeEmail: function() {
@@ -144,10 +186,12 @@ export default {
           console.log(response.data);
           self.email = self.newEmail;
           self.newEmail = '';
+          self.showAlertBox("#emailAlert", "alert-success", "Email updated successfully");
         })
         .catch(function(error) {
           console.log(error.response);
           self.newEmail = '';
+          self.showAlertBox("#emailAlert", "alert-danger", "Unable to update email");
         });
       },
       changeUsername: function() {
@@ -161,11 +205,21 @@ export default {
           console.log(response.data);
           self.username = self.newUsername;
           self.newUsername = '';
+          self.showAlertBox("#usernameAlert", "alert-success", "Username updated successfully");
         })
         .catch(function(error) {
           console.log(error.response);
           self.newUsername = '';
+          self.showAlertBox("#usernameAlert", "alert-danger", "Unable to update username");
         });
+      },
+      changePassword: function() {
+          let self = this;
+          if (self.checkPassword(self.newPasswd1, self.newPasswd2)) {
+            self.showAlertBox("#passwordAlert", "alert-success", "Password updated successfully");
+          } else {
+            self.showAlertBox("#passwordAlert", "alert-danger", "Passwords are different");
+          }
       }
   }
 }
@@ -196,7 +250,7 @@ export default {
     padding: 10px;
 }
 
-.menu--active {
+.menu--active, .alert-box {
     display: none;
 }
 
@@ -212,4 +266,5 @@ export default {
 .pen-icon-color {
     color: #9C35F2;
 }
+
 </style>
