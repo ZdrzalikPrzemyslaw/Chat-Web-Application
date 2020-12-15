@@ -2,11 +2,13 @@ package tech.czatmat.app.CzatMatApp.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
 import tech.czatmat.app.CzatMatApp.payload.request.EmailRequest;
 import tech.czatmat.app.CzatMatApp.payload.request.NamesRequest;
+import tech.czatmat.app.CzatMatApp.payload.request.PasswordRequest;
 import tech.czatmat.app.CzatMatApp.payload.request.UsernameRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.MessageResponse;
 
@@ -18,6 +20,9 @@ public class SettingsController {
     @Autowired
     private final UserRepository userRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public SettingsController(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
@@ -28,7 +33,7 @@ public class SettingsController {
             User user = userRepository.getUsersByUsername(updateRequest.getUsername()).get();
             user.setName(updateRequest.getNewName());
             user.setSurname(updateRequest.getNewSurname());
-            return ResponseEntity.ok(new MessageResponse("User's data updated successfully!"));
+            return ResponseEntity.ok(new MessageResponse("User's name and surname updated successfully!"));
         } else {
             return ResponseEntity.badRequest().body(new MessageResponse("User does not exist"));
         }
@@ -42,7 +47,7 @@ public class SettingsController {
             } else {
                 User user = userRepository.getUsersByUsername(updateRequest.getUsername()).get();
                 user.setEmail(updateRequest.getNewEmail());
-                return ResponseEntity.ok(new MessageResponse("User's data updated successfully!"));
+                return ResponseEntity.ok(new MessageResponse("Email updated successfully!"));
             }
         } else {
             return ResponseEntity.badRequest().body(new MessageResponse("User does not exist"));
@@ -64,8 +69,14 @@ public class SettingsController {
         }
     }
 
-
-
-
-
+    @RequestMapping(value = "/password", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<?> updatePassword(@RequestBody PasswordRequest updateRequest) {
+        if (userRepository.getUsersByUsername(updateRequest.getUsername()).isPresent()) {
+            User user = userRepository.getUsersByUsername(updateRequest.getUsername()).get();
+            user.setPassword(passwordEncoder.encode(updateRequest.getNewPassword()));
+            return ResponseEntity.ok(new MessageResponse("Password updated successfully!"));
+        } else {
+            return ResponseEntity.badRequest().body(new MessageResponse("User does not exist"));
+        }
+    }
 }

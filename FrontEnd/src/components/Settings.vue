@@ -94,10 +94,6 @@
 					<div class="password-block menu--active mt-sm-3 pl-sm-2">
 						<form role="form">
                             <div class="form-group form-row">
-                                <label for="oldPassword" class="col-form-label text-left col-md-4 desc text-left">Old password</label>
-                                <input v-model="oldPasswd" type="password" id="oldPassword" class="form-control col-md-6 ml-md-2" />
-                            </div>
-                            <div class="form-group form-row">
                                 <label for="newPassword1" class="col-form-label text-left col-md-4 desc text-left">New password</label>
                                 <input v-model="newPasswd1" type="password" id="newPassword1" class="form-control col-md-6 ml-md-2" />
                             </div>
@@ -131,7 +127,6 @@ export default {
         newSurname: 'Nowak',
         newEmail: '',
         newUsername: '',
-        oldPasswd: '',
         newPasswd1: '',
         newPasswd2: ''
       }
@@ -215,9 +210,28 @@ export default {
       },
       changePassword: function() {
           let self = this;
-          if (self.checkPassword(self.newPasswd1, self.newPasswd2)) {
+          if (self.checkPassword(self.newPasswd1, self.newPasswd2)) {       
+            axios
+            .post(process.env.VUE_APP_BACKEND_URL + '/update/password', {
+                username: self.username,
+                oldPassword: self.oldPasswd,
+                newPassword: self.newPasswd1
+            })
+            .then(function(response) {
+            console.log(response.data);
+            self.newPasswd1 = '';
+            self.newPasswd2 = '';
             self.showAlertBox("#passwordAlert", "alert-success", "Password updated successfully");
-          } else {
+            })
+            .catch(function(error) {
+            console.log(error.response);
+            self.newPasswd1 = '';
+            self.newPasswd2 = '';
+            self.showAlertBox("#passwordAlert", "alert-danger", "Unable to update password");
+            });
+          } else {           
+            self.newPasswd1 = '';
+            self.newPasswd2 = '';
             self.showAlertBox("#passwordAlert", "alert-danger", "Passwords are different");
           }
       }
