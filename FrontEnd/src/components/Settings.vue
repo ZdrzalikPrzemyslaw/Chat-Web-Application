@@ -1,11 +1,11 @@
 <template>
-		<div id="mainContainer" class="container-fluid">
-			<div id="settingsIcon" class="d-flex justify-content-right">
+		<div id="mainContainer" class="container-fluid d-flex justify-content-end">
+			<div id="settingsIcon">
 				<button v-on:click="showMenu('.menu')" class="settings_btn btn">
 					<i style="color: white;" class="fas fa-user-cog"></i>
 				</button>
 			</div>
-			<div class="menu menu--active justify-content-right">
+			<div class="menu menu--active">
 				<div>
                     <div class="row pl-sm-2">
                         <div class="col-sm-4 desc text-left">Name and surname</div>
@@ -255,7 +255,8 @@ export default {
 .menu {
 	position: absolute;
 	background-color: #D1B5E8;
-	width: 420px;
+	max-width: 375px;
+    margin-top: 52px;
 	padding: 10px;
     z-index: 1000;
 }

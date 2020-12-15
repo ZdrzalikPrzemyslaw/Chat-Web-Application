@@ -1,16 +1,19 @@
 <template>
 <div class=".container-fluid">
   <div class="row">
-    <div class="col-2" id="firstColumn">
+     <div class="col-12 bar">
+        <div class="d-flex justify-content-right" id="lastColumn">
+          <Settings/>
+        </div>
+     </div>
+  </div>
+  <div class="row">
+    <div class="col-3" id="firstColumn">
       <Search @search-event="handleAppEvent"/>
       <ChatsList :chats='eventData'/>
     </div>
-    <div class="col-1"/>
-    <div class="col-6">
+    <div class="col-8">
       <ConversationView/>
-    </div>
-     <div class="col-2" id="lastColumn">
-      <Settings/>
     </div>
   </div>
 </div>
@@ -51,17 +54,18 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
   width: 100%;
 }
 .container *{
   width: 100%;
   table-layout: fixed;
 }
+.bar {
+  padding: 0;
+  background-color: #9C35F2;
+}
 #firstColumn {
   margin: 10px;
 }
-#lastColumn {
-  align-items: left;
-}
+
 </style>
