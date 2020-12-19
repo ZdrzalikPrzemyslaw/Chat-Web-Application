@@ -32,18 +32,10 @@ CREATE TABLE authorities
 CREATE TABLE chats
 (
     ID         int identity primary key,
+    owner_id   int         not null,
     name       varchar(30) not null,
-    created_at DATETIME    not null
-)
-
-create table chat_users
-(
-    id      int identity primary key,
-    chat_id int not null,
-    user_id int not null,
-    unique (chat_id, user_id),
-    foreign key (chat_id) references [chats] (ID),
-    foreign key (user_id) references [users] (username)
+    created_at DATETIME    not null,
+    foreign key (owner_id) references [users] (ID)
 )
 
 CREATE TABLE chat_messages

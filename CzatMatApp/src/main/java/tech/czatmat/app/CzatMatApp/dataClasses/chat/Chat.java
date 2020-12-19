@@ -11,14 +11,24 @@ public class Chat {
     private int id;
     private String name;
     private Date date;
+    private int ownerId;
 
     public Chat() {
     }
 
-    public Chat(int id, String name, Date date) {
+    public Chat(int id, String name, Date date, int ownerId) {
         this.id = id;
         this.name = name;
         this.date = date;
+        this.ownerId = ownerId;
+    }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 
     public int getId() {
