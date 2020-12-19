@@ -27,8 +27,39 @@ CREATE TABLE authorities
     role_name varchar(30) not null,
     foreign key (username) references [users] (username),
     foreign key (role_name) references [roles] (name),
-
 )
+
+CREATE TABLE chats
+(
+    ID         int identity primary key,
+    name       varchar(30) not null,
+    created_at DATETIME    not null
+)
+
+create table chat_users
+(
+    id      int identity primary key,
+    chat_id int not null,
+    user_id int not null,
+    unique (chat_id, user_id),
+    foreign key (chat_id) references [chats] (ID),
+    foreign key (user_id) references [users] (username)
+)
+
+CREATE TABLE chat_messages
+(
+    ID         int identity primary key,
+    chat_id    int      not null,
+    user_id    int      not null,
+--     Todo placeholder, chce coś zrobic żeby dalo sie przesylac pliki czyli pliki powinny byc gdzies zapisywane, nie w db, i powinien byc podawany link do katalogu / id ale idk jeszcze czy moge to jakos fajnie na azure zrobic
+    file_id    int      null,
+    text       varchar(2048),
+    created_at DATETIME not null,
+    foreign key (chat_id) references [chats] (ID),
+    foreign key (user_id) references [users] (username)
+)
+
+
 -- TODO
 insert into roles (name)
 values ('ROLE_USER')
@@ -40,7 +71,8 @@ insert into roles (name)
 values ('ROLE_ADMIN')
 
 insert into [users] (username, password, name, surname, email, enabled)
-values ('admin', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS', 'Administrator', 'Administracyjny', 'admin@admin.pl', 1)
+values ('admin', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS', 'Administrator', 'Administracyjny',
+        'admin@admin.pl', 1)
 
 insert into authorities(username, role_name)
 values ('admin', 'ROLE_ADMIN')
