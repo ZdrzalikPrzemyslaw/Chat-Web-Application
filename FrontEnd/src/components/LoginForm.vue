@@ -51,13 +51,26 @@ import * as Yup from 'yup';
 
 export default {
   name: "LoginForm",
+  components: {
+    Form,
+    Field,
+  },
+
   data() {
+    const schema = Yup.object().shape({ //nie wiem czy tego nie zrobic w setup
+      username: Yup.string()
+          .required('Username is required'),
+      password: Yup.string()
+          .min(5, 'Password must be at least 5 characters')
+          .required('Password is required'),
+    });
     return {
       user: new User('',''),
       // username: "",
       // password: "",
       loading:false,
       submitted: false,
+      schema,
     };
   },
   computed: {
@@ -71,38 +84,47 @@ export default {
     }
   },
   methods: {
-    login: function() {
-      this.loading = true;
-      this.$validator.validateAll().then(isValid => {
-        if (!isValid) {
-          this.loading = false;
-          return;
-        }
-        if (this.user.username && this.user.password) {
-          store.dispatch('/auth/login', this.user).then(
-              () => {
-                this.$router.push('/home');
-              },
-              // error => {
-              //   this.loading = false;
-              // }
-          );
-        }
-      });
-      // let self = this;
-      // axios
-      //   .post(process.env.VUE_APP_BACKEND_URL + "/login", {
-      //     username: self.username,
-      //     password: self.password,
-      //   })
-      //   .then(function(response) {
-      //     console.log(response.data);
-      //     self.$router.push("/home");
-      //   })
-      //   .catch(function(error) {
-      //     console.log(error.response);
-      //   });
+    login: function () {
+      if (this.user.username && this.user.password) {
+        store.dispatch('/auth/login', this.user).then(
+            () => {
+              this.$router.push('/home');
+            },
+        );
+      }
     }
+    // login: function() {
+    //   this.loading = true;
+    //   this.$validator.validateAll().then(isValid => {
+    //     if (!isValid) {
+    //       this.loading = false;
+    //       return;
+    //     }
+    //     if (this.user.username && this.user.password) {
+    //       store.dispatch('/auth/login', this.user).then(
+    //           () => {
+    //             this.$router.push('/home');
+    //           },
+    //           // error => {
+    //           //   this.loading = false;
+    //           // }
+    //       );
+    //     }
+    //   });
+    //   // let self = this;
+    //   // axios
+    //   //   .post(process.env.VUE_APP_BACKEND_URL + "/login", {
+    //   //     username: self.username,
+    //   //     password: self.password,
+    //   //   })
+    //   //   .then(function(response) {
+    //   //     console.log(response.data);
+    //   //     self.$router.push("/home");
+    //   //   })
+    //   //   .catch(function(error) {
+    //   //     console.log(error.response);
+    //   //   });
+    // }
   }
 };
 </script>
