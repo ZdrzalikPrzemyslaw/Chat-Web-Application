@@ -41,11 +41,13 @@
 </template>
 <!--todo adjust to vee-validate 4 (vee-validate 4 works with vue 3, previous no)
   https://vee-validate.logaretm.com/v4/  https://vee-validate.logaretm.com/v4/examples/checkboxes-and-radio
-  https://jasonwatmore.com/post/2020/10/01/vue-3-veevalidate-form-validation-example-->
+  https://jasonwatmore.com/post/2020/10/01/vue-3-veevalidate-form-validation-example -->
 <script>
 //import axios from "axios";
 import User from '../models/user';
 import store from '../store/index';
+import { Form, Field } from 'vee-validate';
+import * as Yup from 'yup';
 
 export default {
   name: "LoginForm",
