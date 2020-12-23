@@ -43,6 +43,7 @@
 <script>
 //import axios from "axios";
 import User from '../models/user';
+import store from '../store/index';
 
 export default {
   name: "LoginForm",
@@ -57,7 +58,7 @@ export default {
   },
   computed: {
     loggedIn() {
-      return this.$store.state.auth.status.loggedIn;
+      return store.state.auth.status.loggedIn;
     }
   },
   created() {
