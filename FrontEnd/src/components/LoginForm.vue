@@ -1,44 +1,25 @@
 <template>
   <div id="login">
     <h2>Login</h2>
-    <div class="form-group sm-3">
-      <label for="username">Username</label>
-      <input
-        type="text"
-        v-model="user.username"
-        name="username"
-        class="form-control sm-3"
-      />
-      <div v-show="submitted && !user.username" class="invalid-feedback">
-        Username is required
+    <Form @submit="login" :validation-schema="schema" v-slot="{ errors }">
+        <div class="form-group sm-3">
+          <label for="username">Username</label>
+          <Field name="username" v-model="user.username" type="text" class="form-control sm-3" :class="{ 'is-invalid': errors.username }"/>
+          <div class="invalid-feedback">{{ errors.username }}</div>
+        </div>
+        <div class="form-group">
+          <label htmlFor="password">Password</label>
+          <Field name="password" v-model="user.password" type="text" class="form-control sm-3" :class="{ 'is-invalid': errors.password }"/>
+          <div class="invalid-feedback">{{ errors.password }}</div>
+        </div>
+      <div class="container text-center" id="buttons">
+        <button class="btn btn-primary" type="submit">Login</button>
+        <button class="btn btn-secondary" v-on:click="this.$router.push('/registration')">Go To Registration</button>
       </div>
-    </div>
-    <div class="form-group">
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        v-model="user.password"
-        name="password"
-        class="form-control sm-3"
-        :class="{ 'is-invalid': submitted && !user.password }"
-      />
-      <div v-show="submitted && !user.password" class="invalid-feedback">
-        Password is required
-      </div>
-    </div>
-    <div class="container text-center" id="buttons">
-        <button class="btn btn-primary" v-on:click="this.login">
-          Login
-        </button>
-        <button
-          class="btn btn-secondary"
-          v-on:click="this.$router.push('/registration')"
-        >
-          Go To Registration
-        </button>
-    </div>
+    </Form>
   </div>
 </template>
+
 <!--todo adjust to vee-validate 4 (vee-validate 4 works with vue 3, previous no)
   https://vee-validate.logaretm.com/v4/  https://vee-validate.logaretm.com/v4/examples/checkboxes-and-radio
   https://jasonwatmore.com/post/2020/10/01/vue-3-veevalidate-form-validation-example -->
@@ -66,10 +47,6 @@ export default {
     });
     return {
       user: new User('',''),
-      // username: "",
-      // password: "",
-      loading:false,
-      submitted: false,
       schema,
     };
   },
@@ -93,38 +70,6 @@ export default {
         );
       }
     }
-    // login: function() {
-    //   this.loading = true;
-    //   this.$validator.validateAll().then(isValid => {
-    //     if (!isValid) {
-    //       this.loading = false;
-    //       return;
-    //     }
-    //     if (this.user.username && this.user.password) {
-    //       store.dispatch('/auth/login', this.user).then(
-    //           () => {
-    //             this.$router.push('/home');
-    //           },
-    //           // error => {
-    //           //   this.loading = false;
-    //           // }
-    //       );
-    //     }
-    //   });
-    //   // let self = this;
-    //   // axios
-    //   //   .post(process.env.VUE_APP_BACKEND_URL + "/login", {
-    //   //     username: self.username,
-    //   //     password: self.password,
-    //   //   })
-    //   //   .then(function(response) {
-    //   //     console.log(response.data);
-    //   //     self.$router.push("/home");
-    //   //   })
-    //   //   .catch(function(error) {
-    //   //     console.log(error.response);
-    //   //   });
-    // }
   }
 };
 </script>
