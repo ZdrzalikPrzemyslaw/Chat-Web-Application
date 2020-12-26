@@ -20,7 +20,7 @@
   </div>
 </template>
 
-<!--todo adjust to vee-validate 4 (vee-validate 4 works with vue 3, previous no)
+<!--
   https://vee-validate.logaretm.com/v4/  https://vee-validate.logaretm.com/v4/examples/checkboxes-and-radio
   https://jasonwatmore.com/post/2020/10/01/vue-3-veevalidate-form-validation-example -->
 <script>
@@ -36,7 +36,6 @@ export default {
     Form,
     Field,
   },
-
   data() {
     const schema = Yup.object().shape({ //nie wiem czy tego nie zrobic w setup
       username: Yup.string()
@@ -63,7 +62,7 @@ export default {
   methods: {
     login: function () {
       if (this.user.username && this.user.password) {
-        store.dispatch('/auth/login', this.user).then(
+        store.dispatch('/auth/login', this.user).then( //todo fix this (.then)
             () => {
               this.$router.push('/home');
             },
