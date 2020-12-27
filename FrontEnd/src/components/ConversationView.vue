@@ -4,6 +4,7 @@
       <div class="col">
         <img src="../assets/profile_pic.jpg" id="image" />
         <p id="user_name">Julia</p>
+<!--        <p id="token">{{ currentUser.accessToken}}</p> odkomentowac do wyswietlenia tokenu -->
       </div>
     </div>
 
@@ -17,6 +18,11 @@
         <p>{{ message.message }}</p>
         <p>{{ message.date }}</p>
       </div>
+    </div>
+
+<!--    dodany button do wylogowywania w wersji roboczej, żeby tylko sprawdzic czy dziala-->
+    <div id="logout_button">
+      <button class="btn btn-secondary" v-on:click="logout">Logout</button>
     </div>
 
     <!-- <div v-for="message in messages" v-bind:key="message">
@@ -34,6 +40,8 @@
 
 <script>
 import axios from "axios";
+import store from '../store/index';
+import router from "@/router"; // odkomentowac do wyswietlenia tokenu
 export default {
   name: "ConversationView",
   data() {
@@ -41,7 +49,11 @@ export default {
       messages: [],
     };
   },
-
+  // computed: {   // odkomentowac te 5 linijek do wyswietlenia tokenu
+  //   currentUser() {
+  //     return store.state.auth.user;
+  //   }
+  // },
   created() {
     this.getPrzyklad();
   },
@@ -58,6 +70,10 @@ export default {
           console.log(error);
         });
     },
+    logout: function () { // wylogowywanie usera za pomoca store
+      store.dispatch('auth/logout');
+      router.push('/login');
+    }
   },
 };
 </script>
