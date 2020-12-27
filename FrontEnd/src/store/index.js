@@ -1,3 +1,5 @@
+// tutaj tworzymy Vuex Store, które posłuży nam do uwierzytelniania.
+
 import { createStore } from "vuex";
 import {auth} from './auth.module';
 

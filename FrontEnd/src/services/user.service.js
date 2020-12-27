@@ -10,7 +10,7 @@ class UserService {
 
     getUserContent() {
         return axios.get(process.env.VUE_APP_BACKEND_URL + 'user',
-            {headers: authHeader()});
+            {headers: authHeader()}); // Tu wlasnie uzywamy tego "HTTP Authorization header z auth-header.js"
     }
     // Tutaj dodajemy jak bedziemy mieli jakies strony, na ktore moga wejsc admini:
     // przyklad ze strony https://bezkoder.com/jwt-vue-vuex-authentication/:

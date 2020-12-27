@@ -1,4 +1,5 @@
 <template>
+<!--  walidacja wprowadzanych za pomoca Form i Field z vee-validate, nizej linki do dokumentacji-->
   <div id="login">
     <h2>Login</h2>
     <Form @submit="login" :validation-schema="schema" v-slot="{ errors }">
@@ -17,6 +18,9 @@
         <button class="btn btn-secondary" v-on:click="this.$router.push('/registration')">Go To Registration</button>
       </div>
     </Form>
+    <div class="form-group">
+      <div v-if="message" class="alert alert-danger" role="alert">{{message}}</div>
+    </div>
   </div>
 </template>
 
@@ -24,7 +28,6 @@
   https://vee-validate.logaretm.com/v4/  https://vee-validate.logaretm.com/v4/examples/checkboxes-and-radio
   https://jasonwatmore.com/post/2020/10/01/vue-3-veevalidate-form-validation-example -->
 <script>
-//import axios from "axios";
 import User from '../models/user';
 import store from '../store/index';
 import { Form, Field } from 'vee-validate';
@@ -37,16 +40,16 @@ export default {
     Field,
   },
   data() {
-    const schema = Yup.object().shape({ //nie wiem czy tego nie zrobic w setup
-      username: Yup.string()
+    const schema = Yup.object().shape({ //nie wiem czy tego nie zrobic w setup() zamiast w data()
+      username: Yup.string() // za pomoca biblioteki yup wyswietlamy errory dot. wprowadzanych danych
           .required('Username is required'),
       password: Yup.string()
-          .min(5, 'Password must be at least 5 characters')
           .required('Password is required'),
     });
     return {
-      user: new User('',''),
+      user: new User('',''), // tu tylko username i password usera
       schema,
+      message: ''
     };
   },
   computed: {
@@ -55,17 +58,23 @@ export default {
     }
   },
   created() {
-    if (this.loggedIn) {
+    if (this.loggedIn) { // jesli zalogowany to przekierowujemy do /home
       this.$router.push("/home");
     }
   },
   methods: {
-    login: function () {
+    login: function () { // funkcja do logowania
       if (this.user.username && this.user.password) {
         store.dispatch('auth/login', this.user).then(
             () => {
               this.$router.push('/home');
             },
+            error => {         // do wyswietlania errorow przy blednych danych, na razie po prostu wyswietla fragment
+              this.message =   // HTMLa (kod 401 - Unauthorized)
+                  (error.response && error.response.data) ||
+                  error.message ||
+                  error.toString();
+            }
         );
       }
     }

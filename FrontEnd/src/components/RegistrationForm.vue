@@ -1,4 +1,5 @@
 <template>
+<!--  walidacja analogicznie do LoginForm-->
   <div id="registration">
     <h2>Register</h2>
     <Form @submit="register" :validation-schema="schema" v-slot="{ errors }">
@@ -58,7 +59,7 @@ export default {
       username: Yup.string()
           .required('Username is required'),
       password: Yup.string()
-          .min(5, 'Password must be at least 5 characters')
+          .min(5, 'Password must be at least 5 characters') // haslo min 5 znakowe
           .required('Password is required'),
       name: Yup.string()
           .required('Firstname is required'),
@@ -66,11 +67,11 @@ export default {
           .required('Surname is required'),
       email: Yup.string()
           .required('Email is required')
-          .email('Email is invalid'),
+          .email('Email is invalid'), // email o odpowiednim formacie
 
     });
     return {
-      user: new User("","","","",""),
+      user: new User("","","","",""), // tu wszystkie dane usera
       schema
     };
   },
@@ -80,7 +81,7 @@ export default {
     }
   },
   created() {
-    if (this.loggedIn) {
+    if (this.loggedIn) {  // jesli user jest zalogowany do przekierowujemy do /home
       this.$router.push("/home");
     }
   },

@@ -20,6 +20,7 @@
       </div>
     </div>
 
+<!--    dodany button do wylogowywania w wersji roboczej, żeby tylko sprawdzic czy dziala-->
     <div id="logout_button">
       <button class="btn btn-secondary" v-on:click="logout">Logout</button>
     </div>
@@ -69,7 +70,7 @@ export default {
           console.log(error);
         });
     },
-    logout: function () {
+    logout: function () { // wylogowywanie usera za pomoca store
       store.dispatch('auth/logout');
       router.push('/login');
     }

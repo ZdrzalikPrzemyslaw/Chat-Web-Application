@@ -1,15 +1,16 @@
-//Vuex authentication module:
+// Vuex authentication module, który zawiera state, actions i mutations:
+// https://next.vuex.vuejs.org/ dokumemtacja
 import AuthService from '../services/auth.service';
 
 const user = JSON.parse(localStorage.getItem('user'));
-const initialState = user
+const initialState = user // ustawiamy poczatkowy status
     ? { status: { loggedIn: true }, user }
     : { status: { loggedIn: false }, user: null };
 
 export const auth = {
     namespaced: true,
-    state: initialState,
-    actions: {
+    state: initialState, // state czyli status użytkownika (czy zalogowany, czy nie)
+    actions: { //akcje (takie jak w auth.service.js, którego uzywamy tutaj), które commituja odpowiednie mutacje
         login({ commit }, user) {
             return AuthService.login(user).then(
                 user => {
@@ -39,7 +40,7 @@ export const auth = {
             );
         }
     },
-    mutations: {
+    mutations: { // mutacje, w których zmieniamy stan.
         loginSuccess(state, user) {
             state.status.loggedIn = true;
             state.user = user;
