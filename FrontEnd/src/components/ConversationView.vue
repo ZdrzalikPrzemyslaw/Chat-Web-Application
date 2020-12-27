@@ -20,6 +20,10 @@
       </div>
     </div>
 
+    <div id="logout_button">
+      <button class="btn btn-secondary" v-on:click="logout">Logout</button>
+    </div>
+
     <!-- <div v-for="message in messages" v-bind:key="message">
       <div v-if="message[2] == 0" class="container">
         <p>{{ message[0] }}</p>
@@ -35,7 +39,8 @@
 
 <script>
 import axios from "axios";
-//import store from '../store/index'; // odkomentowac do wyswietlenia tokenu
+import store from '../store/index';
+import router from "@/router"; // odkomentowac do wyswietlenia tokenu
 export default {
   name: "ConversationView",
   data() {
@@ -64,6 +69,10 @@ export default {
           console.log(error);
         });
     },
+    logout: function () {
+      store.dispatch('auth/logout');
+      router.push('/login');
+    }
   },
 };
 </script>

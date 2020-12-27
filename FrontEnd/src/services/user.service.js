@@ -1,3 +1,5 @@
+// w zasadzie w tym momencie tej klasy nie używamy, ale przy blokadach dla konkretnych klub, czyli np tylko admini mogą
+// wejsc na jakis URL sie przyda.
 import axios from 'axios';
 import authHeader from "./auth-header";
 
