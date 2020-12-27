@@ -4,6 +4,7 @@
       <div class="col">
         <img src="../assets/profile_pic.jpg" id="image" />
         <p id="user_name">Julia</p>
+        <p id="token">{{ currentUser.accessToken}}</p>
       </div>
     </div>
 
@@ -34,6 +35,7 @@
 
 <script>
 import axios from "axios";
+import store from '../store/index';
 export default {
   name: "ConversationView",
   data() {
@@ -41,7 +43,11 @@ export default {
       messages: [],
     };
   },
-
+  computed: {
+    currentUser() {
+      return store.state.auth.user;
+    }
+  },
   created() {
     this.getPrzyklad();
   },
