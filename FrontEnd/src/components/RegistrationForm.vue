@@ -45,6 +45,7 @@ import axios from "axios";
 import User from '../models/user';
 import { Form, Field } from 'vee-validate';
 import * as Yup from 'yup';
+import store from '../store/index';
 
 export default {
   name: "RegistrationForm",
@@ -72,6 +73,16 @@ export default {
       user: new User("","","","",""),
       schema
     };
+  },
+  computed: {
+    loggedIn() {
+      return store.state.auth.status.loggedIn;
+    }
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push("/home");
+    }
   },
   methods: {
     register: function() {
