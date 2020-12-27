@@ -62,7 +62,7 @@ export default {
   methods: {
     login: function () {
       if (this.user.username && this.user.password) {
-        store.dispatch('/auth/login', this.user).then( //todo fix this (.then)
+        store.dispatch('auth/login', this.user).then(
             () => {
               this.$router.push('/home');
             },
