@@ -18,6 +18,9 @@ public class RegistrationRequest {
     private Set<String> role;
     private String name;
     private String surname;
+    @NotBlank
+    @Size(min = 6, max = 40)
+    private String password;
 
     public String getUsername() {
         return username;
@@ -63,6 +66,10 @@ public class RegistrationRequest {
         return password;
     }
 
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "RegistrationRequest{" +
@@ -74,14 +81,6 @@ public class RegistrationRequest {
                 ", password='" + password + '\'' +
                 '}';
     }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @NotBlank
-    @Size(min = 6, max = 40)
-    private String password;
 
 
 }

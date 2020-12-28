@@ -2,5 +2,5 @@ package tech.czatmat.app.CzatMatApp.dataClasses.keys;
 
 import org.springframework.data.repository.CrudRepository;
 
-public interface KeysRepository extends CrudRepository<Long, Key> {
+public interface KeysRepository extends CrudRepository<Key, Long> {
 }

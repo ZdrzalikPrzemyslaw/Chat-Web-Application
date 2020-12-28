@@ -1,7 +1,13 @@
 -- TODO dodać lokalna baze danych uzywana w trakcie developmentu lokalnego, tak aby nie psuć bazy danych w chmurze
+DROP TABLE IF EXISTS keys_users;
+DROP TABLE IF EXISTS chat_messages;
 DROP TABLE IF EXISTS authorities;
 DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS chat_users;
+DROP TABLE IF EXISTS chats;
 DROP TABLE IF EXISTS [users];
+DROP TABLE IF EXISTS keys;
+
 CREATE TABLE [users]
 (
     id       int identity primary key,
@@ -59,13 +65,12 @@ CREATE TABLE chat_messages
     ID         int identity primary key,
     chat_id    int      not null,
     user_id    int      not null,
---     Todo placeholder, chce coś zrobic żeby dalo sie przesylac pliki czyli pliki powinny byc gdzies zapisywane, nie w db, i powinien byc podawany link do katalogu / id ale idk jeszcze czy moge to jakos fajnie na azure zrobic
     file_id    int      null,
     text       varchar(2048),
     created_at DATETIME not null,
     base_key_id     int      null,
     foreign key (chat_id) references [chats] (ID),
-    foreign key (user_id) references [users] (username),
+    foreign key (user_id) references [users] (id),
 )
 
 CREATE TABLE keys_users
@@ -79,7 +84,6 @@ CREATE TABLE keys_users
 )
 
 
--- TODO
 insert into roles (name)
 values ('ROLE_USER')
 
@@ -95,6 +99,9 @@ values ('admin', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS',
 
 insert into authorities(username, role_name)
 values ('admin', 'ROLE_ADMIN')
+
+insert into authorities(username, role_name)
+values ('admin', 'ROLE_USER')
 
 insert into [users] (username, password, name, surname, email, enabled)
 values ('user_zwykly', 'zwykly_user', 'Uzytnik', 'Uzywajacy', 'user@user.pl', 1)
