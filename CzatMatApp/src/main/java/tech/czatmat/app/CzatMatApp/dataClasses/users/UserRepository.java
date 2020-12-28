@@ -2,6 +2,7 @@ package tech.czatmat.app.CzatMatApp.dataClasses.users;
 
 import org.springframework.data.repository.CrudRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends CrudRepository<User, Long> {
@@ -9,7 +10,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Optional<User> getUsersByUsername(String username);
 
-    Optional<User> getTop10UsersByUsername(String username);
+    List<User> getUsersByUsernameContainsAndSurnameContains(String username, String surname);
 
     boolean existsByEmail(String email);
 }
