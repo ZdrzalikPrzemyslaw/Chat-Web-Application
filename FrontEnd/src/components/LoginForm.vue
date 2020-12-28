@@ -1,73 +1,84 @@
 <template>
+<!--  walidacja wprowadzanych za pomoca Form i Field z vee-validate, nizej linki do dokumentacji-->
   <div id="login">
     <h2>Login</h2>
-    <div class="form-group sm-3">
-      <label for="username">Username</label>
-      <input
-        type="text"
-        v-model="username"
-        name="username"
-        class="form-control sm-3"
-      />
-      <div v-show="submitted && !username" class="invalid-feedback">
-        Username is required
+    <Form @submit="login" :validation-schema="schema" v-slot="{ errors }">
+        <div class="form-group sm-3">
+          <label for="username">Username</label>
+          <Field name="username" v-model="user.username" type="text" class="form-control sm-3" :class="{ 'is-invalid': errors.username }"/>
+          <div class="invalid-feedback">{{ errors.username }}</div>
+        </div>
+        <div class="form-group">
+          <label htmlFor="password">Password</label>
+          <Field name="password" v-model="user.password" type="text" class="form-control sm-3" :class="{ 'is-invalid': errors.password }"/>
+          <div class="invalid-feedback">{{ errors.password }}</div>
+        </div>
+      <div class="container text-center" id="buttons">
+        <button class="btn btn-primary" type="submit">Login</button>
+        <button class="btn btn-secondary" v-on:click="this.$router.push('/registration')">Go To Registration</button>
       </div>
-    </div>
+    </Form>
     <div class="form-group">
-      <label htmlFor="password">Password</label>
-      <input
-        type="password"
-        v-model="password"
-        name="password"
-        class="form-control sm-3"
-        :class="{ 'is-invalid': submitted && !password }"
-      />
-      <div v-show="submitted && !password" class="invalid-feedback">
-        Password is required
-      </div>
-    </div>
-    <div class="container text-center" id="buttons">
-        <button class="btn btn-primary" v-on:click="this.login">
-          Login
-        </button>
-        <button
-          class="btn btn-secondary"
-          v-on:click="this.$router.push('/registration')"
-        >
-          Go To Registration
-        </button>
+      <div v-if="message" class="alert alert-danger" role="alert">{{message}}</div>
     </div>
   </div>
 </template>
 
+<!--
+  https://vee-validate.logaretm.com/v4/  https://vee-validate.logaretm.com/v4/examples/checkboxes-and-radio
+  https://jasonwatmore.com/post/2020/10/01/vue-3-veevalidate-form-validation-example -->
 <script>
-import axios from "axios";
+import User from '../models/user';
+import store from '../store/index';
+import { Form, Field } from 'vee-validate';
+import * as Yup from 'yup';
+
 export default {
   name: "LoginForm",
+  components: {
+    Form,
+    Field,
+  },
   data() {
+    const schema = Yup.object().shape({ //nie wiem czy tego nie zrobic w setup() zamiast w data()
+      username: Yup.string() // za pomoca biblioteki yup wyswietlamy errory dot. wprowadzanych danych
+          .required('Username is required'),
+      password: Yup.string()
+          .required('Password is required'),
+    });
     return {
-      username: "",
-      password: "",
-      submitted: false,
+      user: new User('',''), // tu tylko username i password usera
+      schema,
+      message: ''
     };
   },
-  methods: {
-    login: function() {
-      let self = this;
-      axios
-        .post(process.env.VUE_APP_BACKEND_URL + "/login", {
-          username: self.username,
-          password: self.password,
-        })
-        .then(function(response) {
-          console.log(response.data);
-          self.$router.push("/home");
-        })
-        .catch(function(error) {
-          console.log(error.response);
-        });
-    },
+  computed: {
+    loggedIn() {
+      return store.state.auth.status.loggedIn;
+    }
   },
+  created() {
+    if (this.loggedIn) { // jesli zalogowany to przekierowujemy do /home
+      this.$router.push("/home");
+    }
+  },
+  methods: {
+    login: function () { // funkcja do logowania
+      if (this.user.username && this.user.password) {
+        store.dispatch('auth/login', this.user).then(
+            () => {
+              this.$router.push('/home');
+            },
+            error => {         // do wyswietlania errorow przy blednych danych, na razie po prostu wyswietla fragment
+              this.message =   // HTMLa (kod 401 - Unauthorized)
+                  (error.response && error.response.data) ||
+                  error.message ||
+                  error.toString();
+            }
+        );
+      }
+    }
+  }
 };
 </script>
 
