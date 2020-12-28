@@ -46,7 +46,7 @@ create table chat_users
     unique (chat_id, user_id),
     foreign key (chat_id) references [chats] (ID)
 )
-;
+
 CREATE TABLE keys
 (
     id      int identity primary key,
