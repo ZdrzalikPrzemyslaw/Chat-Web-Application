@@ -46,10 +46,12 @@ create table chat_users
     unique (chat_id, user_id),
     foreign key (chat_id) references [chats] (ID)
 )
+;
 CREATE TABLE keys
 (
-    id    int identity primary key,
-    value VARCHAR(1024) not null,
+    id      int identity primary key,
+    base_id int,
+    value   VARCHAR(1024) not null,
 )
 
 CREATE TABLE chat_messages
@@ -61,10 +63,9 @@ CREATE TABLE chat_messages
     file_id    int      null,
     text       varchar(2048),
     created_at DATETIME not null,
-    key_id     int      null,
+    base_key_id     int      null,
     foreign key (chat_id) references [chats] (ID),
     foreign key (user_id) references [users] (username),
-    foreign key (key_id) references [keys] (id),
 )
 
 CREATE TABLE keys_users
