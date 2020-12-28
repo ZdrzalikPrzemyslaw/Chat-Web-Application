@@ -13,7 +13,29 @@ public class Message {
     private int userId;
     private int fileId;
     private String text;
-    private Date created_at;
+    private Date createdAt;
+    private int baseKeyId;
+
+    public Message(int ID, int chatId, int userId, int fileId, String text, Date createdAt, int baseKeyId) {
+        this.ID = ID;
+        this.chatId = chatId;
+        this.userId = userId;
+        this.fileId = fileId;
+        this.text = text;
+        this.createdAt = createdAt;
+        this.baseKeyId = baseKeyId;
+    }
+
+    public Message() {
+    }
+
+    public int getBaseKeyId() {
+        return baseKeyId;
+    }
+
+    public void setBaseKeyId(int baseKeyId) {
+        this.baseKeyId = baseKeyId;
+    }
 
     public int getID() {
         return ID;
@@ -55,23 +77,11 @@ public class Message {
         this.text = text;
     }
 
-    public Date getCreated_at() {
-        return created_at;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Date created_at) {
-        this.created_at = created_at;
-    }
-
-    public Message(int ID, int chatId, int userId, int fileId, String text, Date created_at) {
-        this.ID = ID;
-        this.chatId = chatId;
-        this.userId = userId;
-        this.fileId = fileId;
-        this.text = text;
-        this.created_at = created_at;
-    }
-
-    public Message() {
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 }
