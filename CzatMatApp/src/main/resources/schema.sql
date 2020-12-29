@@ -132,3 +132,30 @@ values ('Witek', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS',
 insert into authorities(username, role_name)
 values ('Witek', 'ROLE_USER')
 
+insert into chats(owner_id, name, created_at)
+values (1, 'testowy', '2020-12-29T19:21:27.443+00:00')
+
+insert into chats(owner_id, name, created_at)
+values (3, 'kolejny', '2020-12-28T19:23:25.443+00:00')
+
+insert into chat_users(chat_id, user_id)
+VALUES (1, 3), (1, 4), (2, 4), (2, 1)
+
+insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
+values (1, 1, 'elko pierwsza mes w 1 chacie', '2020-12-29T19:25:27.443+00:00', -1);
+
+insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
+values (1, 3, 'elko melko siemka hejka', '2020-12-29T19:27:27.443+00:00', -1);
+
+insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
+values (1, 4, 'hejka tu lenka', '2020-12-29T19:30:27.443+00:00', -1);
+
+insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
+values (2, 1, 'przmeus elko melko chodz na piwerko', '2020-12-28T19:23:33.443+00:00', -1);
+
+insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
+values (2, 1, 'no dobra jednak nie chodz', '2020-12-28T19:23:35.443+00:00', -1);
+
+insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
+values (2, 3, 'nie ide bo nie chce', '2020-12-28T19:23:34.443+00:00', -1);
+

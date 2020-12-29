@@ -104,7 +104,7 @@ public class ChatController {
     }
 
     @RequestMapping(value = "/message", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<?> sendMessage(@RequestParam("chatId") int chatId) {
+    public ResponseEntity<?> getChatMessages(@RequestParam("chatId") int chatId) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.getUsersByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
@@ -116,6 +116,6 @@ public class ChatController {
             }
         }
 
-        return ResponseEntity.status(403).body(new MessageResponse("Message successfully sent."));
+        return ResponseEntity.status(403).body(new MessageResponse("You don't have access to this chat."));
     }
 }
