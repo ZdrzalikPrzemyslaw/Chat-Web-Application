@@ -15,11 +15,13 @@ import tech.czatmat.app.CzatMatApp.dataClasses.messages.MessagesRepository;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
 import tech.czatmat.app.CzatMatApp.payload.request.CreateChatRequest;
+import tech.czatmat.app.CzatMatApp.payload.response.ChatMessagesResponse;
 import tech.czatmat.app.CzatMatApp.payload.response.GetChatsResponse;
 import tech.czatmat.app.CzatMatApp.payload.response.MessageResponse;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 @PreAuthorize("hasAnyRole('USER', 'SUPER_USER', 'ADMIN')")
@@ -82,7 +84,7 @@ public class ChatController {
         
         for (var i : chatsRepository.getChatByName(chatName, user.getID())) {
             // FIXME: 29.12.2020 created at to last message sent date
-            list.add(new GetChatsResponse.ChatResponseData(userRepository.getUsersFromChat(i.getId()) , i.getName(), i.getCreatedAt()));
+            list.add(new GetChatsResponse.ChatResponseData(userRepository.getUsersFromChat(i.getId()) , i.getName(), i.getCreatedAt(), i.getId()));
         }
 
         return ResponseEntity.ok(new GetChatsResponse(list));
@@ -99,5 +101,21 @@ public class ChatController {
         messagesRepository.save(message);
 
         return ResponseEntity.ok(new MessageResponse("Message successfully sent."));
+    }
+
+    @RequestMapping(value = "/message", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<?> sendMessage(@RequestParam("chatId") int chatId) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.getUsersByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("Error: User is not found."));
+
+        for (var i : userRepository.getUsersFromChat(chatId)) {
+            if (i.getID() == user.getID()) {
+                var messages = messagesRepository.getMessagesByChatIdOrderByCreatedAtDesc(chatId);
+                return ResponseEntity.ok(new ChatMessagesResponse(messages));
+            }
+        }
+
+        return ResponseEntity.status(403).body(new MessageResponse("Message successfully sent."));
     }
 }

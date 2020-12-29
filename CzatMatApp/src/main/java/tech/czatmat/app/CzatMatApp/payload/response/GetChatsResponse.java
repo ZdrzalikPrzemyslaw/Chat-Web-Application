@@ -2,7 +2,6 @@ package tech.czatmat.app.CzatMatApp.payload.response;
 
 import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.LinkedList;
 import java.util.List;
@@ -28,14 +27,17 @@ public class GetChatsResponse {
         private final String chatName;
         // TODO: 29.12.2020 ZROBIC TO
         private final Timestamp lastMessageDate;
+        private final int id;
 
-        public ChatResponseData(List<UserDataResponse> userList, String chatName, Timestamp lastMessageDate) {
+        public ChatResponseData(List<UserDataResponse> userList, String chatName, Timestamp lastMessageDate, int id) {
             this.userList = userList;
             this.chatName = chatName;
             this.lastMessageDate = lastMessageDate;
+            this.id = id;
         }
 
-        public ChatResponseData(Iterable<User> userList, String chatName, Timestamp lastMessageDate) {
+        public ChatResponseData(Iterable<User> userList, String chatName, Timestamp lastMessageDate, int id) {
+            this.id = id;
             this.userList = new LinkedList<>();
             for (var i : userList) {
                 this.userList.add(new UserDataResponse(i));
@@ -50,6 +52,10 @@ public class GetChatsResponse {
 
         public String getChatName() {
             return chatName;
+        }
+
+        public int getId() {
+            return id;
         }
 
         public Timestamp getLastMessageDate() {
