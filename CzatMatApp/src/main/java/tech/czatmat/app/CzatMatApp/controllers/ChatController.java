@@ -95,7 +95,6 @@ public class ChatController {
             } else {
                 list.add(new GetChatsResponse.ChatResponseData(userRepository.getUsersFromChat(i.getId()), i.getName(), i.getCreatedAt(), i.getId()));
             }
-            // FIXME: 29.12.2020 created at to last message sent date
         }
 
         return ResponseEntity.ok(new GetChatsResponse(list));
