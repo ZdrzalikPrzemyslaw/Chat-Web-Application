@@ -1,8 +1,10 @@
 package tech.czatmat.app.CzatMatApp.dataClasses.chat;
 
+import org.springframework.data.jdbc.repository.query.Modifying;
 import org.springframework.data.jdbc.repository.query.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface ChatsRepository extends CrudRepository<Chat, Long> {
 
@@ -11,7 +13,10 @@ public interface ChatsRepository extends CrudRepository<Chat, Long> {
 
     boolean existsChatById(int chatId);
 
-    void deleteChatById(int chatId);
+    @Query("delete from chats where id = :chatId")
+    @Modifying
+    @Transactional
+    void deleteChatById(@Param("chatId") int chatId);
 
     boolean existsChatByIdAndOwnerId(int chatId, int ownerId);
 

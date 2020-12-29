@@ -50,7 +50,7 @@ create table chat_users
     chat_id int not null,
     user_id int not null,
     unique (chat_id, user_id),
-    foreign key (chat_id) references [chats] (ID)
+    foreign key (chat_id) references [chats] (ID) on delete cascade
 )
 
 
@@ -70,7 +70,7 @@ CREATE TABLE chat_messages
     text        varchar(2048),
     created_at  DATETIME not null,
     base_key_id int      null,
-    foreign key (chat_id) references [chats] (ID),
+    foreign key (chat_id) references [chats] (ID) on delete cascade,
     foreign key (user_id) references [users] (id),
 )
 
