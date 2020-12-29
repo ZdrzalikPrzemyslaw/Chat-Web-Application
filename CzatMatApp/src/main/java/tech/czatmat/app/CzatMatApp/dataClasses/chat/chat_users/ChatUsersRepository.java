@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface ChatUsersRepository extends CrudRepository<ChatUser, Long> {
 
-    boolean existsChatUserByUserIdAndChatId(int userId, int chatId);
+    boolean existsByUserIdAndChatId(int userId, int chatId);
 
     @Query("delete from chat_users where chat_id = :chatId and user_id = :userId")
     @Modifying

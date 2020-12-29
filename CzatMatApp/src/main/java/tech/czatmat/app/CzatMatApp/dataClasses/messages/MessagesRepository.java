@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface MessagesRepository extends CrudRepository<Message, Long> {
     List<Message> getMessagesByChatIdOrderByCreatedAtDesc(int id);
 
+    Optional<Message> getTop1ByChatIdOrderByCreatedAtDesc(int id);
+
     Optional<Message> getMessageByID(int id);
 
     boolean existsMessageByIDAndUserId(int messageId, int userId);
