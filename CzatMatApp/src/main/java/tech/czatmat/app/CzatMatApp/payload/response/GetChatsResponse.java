@@ -25,7 +25,6 @@ public class GetChatsResponse {
     public static class ChatResponseData {
         private final List<UserDataResponse> userList;
         private final String chatName;
-        // TODO: 29.12.2020 ZROBIC TO
         private final Timestamp lastMessageDate;
         private final int id;
 

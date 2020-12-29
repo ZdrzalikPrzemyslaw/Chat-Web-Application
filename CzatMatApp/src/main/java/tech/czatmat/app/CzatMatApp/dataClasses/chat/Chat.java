@@ -16,7 +16,7 @@ public class Chat {
     public Chat() {
     }
 
-    public Chat(Chat chat){
+    public Chat(Chat chat) {
         this.id = chat.id;
         this.name = chat.name;
         this.createdAt = chat.createdAt;

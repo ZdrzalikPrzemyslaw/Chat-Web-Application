@@ -8,7 +8,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import tech.czatmat.app.CzatMatApp.payload.request.LoginRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.JwtResponse;
 import tech.czatmat.app.CzatMatApp.security.JwtUtils;
@@ -56,7 +59,6 @@ public class LoginController {
                 userDetails.getEmail(),
                 roles));
     }
-
 
 
 }
