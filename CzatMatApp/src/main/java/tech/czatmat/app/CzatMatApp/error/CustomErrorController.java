@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class CustomErrorController implements ErrorController {
 
+    // FIXME: 28.12.2020 FIXME : (
     @RequestMapping("/error")
     @ResponseBody
     public String handleError(HttpServletRequest request) {
