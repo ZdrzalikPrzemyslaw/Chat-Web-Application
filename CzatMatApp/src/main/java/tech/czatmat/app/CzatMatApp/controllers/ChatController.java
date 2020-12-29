@@ -57,8 +57,10 @@ public class ChatController {
         for (var i : createChatRequest.getUsers()) {
             User userToChat = userRepository.getUsersByUsername(i.getUsername())
                     .orElseThrow(() -> new RuntimeException("Error: User is not found."));
-            ChatUser chatUser = new ChatUser(chat.getId(), userToChat.getID());
-            chatUsersRepository.save(chatUser);
+            if (userToChat.getID() != user.getID()) {
+                ChatUser chatUser = new ChatUser(chat.getId(), userToChat.getID());
+                chatUsersRepository.save(chatUser);
+            }
         }
 
         return ResponseEntity.ok("Chat successfully created.");
