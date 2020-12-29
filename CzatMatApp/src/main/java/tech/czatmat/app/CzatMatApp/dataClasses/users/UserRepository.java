@@ -10,7 +10,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Optional<User> getUsersByUsername(String username);
 
-    List<User> getUsersByUsernameContainsAndSurnameContains(String username, String surname);
-
     boolean existsByEmail(String email);
+
+    Iterable<User> getUsersByNameContainsAndSurnameContains(String name, String surname);
 }
