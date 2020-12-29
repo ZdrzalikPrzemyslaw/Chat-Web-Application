@@ -83,7 +83,6 @@ CREATE TABLE keys_users
     unique (user_id, key_id),
 )
 
-
 insert into roles (name)
 values ('ROLE_USER')
 
