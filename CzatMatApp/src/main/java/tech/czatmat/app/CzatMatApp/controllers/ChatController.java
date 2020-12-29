@@ -10,13 +10,14 @@ import tech.czatmat.app.CzatMatApp.dataClasses.chat.Chat;
 import tech.czatmat.app.CzatMatApp.dataClasses.chat.ChatsRepository;
 import tech.czatmat.app.CzatMatApp.dataClasses.chat.chat_users.ChatUser;
 import tech.czatmat.app.CzatMatApp.dataClasses.chat.chat_users.ChatUsersRepository;
+import tech.czatmat.app.CzatMatApp.dataClasses.messages.Message;
+import tech.czatmat.app.CzatMatApp.dataClasses.messages.MessagesRepository;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
 import tech.czatmat.app.CzatMatApp.payload.request.CreateChatRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.GetChatsResponse;
 import tech.czatmat.app.CzatMatApp.payload.response.MessageResponse;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +33,15 @@ public class ChatController {
     private final ChatsRepository chatsRepository;
     @Autowired
     private final ChatUsersRepository chatUsersRepository;
+    @Autowired
+    private final MessagesRepository messagesRepository;
 
 
-    public ChatController(UserRepository userRepository, ChatsRepository chatsRepository, ChatUsersRepository chatUsersRepository) {
+    public ChatController(UserRepository userRepository, ChatsRepository chatsRepository, ChatUsersRepository chatUsersRepository, MessagesRepository messagesRepository) {
         this.userRepository = userRepository;
         this.chatsRepository = chatsRepository;
         this.chatUsersRepository = chatUsersRepository;
+        this.messagesRepository = messagesRepository;
     }
 
     @PreAuthorize("hasRole('SUPER_USER')")
@@ -82,5 +86,18 @@ public class ChatController {
         }
 
         return ResponseEntity.ok(new GetChatsResponse(list));
+    }
+
+    @RequestMapping(value = "/message", method = RequestMethod.PUT, produces = "application/json")
+    public ResponseEntity<?> sendMessage(@RequestParam("chatId") int chatId, @RequestBody String messageText) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.getUsersByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("Error: User is not found."));
+
+        Message message = new Message(chatId, user.getID(), messageText, new Timestamp(new java.util.Date().getTime()));
+
+        messagesRepository.save(message);
+
+        return ResponseEntity.ok(new MessageResponse("Message successfully sent."));
     }
 }

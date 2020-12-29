@@ -3,20 +3,21 @@ package tech.czatmat.app.CzatMatApp.dataClasses.messages;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 @Table("chat_messages")
 public class Message {
+    private final static int NOT_ENCRYPTED_MESSAGE_ID = -1;
     @Id
     private int ID;
     private int chatId;
     private int userId;
-    private int fileId;
+    private Integer fileId;
     private String text;
-    private Date createdAt;
+    private Timestamp createdAt;
     private int baseKeyId;
 
-    public Message(int ID, int chatId, int userId, int fileId, String text, Date createdAt, int baseKeyId) {
+    public Message(int ID, int chatId, int userId, int fileId, String text, Timestamp createdAt, int baseKeyId) {
         this.ID = ID;
         this.chatId = chatId;
         this.userId = userId;
@@ -24,6 +25,15 @@ public class Message {
         this.text = text;
         this.createdAt = createdAt;
         this.baseKeyId = baseKeyId;
+    }
+
+    public Message(int chatId, int userId, String text, Timestamp createdAt) {
+        this.chatId = chatId;
+        this.userId = userId;
+        this.fileId = null;
+        this.text = text;
+        this.createdAt = createdAt;
+        this.baseKeyId = NOT_ENCRYPTED_MESSAGE_ID;
     }
 
     public Message() {
@@ -77,11 +87,11 @@ public class Message {
         this.text = text;
     }
 
-    public Date getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
 }
