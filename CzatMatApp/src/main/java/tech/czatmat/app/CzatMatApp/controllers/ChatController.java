@@ -6,10 +6,12 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
+import tech.czatmat.app.CzatMatApp.payload.request.CreateChatRequest;
 
 @RestController
 @RequestMapping("/chat")
@@ -27,9 +29,7 @@ public class ChatController {
 
     @PreAuthorize("hasRole('SUPER_USER')")
     @RequestMapping(value = "", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<?> createChat() {
-        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(userDetails.getUsername());
-        return ResponseEntity.ok(userRepository.findAll());
+    public ResponseEntity<?> createChat(@RequestBody CreateChatRequest createChatRequest) {
+        return  ResponseEntity.ok("");
     }
 }

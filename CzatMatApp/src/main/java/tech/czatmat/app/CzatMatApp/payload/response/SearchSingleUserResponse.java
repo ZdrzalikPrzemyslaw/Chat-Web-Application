@@ -7,14 +7,24 @@ public class SearchSingleUserResponse {
     private String name;
     private String surname;
     private String email;
+    private String username;
 
     private SearchSingleUserResponse() {
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public SearchSingleUserResponse(User user) {
         this.name = user.getName();
         this.surname = user.getSurname();
         this.email = user.getEmail();
+        this.username = user.getUsername();
     }
 
     public String getSurname() {

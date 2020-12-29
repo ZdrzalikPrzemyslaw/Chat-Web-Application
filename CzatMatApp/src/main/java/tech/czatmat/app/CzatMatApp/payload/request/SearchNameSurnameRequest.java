@@ -3,8 +3,10 @@ package tech.czatmat.app.CzatMatApp.payload.request;
 import javax.validation.constraints.NotBlank;
 
 public class SearchNameSurnameRequest {
+    @NotBlank
     private String name;
 
+    @NotBlank
     private String surname;
 
     public String getSurname() {
