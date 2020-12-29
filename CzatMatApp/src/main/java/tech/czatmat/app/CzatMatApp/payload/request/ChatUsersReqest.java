@@ -16,18 +16,18 @@ public class ChatUsersReqest {
         this.users = users;
     }
 
+    @Override
+    public String toString() {
+        return "ChatUsersReqest{" +
+                "users=" + users +
+                '}';
+    }
+
     public static class ChatSubRequest {
         private String username;
 
         public String getUsername() {
             return username;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "ChatUsersReqest{" +
-                "users=" + users +
-                '}';
     }
 }

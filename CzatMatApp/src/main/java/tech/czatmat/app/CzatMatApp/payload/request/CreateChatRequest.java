@@ -1,8 +1,6 @@
 package tech.czatmat.app.CzatMatApp.payload.request;
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 public class CreateChatRequest extends ChatUsersReqest {
 

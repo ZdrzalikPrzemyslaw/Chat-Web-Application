@@ -39,7 +39,7 @@ public class Message {
     public Message() {
     }
 
-    public Message(Message message){
+    public Message(Message message) {
         this.ID = message.ID;
         this.chatId = message.chatId;
         this.userId = message.userId;
