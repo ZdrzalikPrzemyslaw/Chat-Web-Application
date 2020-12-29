@@ -31,6 +31,16 @@ public class User {
         this.enabled = enabled;
     }
 
+    public User(User user){
+        this.ID = user.ID;
+        this.username = user.username;
+        this.password = user.password;
+        this.name = user.name;
+        this.surname = user.surname;
+        this.email = user.email;
+        this.enabled = user.enabled;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
