@@ -108,3 +108,9 @@ values ('user_zwykly', 'zwykly_user', 'Uzytnik', 'Uzywajacy', 'user@user.pl', 1)
 
 insert into authorities(username, role_name)
 values ('user_zwykly', 'ROLE_USER')
+
+insert into [users] (username, password, name, surname, email, enabled)
+values ('Przemus', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS', 'Przemek', 'Zdrzalus', 'p@z.pl', 1)
+
+insert into authorities(username, role_name)
+values ('Przemus', 'ROLE_USER')
