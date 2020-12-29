@@ -3,3 +3,9 @@ https://stackoverflow.com/a/17267718 - pozostawianie użytkownika zalogowanym
 https://tulodz-my.sharepoint.com/:p:/r/personal/224298_edu_p_lodz_pl/_layouts/15/Doc.aspx?sourcedoc=%7B9E48936E-78A3-45C5-9625-DE6320DD98B4%7D&file=Prezentacja.pptx&action=edit&mobileredirect=true&fbclid=IwAR0avk-PrPzTjPxWvAM-kXRfRy0x_15_VrCqPXhGpy5zO-Og9QH6It2WK0w&cid=c17f17fc-a71b-40af-8dbb-c7e3d600cbce  - link do prezentacji 2
 
 https://tulodz-my.sharepoint.com/:w:/g/personal/224441_edu_p_lodz_pl/ESLucJquRT5OmWhpL9xTY3sByGik7OAj2ouu0pjWIZxa4A?e=nJqMS5 - link do Worda o HTTP (też jest to w prezentacji zawarte)
+
+https://bezkoder.com/jwt-vue-vuex-authentication/ - vue.js authentication
+
+https://documenter.getpostman.com/view/14003802/TVsyekH6 - dokumentacja w postmanie
+
+https://app.getpostman.com/join-team?invite_code=27784d6a8fa83468e9aa8b4c90a07efb&ws=6d5cb594-122a-46af-956e-9254022a4a31 - link do teamu w postmanie do edytowania requestów/dokumentacji.
