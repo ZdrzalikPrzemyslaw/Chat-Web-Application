@@ -136,6 +136,20 @@ public class ChatController {
         return ResponseEntity.ok(new MessageResponse("Users successfully added."));
     }
 
+    @RequestMapping(value = "", method = RequestMethod.DELETE, produces = "application/json")
+    public ResponseEntity<?> deleteUsersFromExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersReqest chatUsersReqest) {
 
+        for (var i : chatUsersReqest.getUsers()) {
+            User user = userRepository.getUsersByUsername(i.getUsername())
+                    .orElseThrow(() -> new RuntimeException("Error: User is not found."));
+
+            if (chatUsersRepository.existsChatUserByUserIdAndChatId(user.getID(), chatId)) {
+                ChatUser chatUser = new ChatUser(chatId, user.getID());
+                chatUsersRepository.delete(chatUser);
+            }
+        }
+
+        return ResponseEntity.ok(new MessageResponse("Users successfully deleted."));
+    }
 
 }
