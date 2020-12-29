@@ -10,22 +10,22 @@ public class Chat {
     @Id
     private int id;
     private String name;
-    private Date date;
+    private Date createdAt;
     private int ownerId;
 
     public Chat() {
     }
 
-    public Chat(int id, String name, Date date, int ownerId) {
+    public Chat(int id, String name, Date createdAt, int ownerId) {
         this.id = id;
         this.name = name;
-        this.date = date;
+        this.createdAt = createdAt;
         this.ownerId = ownerId;
     }
 
-    public Chat(String name, Date date, int ownerId) {
+    public Chat(String name, Date createdAt, int ownerId) {
         this.name = name;
-        this.date = date;
+        this.createdAt = createdAt;
         this.ownerId = ownerId;
     }
 
@@ -53,12 +53,12 @@ public class Chat {
         this.name = name;
     }
 
-    public Date getDate() {
-        return date;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
 }

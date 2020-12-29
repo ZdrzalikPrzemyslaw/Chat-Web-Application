@@ -28,8 +28,12 @@ public class CreateChatRequest {
         this.users = users;
     }
 
-    private static class ChatSubRequest {
+    public static class ChatSubRequest {
         private String username;
+
+        public String getUsername() {
+            return username;
+        }
     }
 
     @Override

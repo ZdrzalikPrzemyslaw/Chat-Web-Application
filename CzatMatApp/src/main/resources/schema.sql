@@ -103,6 +103,9 @@ values ('admin', 'ROLE_ADMIN')
 insert into authorities(username, role_name)
 values ('admin', 'ROLE_USER')
 
+insert into authorities(username, role_name)
+values ('admin', 'ROLE_SUPER_USER')
+
 insert into [users] (username, password, name, surname, email, enabled)
 values ('user_zwykly', 'zwykly_user', 'Uzytnik', 'Uzywajacy', 'user@user.pl', 1)
 
