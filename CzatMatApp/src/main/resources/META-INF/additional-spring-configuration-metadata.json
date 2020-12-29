@@ -9,5 +9,15 @@
       "name": "tech.czatMat.app.CzatMapApp.jwtExpirationMs",
       "type": "java.lang.String",
       "description": "tech.czatMat.app.CzatMapApp.jwtExpirationMs is a expiration time in ms."
+    },
+    {
+      "name": "jwtSecret",
+      "type": "java.lang.String",
+      "description": "Description for jwtSecret."
+    },
+    {
+      "name": "jwtExpirationMs",
+      "type": "java.lang.String",
+      "description": "Description for jwtExpirationMs."
     }
   ] }
