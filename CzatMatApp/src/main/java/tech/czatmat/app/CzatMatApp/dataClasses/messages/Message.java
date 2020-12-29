@@ -39,6 +39,16 @@ public class Message {
     public Message() {
     }
 
+    public Message(Message message){
+        this.ID = message.ID;
+        this.chatId = message.chatId;
+        this.userId = message.userId;
+        this.fileId = message.fileId;
+        this.text = message.text;
+        this.createdAt = message.createdAt;
+        this.baseKeyId = message.baseKeyId;
+    }
+
     public int getBaseKeyId() {
         return baseKeyId;
     }

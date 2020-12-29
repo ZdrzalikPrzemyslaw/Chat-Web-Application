@@ -17,6 +17,7 @@ import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
 import tech.czatmat.app.CzatMatApp.payload.request.ChatUsersReqest;
 import tech.czatmat.app.CzatMatApp.payload.request.CreateChatRequest;
+import tech.czatmat.app.CzatMatApp.payload.request.MessageRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.ChatMessagesResponse;
 import tech.czatmat.app.CzatMatApp.payload.response.GetChatsResponse;
 import tech.czatmat.app.CzatMatApp.payload.response.MessageResponse;
@@ -157,6 +158,26 @@ public class ChatController {
         }
 
         return ResponseEntity.status(403).body(new MessageResponse("You don't have access to this chat."));
+    }
+
+    @Transactional
+    @RequestMapping(value = "/message", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<?> editChatMessage(@RequestParam("messageId") int messageId, @RequestBody MessageRequest messageRequest) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.getUsersByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("Error: User is not found."));
+
+        if(messagesRepository.existsMessageByIDAndUserId(messageId, user.getID())){
+            Message message = messagesRepository.getMessageByID(messageId)
+                    .orElseThrow(() -> new RuntimeException("Error: Message is not found."));
+
+            Message newMessage = new Message(message);
+            newMessage.setText(messageRequest.getText());
+            messagesRepository.save(newMessage);
+            return ResponseEntity.ok(new MessageResponse("Message changed successfully."));
+        }
+
+        return ResponseEntity.status(403).body(new MessageResponse("You don't have access to this message."));
     }
 
     @Transactional
