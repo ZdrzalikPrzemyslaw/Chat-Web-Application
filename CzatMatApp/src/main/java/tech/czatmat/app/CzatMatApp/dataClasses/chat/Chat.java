@@ -3,7 +3,6 @@ package tech.czatmat.app.CzatMatApp.dataClasses.chat;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @Table("chats")

@@ -54,6 +54,7 @@ public class RegistrationController {
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
+
         User user = new User(request.getUsername(),
                 passwordEncoder.encode(request.getPassword()),
                 request.getName(),
