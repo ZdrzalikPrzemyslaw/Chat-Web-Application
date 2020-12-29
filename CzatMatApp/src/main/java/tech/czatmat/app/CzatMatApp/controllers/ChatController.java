@@ -120,7 +120,7 @@ public class ChatController {
         return ResponseEntity.status(403).body(new MessageResponse("You don't have access to this chat."));
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
+    @RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> addUsersToExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersReqest chatUsersReqest) {
 
         for (var i : chatUsersReqest.getUsers()) {
@@ -136,7 +136,7 @@ public class ChatController {
         return ResponseEntity.ok(new MessageResponse("Users successfully added."));
     }
 
-    @RequestMapping(value = "", method = RequestMethod.DELETE, produces = "application/json")
+    @RequestMapping(value = "/users", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<?> deleteUsersFromExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersReqest chatUsersReqest) {
 
         for (var i : chatUsersReqest.getUsers()) {
