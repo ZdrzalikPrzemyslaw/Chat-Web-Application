@@ -76,7 +76,7 @@ public class ChatController {
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<?> findChatByName(@RequestParam("chatName") String chatName) {
+    public ResponseEntity<?> findChatByName(@RequestParam(value = "chatName", required = false, defaultValue = "") String chatName) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.getUsersByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
@@ -92,12 +92,12 @@ public class ChatController {
     }
 
     @RequestMapping(value = "/message", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<?> sendMessage(@RequestParam("chatId") int chatId, @RequestBody String messageText) {
+    public ResponseEntity<?> sendMessage(@RequestParam("chatId") int chatId, @RequestBody MessageResponse messageText) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.getUsersByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
-        Message message = new Message(chatId, user.getID(), messageText, new Timestamp(new java.util.Date().getTime()));
+        Message message = new Message(chatId, user.getID(), messageText.getMessage(), new Timestamp(new java.util.Date().getTime()));
 
         messagesRepository.save(message);
 

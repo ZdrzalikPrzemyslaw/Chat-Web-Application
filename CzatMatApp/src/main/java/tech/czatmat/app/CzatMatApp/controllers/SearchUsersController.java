@@ -33,7 +33,7 @@ public class SearchUsersController {
 //    }
 
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
-    public ResponseEntity<?> getUsersByNameAndSurname(@RequestParam("name") String name, @RequestParam("surname") String surname) {
+    public ResponseEntity<?> getUsersByNameAndSurname(@RequestParam(value = "name", required = false, defaultValue = "") String name, @RequestParam(value = "surname", required = false, defaultValue = "") String surname) {
         return ResponseEntity.ok(new SearchMultipleUsersResponse(userRepository.getUsersByNameContainsAndSurnameContains(name, surname)));
     }
 
