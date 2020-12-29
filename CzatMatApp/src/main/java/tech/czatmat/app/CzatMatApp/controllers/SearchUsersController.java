@@ -10,6 +10,7 @@ import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
 import tech.czatmat.app.CzatMatApp.payload.request.SearchNameSurnameRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.SearchMultipleUsersResponse;
 
+@PreAuthorize("hasAnyRole('USER', 'SUPER_USER', 'ADMIN')")
 @RestController
 @RequestMapping("/search")
 public class SearchUsersController {
@@ -31,13 +32,11 @@ public class SearchUsersController {
 //        return ResponseEntity.ok(new SearchMultipleUsersResponse(userRepository.findAll()));
 //    }
 
-    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<?> getUsersByNameAndSurname(@RequestParam("name") String name, @RequestParam("surname") String surname) {
         return ResponseEntity.ok(new SearchMultipleUsersResponse(userRepository.getUsersByNameContainsAndSurnameContains(name, surname)));
     }
 
-    @PreAuthorize("hasRole('USER')")
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> getUsersByNameAndSurname(@RequestBody SearchNameSurnameRequest searchNameSurnameRequest) {
         return ResponseEntity.ok(new SearchMultipleUsersResponse(userRepository.getUsersByNameContainsAndSurnameContains(searchNameSurnameRequest.getName(), searchNameSurnameRequest.getSurname())));
