@@ -10,7 +10,7 @@ public class User {
     public static final int ENABLED = 1;
     public static final int DISABLED = 0;
     @Id
-    private int id;
+    private int ID;
     private String username;
     // Password as a hash, not plain text
     private String password;
@@ -34,7 +34,7 @@ public class User {
     @Override
     public String toString() {
         return "Users{" +
-                "ID=" + id +
+                "ID=" + ID +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", name='" + name + '\'' +
@@ -52,12 +52,12 @@ public class User {
         this.enabled = enabled;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getUsername() {

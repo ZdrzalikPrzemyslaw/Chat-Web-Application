@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.czatmat.app.CzatMatApp.dataClasses.chat.Chat;
 import tech.czatmat.app.CzatMatApp.dataClasses.chat.ChatsRepository;
@@ -46,6 +47,7 @@ public class ChatController {
         this.messagesRepository = messagesRepository;
     }
 
+    @Transactional
     @PreAuthorize("hasRole('SUPER_USER')")
     @RequestMapping(value = "", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<?> createChat(@RequestBody CreateChatRequest createChatRequest) {
@@ -54,19 +56,19 @@ public class ChatController {
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
         Chat chat = new Chat(createChatRequest.getChatName(),
                 new Timestamp(new java.util.Date().getTime()),
-                user.getId());
+                user.getID());
 
         chat = chatsRepository.save(chat);
 
-        ChatUser chatOwner = new ChatUser(chat.getId(), user.getId());
+        ChatUser chatOwner = new ChatUser(chat.getId(), user.getID());
         chatUsersRepository.save(chatOwner);
 
 
         for (var i : createChatRequest.getUsers()) {
             User userToChat = userRepository.getUsersByUsername(i.getUsername())
                     .orElseThrow(() -> new RuntimeException("Error: User is not found."));
-            if (userToChat.getId() != user.getId()) {
-                ChatUser chatUser = new ChatUser(chat.getId(), userToChat.getId());
+            if (userToChat.getID() != user.getID()) {
+                ChatUser chatUser = new ChatUser(chat.getId(), userToChat.getID());
                 chatUsersRepository.save(chatUser);
             }
         }
@@ -74,6 +76,7 @@ public class ChatController {
         return ResponseEntity.ok(new MessageResponse("Chat successfully created."));
     }
 
+    @Transactional
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<?> findChatByName(@RequestParam(value = "chatName", required = false, defaultValue = "") String chatName) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -82,7 +85,7 @@ public class ChatController {
 
         List<GetChatsResponse.ChatResponseData> list = new ArrayList<>();
 
-        for (var i : chatsRepository.getChatByName(chatName, user.getId())) {
+        for (var i : chatsRepository.getChatByName(chatName, user.getID())) {
             // FIXME: 29.12.2020 created at to last message sent date
             list.add(new GetChatsResponse.ChatResponseData(userRepository.getUsersFromChat(i.getId()), i.getName(), i.getCreatedAt(), i.getId()));
         }
@@ -90,13 +93,14 @@ public class ChatController {
         return ResponseEntity.ok(new GetChatsResponse(list));
     }
 
+    @Transactional
     @RequestMapping(value = "", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<?> deleteExistingChat(@RequestParam("chatId") int chatId) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.getUsersByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
-        if(chatsRepository.existsChatByIdAndOwnerId(chatId, user.getId())) {
+        if(chatsRepository.existsChatByIdAndOwnerId(chatId, user.getID())) {
             chatsRepository.deleteChatById(chatId);
             return ResponseEntity.ok(new MessageResponse("Chat successfully deleted."));
         }
@@ -105,19 +109,21 @@ public class ChatController {
 
     }
 
+    @Transactional
     @RequestMapping(value = "/message", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<?> sendMessage(@RequestParam("chatId") int chatId, @RequestBody MessageResponse messageText) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.getUsersByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
-        Message message = new Message(chatId, user.getId(), messageText.getMessage(), new Timestamp(new java.util.Date().getTime()));
+        Message message = new Message(chatId, user.getID(), messageText.getMessage(), new Timestamp(new java.util.Date().getTime()));
 
         messagesRepository.save(message);
 
         return ResponseEntity.ok(new MessageResponse("Message successfully sent."));
     }
 
+    @Transactional
     @RequestMapping(value = "/message", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<?> getChatMessages(@RequestParam("chatId") int chatId) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -125,7 +131,7 @@ public class ChatController {
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
         for (var i : userRepository.getUsersFromChat(chatId)) {
-            if (i.getId() == user.getId()) {
+            if (i.getID() == user.getID()) {
                 var messages = messagesRepository.getMessagesByChatIdOrderByCreatedAtDesc(chatId);
                 return ResponseEntity.ok(new ChatMessagesResponse(messages));
             }
@@ -134,6 +140,7 @@ public class ChatController {
         return ResponseEntity.status(403).body(new MessageResponse("You don't have access to this chat."));
     }
 
+    @Transactional
     @RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> addUsersToExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersReqest chatUsersReqest) {
 
@@ -141,8 +148,8 @@ public class ChatController {
             User user = userRepository.getUsersByUsername(i.getUsername())
                     .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
-            if (!chatUsersRepository.existsChatUserByUserIdAndChatId(user.getId(), chatId)) {
-                ChatUser chatUser = new ChatUser(chatId, user.getId());
+            if (!chatUsersRepository.existsChatUserByUserIdAndChatId(user.getID(), chatId)) {
+                ChatUser chatUser = new ChatUser(chatId, user.getID());
                 chatUsersRepository.save(chatUser);
             }
         }
@@ -150,6 +157,7 @@ public class ChatController {
         return ResponseEntity.ok(new MessageResponse("Users successfully added."));
     }
 
+    @Transactional
     @RequestMapping(value = "/users", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<?> deleteUsersFromExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersReqest chatUsersReqest) {
 
@@ -157,8 +165,10 @@ public class ChatController {
             User user = userRepository.getUsersByUsername(i.getUsername())
                     .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
-            if (chatUsersRepository.existsChatUserByUserIdAndChatId(user.getId(), chatId)) {
-                chatUsersRepository.deleteByUserIdAndChatId(user.getId(), chatId);
+            if (chatUsersRepository.existsChatUserByUserIdAndChatId(user.getID(), chatId)) {
+                System.out.println(chatId);
+                System.out.println(user.getID());
+                chatUsersRepository.deleteByChatIdAndUserId(chatId, user.getID());
             }
         }
 

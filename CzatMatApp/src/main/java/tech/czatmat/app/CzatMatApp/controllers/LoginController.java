@@ -7,6 +7,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import tech.czatmat.app.CzatMatApp.payload.request.LoginRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.JwtResponse;
@@ -31,6 +32,7 @@ public class LoginController {
     public LoginController() {
     }
 
+    @Transactional
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> loginUser(@RequestBody LoginRequest loginRequest) {
 
