@@ -59,36 +59,13 @@ public class RegistrationController {
                 request.getEmail(),
                 User.ENABLED
         );
-        Set<String> strRoles = request.getRole();
         Set<Role> roles = new HashSet<>();
 
 
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(RoleSource.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case RoleSource.ROLE_ADMIN:
-                        Role adminRole = roleRepository.findByName(RoleSource.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
+        Role userRole = roleRepository.findByName(RoleSource.ROLE_USER)
+                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        roles.add(userRole);
 
-                        break;
-                    case RoleSource.ROLE_SUPER_USER:
-                        Role supRole = roleRepository.findByName(RoleSource.ROLE_SUPER_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(supRole);
-
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(RoleSource.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                }
-            });
-        }
         userRepository.save(user);
 
         for (var i : roles) {

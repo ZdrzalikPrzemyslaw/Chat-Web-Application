@@ -7,16 +7,17 @@ import java.util.Set;
 
 public class RegistrationRequest {
     @NotBlank
-    @Size(min = 3, max = 20)
+    @Size(min = 3, max = 30)
     private String username;
 
     @NotBlank
-    @Size(max = 50)
+    @Size(max = 100)
     @Email
     private String email;
 
-    private Set<String> role;
+    @Size(max = 50)
     private String name;
+    @Size(max = 50)
     private String surname;
     @NotBlank
     @Size(min = 6, max = 40)
@@ -36,14 +37,6 @@ public class RegistrationRequest {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public Set<String> getRole() {
-        return role;
-    }
-
-    public void setRole(Set<String> role) {
-        this.role = role;
     }
 
     public String getName() {
@@ -75,7 +68,6 @@ public class RegistrationRequest {
         return "RegistrationRequest{" +
                 "username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", role=" + role +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", password='" + password + '\'' +
