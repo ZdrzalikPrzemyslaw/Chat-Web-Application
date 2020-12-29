@@ -115,6 +115,9 @@ values ('Przemus', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS
 insert into authorities(username, role_name)
 values ('Przemus', 'ROLE_USER')
 
+insert into authorities(username, role_name)
+values ('Przemus', 'ROLE_SUPER_USER')
+
 insert into [users] (username, password, name, surname, email, enabled)
 values ('Julcia', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS', 'Julia', 'Szymania', 'J@S.pl', 1)
 

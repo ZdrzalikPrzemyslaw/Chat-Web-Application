@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/login")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class LoginController {
     // TODO: 27.11.2020 https://bezkoder.com/spring-boot-jwt-authentication/
 
