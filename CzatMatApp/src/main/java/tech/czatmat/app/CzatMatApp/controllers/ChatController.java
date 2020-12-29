@@ -173,6 +173,26 @@ public class ChatController {
     }
 
     @Transactional
+    @RequestMapping(value = "/message", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<?> editChatMessage(@RequestParam("messageId") int messageId, @RequestBody MessageRequest messageRequest) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.getUsersByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("Error: User is not found."));
+
+        if(messagesRepository.existsMessageByIDAndUserId(messageId, user.getID())){
+            Message message = messagesRepository.getMessageByID(messageId)
+                    .orElseThrow(() -> new RuntimeException("Error: Message is not found."));
+
+            Message newMessage = new Message(message);
+            newMessage.setText(messageRequest.getText());
+            messagesRepository.save(newMessage);
+            return ResponseEntity.ok(new MessageResponse("Message changed successfully."));
+        }
+
+        return ResponseEntity.status(403).body(new MessageResponse("You don't have access to this message."));
+    }
+
+    @Transactional
     @RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> addUsersToExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersReqest chatUsersReqest) {
         if (!chatsRepository.existsChatById(chatId)) {
