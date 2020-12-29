@@ -23,6 +23,12 @@ public class Chat {
         this.ownerId = ownerId;
     }
 
+    public Chat(String name, Date date, int ownerId) {
+        this.name = name;
+        this.date = date;
+        this.ownerId = ownerId;
+    }
+
     public int getOwnerId() {
         return ownerId;
     }

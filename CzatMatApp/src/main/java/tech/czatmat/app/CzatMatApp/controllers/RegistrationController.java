@@ -75,14 +75,4 @@ public class RegistrationController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    // TODO: 27.11.2020 Ograniczyć możliwość używania zapytania
-    @RequestMapping(value = "/get_users", method = RequestMethod.GET, produces = "application/json")
-    public Iterable<User> getUsers() {
-        return userRepository.findAll();
-    }
-
-    @RequestMapping(value = "/przyklad", method = RequestMethod.GET, produces = "application/json")
-    public String getPrzyklad() {
-        return "Siema Registration";
-    }
 }

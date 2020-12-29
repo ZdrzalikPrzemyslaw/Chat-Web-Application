@@ -39,7 +39,7 @@ CREATE TABLE chats
 (
     ID         int identity primary key,
     owner_id   int         not null,
-    name       varchar(30) not null,
+    name       varchar(30) null,
     created_at DATETIME    not null,
     foreign key (owner_id) references [users] (ID)
 )
@@ -62,13 +62,13 @@ CREATE TABLE keys
 
 CREATE TABLE chat_messages
 (
-    ID         int identity primary key,
-    chat_id    int      not null,
-    user_id    int      not null,
-    file_id    int      null,
-    text       varchar(2048),
-    created_at DATETIME not null,
-    base_key_id     int      null,
+    ID          int identity primary key,
+    chat_id     int      not null,
+    user_id     int      not null,
+    file_id     int      null,
+    text        varchar(2048),
+    created_at  DATETIME not null,
+    base_key_id int      null,
     foreign key (chat_id) references [chats] (ID),
     foreign key (user_id) references [users] (id),
 )

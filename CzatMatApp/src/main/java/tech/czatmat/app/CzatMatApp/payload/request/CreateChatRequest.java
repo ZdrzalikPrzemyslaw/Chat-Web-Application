@@ -35,7 +35,8 @@ public class CreateChatRequest {
     @Override
     public String toString() {
         return "CreateChatRequest{" +
-                "list=" + users +
+                "users=" + users +
+                ", chatName='" + chatName + '\'' +
                 '}';
     }
 }

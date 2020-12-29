@@ -10,8 +10,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import tech.czatmat.app.CzatMatApp.dataClasses.chat.Chat;
+import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
 import tech.czatmat.app.CzatMatApp.payload.request.CreateChatRequest;
+
+import java.sql.Date;
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/chat")
@@ -30,6 +36,13 @@ public class ChatController {
     @PreAuthorize("hasRole('SUPER_USER')")
     @RequestMapping(value = "", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<?> createChat(@RequestBody CreateChatRequest createChatRequest) {
-        return  ResponseEntity.ok("");
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.getUsersByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        Chat chat = new Chat(createChatRequest.getChatName(),
+                new Date(new java.util.Date().getTime()),
+                user.getID());
+        return ResponseEntity.ok("Chat successfully created.");
+
     }
 }
