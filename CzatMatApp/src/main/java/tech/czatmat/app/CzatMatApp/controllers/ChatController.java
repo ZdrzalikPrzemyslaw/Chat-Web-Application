@@ -97,6 +97,9 @@ public class ChatController {
     @Transactional
     @RequestMapping(value = "", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<?> deleteExistingChat(@RequestParam("chatId") int chatId) {
+        if (!chatsRepository.existsChatById(chatId)) {
+            return ResponseEntity.status(404).body("Error: Chat not found");
+        }
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.getUsersByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
@@ -112,6 +115,9 @@ public class ChatController {
     @Transactional
     @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> changeChatName(@RequestParam("chatId") int chatId, @RequestParam("chatName") String chatName) {
+        if (!chatsRepository.existsChatById(chatId)) {
+            return ResponseEntity.status(404).body("Error: Chat not found");
+        }
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.getUsersByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
@@ -132,6 +138,9 @@ public class ChatController {
     @Transactional
     @RequestMapping(value = "/message", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<?> sendMessage(@RequestParam("chatId") int chatId, @RequestBody MessageRequest messageText) {
+        if (!chatsRepository.existsChatById(chatId)) {
+            return ResponseEntity.status(404).body("Error: Chat not found");
+        }
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.getUsersByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
@@ -146,6 +155,9 @@ public class ChatController {
     @Transactional
     @RequestMapping(value = "/message", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<?> getChatMessages(@RequestParam("chatId") int chatId) {
+        if (!chatsRepository.existsChatById(chatId)) {
+            return ResponseEntity.status(404).body("Error: Chat not found");
+        }
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.getUsersByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
@@ -163,12 +175,16 @@ public class ChatController {
     @Transactional
     @RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> addUsersToExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersReqest chatUsersReqest) {
+        if (!chatsRepository.existsChatById(chatId)) {
+            return ResponseEntity.status(404).body("Error: Chat not found");
+        }
 
         for (var i : chatUsersReqest.getUsers()) {
             User user = userRepository.getUsersByUsername(i.getUsername())
                     .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
-            if (!chatUsersRepository.existsChatUserByUserIdAndChatId(user.getID(), chatId)) {
+
+            if (!chatUsersRepository.existsByUserIdAndChatId(user.getID(), chatId)) {
                 ChatUser chatUser = new ChatUser(chatId, user.getID());
                 chatUsersRepository.save(chatUser);
             }
@@ -180,12 +196,15 @@ public class ChatController {
     @Transactional
     @RequestMapping(value = "/users", method = RequestMethod.DELETE, produces = "application/json")
     public ResponseEntity<?> deleteUsersFromExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersReqest chatUsersReqest) {
+        if (!chatsRepository.existsChatById(chatId)) {
+            return ResponseEntity.status(404).body("Error: Chat not found");
+        }
 
         for (var i : chatUsersReqest.getUsers()) {
             User user = userRepository.getUsersByUsername(i.getUsername())
                     .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
-            if (chatUsersRepository.existsChatUserByUserIdAndChatId(user.getID(), chatId)) {
+            if (chatUsersRepository.existsByUserIdAndChatId(user.getID(), chatId)) {
                 System.out.println(chatId);
                 System.out.println(user.getID());
                 chatUsersRepository.deleteByChatIdAndUserId(chatId, user.getID());
