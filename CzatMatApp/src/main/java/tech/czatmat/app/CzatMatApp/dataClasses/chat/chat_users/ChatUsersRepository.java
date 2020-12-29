@@ -6,4 +6,6 @@ public interface ChatUsersRepository extends CrudRepository<ChatUser, Long> {
 
     boolean existsChatUserByUserIdAndChatId(int userId, int chatId);
 
+    void deleteByUserIdAndChatId(int userId, int chatId);
+
 }
