@@ -14,6 +14,7 @@ import tech.czatmat.app.CzatMatApp.dataClasses.messages.Message;
 import tech.czatmat.app.CzatMatApp.dataClasses.messages.MessagesRepository;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
+import tech.czatmat.app.CzatMatApp.payload.request.ChatUsersReqest;
 import tech.czatmat.app.CzatMatApp.payload.request.CreateChatRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.ChatMessagesResponse;
 import tech.czatmat.app.CzatMatApp.payload.response.GetChatsResponse;
@@ -118,4 +119,23 @@ public class ChatController {
 
         return ResponseEntity.status(403).body(new MessageResponse("You don't have access to this chat."));
     }
+
+    @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<?> addUsersToExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersReqest chatUsersReqest) {
+
+        for (var i : chatUsersReqest.getUsers()) {
+            User user = userRepository.getUsersByUsername(i.getUsername())
+                    .orElseThrow(() -> new RuntimeException("Error: User is not found."));
+
+            if (!chatUsersRepository.existsChatUserByUserIdAndChatId(user.getID(), chatId)) {
+                ChatUser chatUser = new ChatUser(chatId, user.getID());
+                chatUsersRepository.save(chatUser);
+            }
+        }
+
+        return ResponseEntity.ok(new MessageResponse("Users successfully added."));
+    }
+
+
+
 }

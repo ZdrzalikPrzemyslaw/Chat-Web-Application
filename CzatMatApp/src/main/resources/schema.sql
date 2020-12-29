@@ -133,29 +133,29 @@ insert into authorities(username, role_name)
 values ('Witek', 'ROLE_USER')
 
 insert into chats(owner_id, name, created_at)
-values (1, 'testowy', '2020-12-29T19:21:27.443+00:00')
+values (1, 'testowy', CONVERT(DATETIME, '2020.12.29 19:21:27.55'))
 
 insert into chats(owner_id, name, created_at)
-values (3, 'kolejny', '2020-12-28T19:23:25.443+00:00')
+values (3, 'kolejny', CONVERT(DATETIME, '2020.12.28 19:23:27.55'))
 
 insert into chat_users(chat_id, user_id)
-VALUES (1, 3), (1, 4), (2, 4), (2, 1)
+VALUES (1, 3), (1, 4), (1, 1), (2, 4), (2, 1), (2, 3)
 
 insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
-values (1, 1, 'elko pierwsza mes w 1 chacie', '2020-12-29T19:25:27.443+00:00', -1);
+values (1, 1, 'elko pierwsza mes w 1 chacie', CONVERT(DATETIME, '2020.12.29 19:25:27.55'), -1);
 
 insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
-values (1, 3, 'elko melko siemka hejka', '2020-12-29T19:27:27.443+00:00', -1);
+values (1, 3, 'elko melko siemka hejka', CONVERT(DATETIME, '2020.12.29 19:27:27.55'), -1);
 
 insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
-values (1, 4, 'hejka tu lenka', '2020-12-29T19:30:27.443+00:00', -1);
+values (1, 4, 'hejka tu lenka', CONVERT(DATETIME, '2020.12.29 19:21:28.55'), -1);
 
 insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
-values (2, 1, 'przmeus elko melko chodz na piwerko', '2020-12-28T19:23:33.443+00:00', -1);
+values (2, 1, 'przmeus elko melko chodz na piwerko', CONVERT(DATETIME, '2020.12.28 19:24:27.55'), -1);
 
 insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
-values (2, 1, 'no dobra jednak nie chodz', '2020-12-28T19:23:35.443+00:00', -1);
+values (2, 1, 'no dobra jednak nie chodz', CONVERT(DATETIME, '2020.12.28 19:25:27.55'), -1);
 
 insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
-values (2, 3, 'nie ide bo nie chce', '2020-12-28T19:23:34.443+00:00', -1);
+values (2, 3, 'nie ide bo nie chce', CONVERT(DATETIME, '2020.12.28 19:29:29.55'), -1);
 
