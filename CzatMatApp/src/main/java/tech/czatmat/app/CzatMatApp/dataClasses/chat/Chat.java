@@ -17,6 +17,13 @@ public class Chat {
     public Chat() {
     }
 
+    public Chat(Chat chat){
+        this.id = chat.id;
+        this.name = chat.name;
+        this.createdAt = chat.createdAt;
+        this.ownerId = chat.ownerId;
+    }
+
     public Chat(int id, String name, Timestamp createdAt, int ownerId) {
         this.id = id;
         this.name = name;

@@ -100,13 +100,32 @@ public class ChatController {
         User user = userRepository.getUsersByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
-        if(chatsRepository.existsChatByIdAndOwnerId(chatId, user.getID())) {
+        if (chatsRepository.existsChatByIdAndOwnerId(chatId, user.getID())) {
             chatsRepository.deleteChatById(chatId);
             return ResponseEntity.ok(new MessageResponse("Chat successfully deleted."));
         }
 
         return ResponseEntity.status(403).body(new MessageResponse("You don't have access to this chat."));
+    }
 
+    @Transactional
+    @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<?> changeChatName(@RequestParam("chatId") int chatId, @RequestParam("chatName") String chatName) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.getUsersByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("Error: User is not found."));
+
+        if (chatsRepository.existsChatByIdAndOwnerId(chatId, user.getID())) {
+            Chat chat = chatsRepository.getChatById(chatId)
+                    .orElseThrow(() -> new RuntimeException("Error: Chat is not found."));
+
+            Chat newChat = new Chat(chat);
+            newChat.setName(chatName);
+            chatsRepository.save(newChat);
+            return ResponseEntity.ok(new MessageResponse("Chat name changed successfully."));
+        }
+
+        return ResponseEntity.status(403).body(new MessageResponse("You don't have access to this chat."));
     }
 
     @Transactional
