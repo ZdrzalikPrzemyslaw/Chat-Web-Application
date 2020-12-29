@@ -5,10 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.czatmat.app.CzatMatApp.dataClasses.chat.Chat;
 import tech.czatmat.app.CzatMatApp.dataClasses.chat.ChatsRepository;
 import tech.czatmat.app.CzatMatApp.dataClasses.chat.chat_users.ChatUser;
@@ -16,10 +13,15 @@ import tech.czatmat.app.CzatMatApp.dataClasses.chat.chat_users.ChatUsersReposito
 import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
 import tech.czatmat.app.CzatMatApp.payload.request.CreateChatRequest;
+import tech.czatmat.app.CzatMatApp.payload.response.GetChatsResponse;
+import tech.czatmat.app.CzatMatApp.payload.response.MessageResponse;
 
 import java.sql.Date;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
-
+@PreAuthorize("hasAnyRole('USER', 'SUPER_USER', 'ADMIN')")
 @RestController
 @RequestMapping("/chat")
 public class ChatController {
@@ -45,7 +47,7 @@ public class ChatController {
         User user = userRepository.getUsersByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
         Chat chat = new Chat(createChatRequest.getChatName(),
-                new Date(new java.util.Date().getTime()),
+                new Timestamp(new java.util.Date().getTime()),
                 user.getID());
 
         chat = chatsRepository.save(chat);
@@ -63,8 +65,22 @@ public class ChatController {
             }
         }
 
+        return ResponseEntity.ok(new MessageResponse("Chat successfully created."));
+    }
 
-        return ResponseEntity.ok("Chat successfully created.");
+    @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<?> findChatByName(@RequestParam("chatName") String chatName) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.getUsersByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
+        List<GetChatsResponse.ChatResponseData> list = new ArrayList<>();
+        
+        for (var i : chatsRepository.getChatByName(chatName, user.getID())) {
+            // FIXME: 29.12.2020 created at to last message sent date
+            list.add(new GetChatsResponse.ChatResponseData(userRepository.getUsersFromChat(i.getId()) , i.getName(), i.getCreatedAt()));
+        }
+
+        return ResponseEntity.ok(new GetChatsResponse(list));
     }
 }

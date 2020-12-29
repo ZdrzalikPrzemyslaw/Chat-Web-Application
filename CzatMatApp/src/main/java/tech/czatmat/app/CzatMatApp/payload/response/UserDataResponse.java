@@ -2,14 +2,14 @@ package tech.czatmat.app.CzatMatApp.payload.response;
 
 import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 
-public class SearchSingleUserResponse {
+public class UserDataResponse {
 
     private String name;
     private String surname;
     private String email;
     private String username;
 
-    private SearchSingleUserResponse() {
+    private UserDataResponse() {
     }
 
     public String getUsername() {
@@ -20,7 +20,7 @@ public class SearchSingleUserResponse {
         this.username = username;
     }
 
-    public SearchSingleUserResponse(User user) {
+    public UserDataResponse(User user) {
         this.name = user.getName();
         this.surname = user.getSurname();
         this.email = user.getEmail();

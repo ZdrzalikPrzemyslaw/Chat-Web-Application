@@ -7,20 +7,20 @@ import java.util.List;
 
 public class SearchMultipleUsersResponse {
 
-    private List<SearchSingleUserResponse> list;
+    private List<UserDataResponse> users;
 
     public SearchMultipleUsersResponse(Iterable<User> usersIterable) {
-        list = new ArrayList<>();
+        users = new ArrayList<>();
         for (var i : usersIterable) {
-            list.add(new SearchSingleUserResponse(i));
+            users.add(new UserDataResponse(i));
         }
     }
 
-    public List<SearchSingleUserResponse> getList() {
-        return list;
+    public List<UserDataResponse> getUsers() {
+        return users;
     }
 
-    public void setList(List<SearchSingleUserResponse> list) {
-        this.list = list;
+    public void setUsers(List<UserDataResponse> users) {
+        this.users = users;
     }
 }
