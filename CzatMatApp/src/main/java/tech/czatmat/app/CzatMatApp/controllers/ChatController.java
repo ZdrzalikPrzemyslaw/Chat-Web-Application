@@ -131,12 +131,12 @@ public class ChatController {
 
     @Transactional
     @RequestMapping(value = "/message", method = RequestMethod.PUT, produces = "application/json")
-    public ResponseEntity<?> sendMessage(@RequestParam("chatId") int chatId, @RequestBody MessageResponse messageText) {
+    public ResponseEntity<?> sendMessage(@RequestParam("chatId") int chatId, @RequestBody MessageRequest messageText) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         User user = userRepository.getUsersByUsername(userDetails.getUsername())
                 .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
-        Message message = new Message(chatId, user.getID(), messageText.getMessage(), new Timestamp(new java.util.Date().getTime()));
+        Message message = new Message(chatId, user.getID(), messageText.getText(), new Timestamp(new java.util.Date().getTime()));
 
         messagesRepository.save(message);
 
