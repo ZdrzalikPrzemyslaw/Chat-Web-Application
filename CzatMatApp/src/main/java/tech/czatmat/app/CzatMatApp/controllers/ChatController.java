@@ -25,6 +25,7 @@ import tech.czatmat.app.CzatMatApp.payload.response.MessageResponse;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @PreAuthorize("hasAnyRole('USER', 'SUPER_USER', 'ADMIN')")
 @RestController
@@ -87,8 +88,14 @@ public class ChatController {
         List<GetChatsResponse.ChatResponseData> list = new ArrayList<>();
 
         for (var i : chatsRepository.getChatByName(chatName, user.getID())) {
+
+            var message = messagesRepository.getTop1ByChatIdOrderByCreatedAtDesc(i.getId());
+            if (message.isPresent()) {
+                list.add(new GetChatsResponse.ChatResponseData(userRepository.getUsersFromChat(i.getId()), i.getName(), message.get().getCreatedAt(), i.getId()));
+            } else {
+                list.add(new GetChatsResponse.ChatResponseData(userRepository.getUsersFromChat(i.getId()), i.getName(), i.getCreatedAt(), i.getId()));
+            }
             // FIXME: 29.12.2020 created at to last message sent date
-            list.add(new GetChatsResponse.ChatResponseData(userRepository.getUsersFromChat(i.getId()), i.getName(), i.getCreatedAt(), i.getId()));
         }
 
         return ResponseEntity.ok(new GetChatsResponse(list));
