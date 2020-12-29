@@ -6,14 +6,14 @@ import java.util.List;
 public class CreateChatRequest {
 
     @NotBlank
-    private List<ChatSubRequest> list;
+    private List<ChatSubRequest> users;
 
-    public List<ChatSubRequest> getList() {
-        return list;
+    public List<ChatSubRequest> getUsers() {
+        return users;
     }
 
-    public void setList(List<ChatSubRequest> list) {
-        this.list = list;
+    public void setUsers(List<ChatSubRequest> users) {
+        this.users = users;
     }
 
     private static class ChatSubRequest {
@@ -23,7 +23,7 @@ public class CreateChatRequest {
     @Override
     public String toString() {
         return "CreateChatRequest{" +
-                "list=" + list +
+                "list=" + users +
                 '}';
     }
 }
