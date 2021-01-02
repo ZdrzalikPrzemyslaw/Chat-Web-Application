@@ -14,7 +14,7 @@
           <div class="invalid-feedback">{{ errors.password }}</div>
         </div>
       <div class="container text-center" id="buttons">
-        <button class="btn btn-primary" type="submit">Login</button>
+        <button class="btn btn-primary btn-sm" type="submit" id="loginBtn">Login</button>
         <button class="btn btn-secondary" v-on:click="this.$router.push('/registration')">Go To Registration</button>
       </div>
     </Form>
@@ -83,17 +83,30 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
 #login {
-  width: 20%;
-  margin: auto;
+  width: 25%;
+  margin: 150px auto auto;
   border: 1px solid gray;
   border-radius: 10px;
   padding: 10px 30px;
   background: #dcdcdc;
 }
+
 #buttons > button {
   width: 60%;
-  margin: 3px;
+  margin: 10px;
   text-align: center;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#buttons > #loginBtn {
+  background: #00abb7;
 }
 </style>

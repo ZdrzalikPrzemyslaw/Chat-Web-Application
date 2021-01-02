@@ -36,17 +36,20 @@ export default {
   cursor: pointer;
   width: 100%;
   background: #D4D4D4;
-  margin: 5px;
+  margin: 10px 5px 5px 50px;
   border-radius: 10px;
+  color: black;
 }
 
 #UserName {
   font-weight: bold;
-  padding: 2px 0
+  padding: 5px 0;
+  margin-left: 5px;
 }
 
 #LastMessage {
   opacity: 0.9;
+  margin-left: 5px;
 }
  
 </style>

@@ -109,12 +109,29 @@ export default {
 </script>
 
 <style scoped>
+h2 {
+  font-weight: bold;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
 #registration {
-  width: 20%;
-  margin: auto;
+  width: 25%;
+  margin: 150px auto auto;
   border: 1px solid gray;
   border-radius: 10px;
   padding: 10px 30px;
   background: #dcdcdc;
 }
+
+#buttons > button {
+  width: 70%;
+  margin: 10px;
+  text-align: center;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: bold;
+  background: #00abb7;
+}
+
 </style>

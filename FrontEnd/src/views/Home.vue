@@ -38,7 +38,7 @@ export default {
   methods: {
     handleAppEvent: function (data) {
       this.eventData = data;
-      console.log('event received');
+      console.log('event received');    //color: #2c3e50;font-family: Arial ;
     }
   }
 }
@@ -50,9 +50,12 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
   margin-top: 60px;
   width: 100%;
+  font-size: 16px;
+}
+body {
+  background: #00abb7;
 }
 .container *{
   width: 100%;

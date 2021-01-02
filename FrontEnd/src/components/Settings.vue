@@ -27,7 +27,7 @@
                                 <input v-model="surname" type="text" id="surname" class="form-control col-md-6 ml-md-2"/>
                             </div>
                             <div class="text-right">
-                                <input class="btn btn-primary" type="submit" value="Submit"/>   
+                                <input class="btn btn-sm btn-secondary float-right" type="submit" value="Submit"/>
                             </div>    
 						</form>
 					</div>
@@ -50,7 +50,7 @@
                                 <input type="text" id="login" class="form-control col-md-6 ml-md-2"/>
                             </div>
                             <div class="text-right">
-                                <input class="btn btn-primary" type="submit" value="Submit"/>   
+                                <input class="btn btn-sm btn-secondary float-right" type="submit" value="Submit"/>
                             </div>    
 						</form>
 					</div>
@@ -73,7 +73,7 @@
                                 <input type="email" id="email" class="form-control col-md-6 ml-md-2"/>
                             </div>
                             <div class="text-right">
-                                <input class="btn btn-primary" type="submit" value="Submit"/>   
+                                <input class="btn btn-sm btn-secondary float-right" type="submit" value="Submit"/>
                             </div>    
 						</form>
 					</div>
@@ -82,9 +82,9 @@
 					<div>Change password</div>
 					<div style="display: none">
 						<form>
-							<input type="password" placeholder="Ols password"/>
+							<input type="password" placeholder="Old password"/>
 							<input type="text" placeholder="New password"/>
-							<input type="text" placeholder="Reapet new password" />
+							<input type="text" placeholder="Repeat new password" />
 							<input type="checkbox" value="Show password" />
 							<input type="button" value="Submit"/>
 						</form>
@@ -120,18 +120,20 @@ export default {
 <style scoped>
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css");
  .settings_btn {
-  background-color: #9C35F2;
-  border: none; 
-  color: white; 
-  padding: 10px;
-  font-size: 22px; 
-  cursor: pointer; 
-  margin: 0; 
+   background-color: #00abb7;
+   color: white;
+   padding: 10px;
+   font-size: 22px;
+   cursor: pointer;
+   margin: 0;
+   border: 4px solid #fff;
+   border-radius: 10px;
 }
 
 .menu {
 	position: absolute;
-	background-color: #D1B5E8;
+	background-color: #AFEEEE;
+  color: black;
 	width: 420px;
 	padding: 10px;
     z-index: 1000;
@@ -151,10 +153,28 @@ export default {
 
 .pen-icon {
     border: none; 
-    background-color: #D1B5E8; 
+    background-color: #AFEEEE;
     cursor: pointer;
 }
 .pen-icon-color {
-    color: #9C35F2;
+    color: #00abb7;
 }
+
+.text-right > .btn {
+  background: none;
+  border: 2px solid black;
+  border-radius: 10px;
+  color: black;
+  display: block;
+  font-size: 0.7em;
+  font-weight: bold;
+  padding: 0.8em 2em;
+  position: relative;
+  text-transform: uppercase;
+  height: 35px;
+  top: 10px;
+  margin-top: -23px;
+}
+
+
 </style>
