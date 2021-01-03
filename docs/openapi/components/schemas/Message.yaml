@@ -1,5 +1,4 @@
 type: string
-format: test
 maxLength: 2048
 example: 
     message: Czesc to zmieniona wiadomosc

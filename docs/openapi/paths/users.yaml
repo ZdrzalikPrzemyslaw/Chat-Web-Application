@@ -1,0 +1,69 @@
+post:
+  tags:
+    - Users
+  summary: Add user
+  description: Add user to existing chat
+  operationId: addUsersToExistingChat 
+  security:
+    - token: []
+  parameters:
+    - name: chatId
+      in: path
+      description: Id of the chat to which we add users
+      required: true
+      schema:
+        type: int
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            message: Users successfully added.
+    '404':
+      description: Chat with that id doesn't exist
+      content:
+        application/json:
+          example:
+            message: 'Error: Chat not found'
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ChatUsers.yaml
+    required: true
+
+delete:
+  tags:
+    - Users
+  summary: Delete user
+  description: Delete user from existing chat
+  operationId: deleteUsersFromExistingChat 
+  security:
+    - token: []
+  parameters:
+    - name: chatId
+      in: path
+      description: Id of the chat from which we delete users
+      required: true
+      schema:
+        type: int
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            message: Users successfully deleted.
+    '404':
+      description: Chat with that id doesn't exist
+      content:
+        application/json:
+          example:
+            message: 'Error: Chat not found'
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/ChatUsers.yaml
+    required: true

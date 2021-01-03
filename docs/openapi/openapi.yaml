@@ -12,7 +12,11 @@ tags:
   - name: Search
     description: Searching user data in the database
   - name: Chat
-    description: All operations regarding chats and messages
+    description: All operations regarding chats
+  - name: Message
+    description: All operations regarding messages
+  - name: Users
+    description: All operations regarding users
 servers:
   - url: "https://czatmat.azurewebsites.net/api"
 paths:
