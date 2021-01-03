@@ -3,7 +3,7 @@ package tech.czatmat.app.CzatMatApp.payload.request;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 
-public class ChatUsersReqest {
+public class ChatUsersRequest {
 
     @NotBlank
     private List<CreateChatRequest.ChatSubRequest> users;

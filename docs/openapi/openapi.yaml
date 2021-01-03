@@ -3,17 +3,18 @@ info:
   version: 1.0.0
   title: https://czatmat.azurewebsites.net/api
   description: >
-
     This is ChatMat API documentation.
-  
 tags:
   - name: Registration
-    description: Example registration operation.
-  - name: User
-    description: Operations about user
+    description: Creating and modifying user data
+  - name: Login
+    description: User authentication
+  - name: Search
+    description: Searching user data in the database
+  - name: Chat
+    description: All operations regarding chats and messages
 servers:
-  - url: "https://czatmat.azurewebsites.net/api/registration"
-  - url: "https://example.com/api/v1"
+  - url: "https://czatmat.azurewebsites.net/api"
 paths:
   /registration:
     $ref: paths/registration.yaml

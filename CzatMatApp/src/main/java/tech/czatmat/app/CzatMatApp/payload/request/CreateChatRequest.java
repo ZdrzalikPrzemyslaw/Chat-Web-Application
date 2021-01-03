@@ -2,7 +2,7 @@ package tech.czatmat.app.CzatMatApp.payload.request;
 
 import javax.validation.constraints.Size;
 
-public class CreateChatRequest extends ChatUsersReqest {
+public class CreateChatRequest extends ChatUsersRequest {
 
     @Size(min = 3, max = 30)
     private String chatName;

@@ -19,7 +19,7 @@ import tech.czatmat.app.CzatMatApp.dataClasses.messages.Message;
 import tech.czatmat.app.CzatMatApp.dataClasses.messages.MessagesRepository;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
-import tech.czatmat.app.CzatMatApp.payload.request.ChatUsersReqest;
+import tech.czatmat.app.CzatMatApp.payload.request.ChatUsersRequest;
 import tech.czatmat.app.CzatMatApp.payload.request.CreateChatRequest;
 import tech.czatmat.app.CzatMatApp.payload.request.MessageRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.ChatMessagesResponse;
@@ -204,12 +204,12 @@ public class ChatController {
 
     @Transactional
     @RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")
-    public ResponseEntity<?> addUsersToExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersReqest chatUsersReqest) {
+    public ResponseEntity<?> addUsersToExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersRequest chatUsersRequest) {
         if (!chatsRepository.existsChatById(chatId)) {
             return ResponseEntity.status(404).body("Error: Chat not found");
         }
 
-        for (var i : chatUsersReqest.getUsers()) {
+        for (var i : chatUsersRequest.getUsers()) {
             User user = userRepository.getUsersByUsername(i.getUsername())
                     .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
@@ -225,12 +225,12 @@ public class ChatController {
 
     @Transactional
     @RequestMapping(value = "/users", method = RequestMethod.DELETE, produces = "application/json")
-    public ResponseEntity<?> deleteUsersFromExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersReqest chatUsersReqest) {
+    public ResponseEntity<?> deleteUsersFromExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersRequest chatUsersRequest) {
         if (!chatsRepository.existsChatById(chatId)) {
             return ResponseEntity.status(404).body("Error: Chat not found");
         }
 
-        for (var i : chatUsersReqest.getUsers()) {
+        for (var i : chatUsersRequest.getUsers()) {
             User user = userRepository.getUsersByUsername(i.getUsername())
                     .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 

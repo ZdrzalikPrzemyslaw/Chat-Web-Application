@@ -69,6 +69,8 @@ post:
   summary: Search user
   description: Search user by name or/and surname
   operationId: search 
+  security:
+    - token: []
   responses:
     '200':
       description: Success

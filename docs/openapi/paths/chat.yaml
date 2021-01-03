@@ -1,22 +1,70 @@
 put:
   tags:
     - Chat
-  summary: Chat
-  description: 
-  operationId:    
+  summary: Create Chat
+  description: Create chat with the selected users and name
+  operationId: createChat
+  security:
+    - token: []
   responses:
     '200':
       description: Success
       content:
         application/json:
           example:
-            message: User registered successfully!
-    '403':
-      description: User already exist or email is already in use!
+            message: Chat successfully created!
   requestBody:
     content:
       application/json:
         schema:
-          $ref: ../components/schemas/User.yaml
+          $ref: ../components/schemas/CreateChat.yaml
     description: Registration user object
     required: true
+get:
+  tags:
+    - Chat
+  summary: Find Chat
+  description: Find Chat with given name
+  opearationId: findChat
+  secutrity:
+    -token: []
+  parameters:
+    - name: chatName
+      in: path
+      description: Searched chat name
+      required: false
+      schema:
+        type: string
+  reponses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            chatsList: [
+              {
+                # userList: [
+                #   {
+                #     name: Administrator,
+                #     surname: Administracyjny,
+                #     email: admin@admin.pl,
+                #     username: admin
+                #   },
+                #   {
+                #     name: Przemek,
+                #     surname: Zdrzalus,
+                #     email: p@z.pl,
+                #     username: Przemus
+                #   },
+                #   {
+                #     name: Julia,
+                #     surname: Szymania
+                #     email: J@S.pl,
+                #     username: Julcia
+                #   }
+                # ],
+                chatName: testowy,
+                lastMessageDate: 2020-12-29T18:27:27.550+00:00,
+                id: 1
+              }
+            ]
