@@ -1,25 +1,22 @@
 put:
   tags:
     - Registration
-  summary: Example registration
+  summary: Register new user
   description: Register user.
-  operationId: registration
+  operationId: registration    
   responses:
     '200':
-      description: OK
+      description: Success
       content:
         application/json:
-          schema:
-            type: string
-          message:
-            value: User registered successfully!
+          example:
+            message: User registered successfully!
   requestBody:
-    headers:
     content:
       application/json:
         schema:
-          type: string
-          example: 
+          $ref: ../components/schemas/User.yaml
+    description: Registration user object
     required: true
   x-codeSamples:
     - lang: "C#"

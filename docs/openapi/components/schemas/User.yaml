@@ -3,17 +3,27 @@ properties:
   username:
     description: User supplied username
     type: string
-    minLength: 4
+    minLength: 3
+    maxLength: 30
+    required: true
     example: John78
-  firstName:
+  password:
+    description: User supplied password
+    type: string
+    minLength: 6
+    maxLength: 40
+    required: true
+    example: admin
+  name:
     description: User first name
     type: string
-    minLength: 1
+    maxLength: 50
     example: John
-  lastName:
+  surname:
     description: User last name
     type: string
-    minLength: 1
+    maxLength: 50
     example: Smith
   email:
     $ref: ./Email.yaml
+    required: true
