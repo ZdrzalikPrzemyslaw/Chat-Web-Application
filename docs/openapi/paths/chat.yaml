@@ -35,7 +35,7 @@ get:
       required: false
       schema:
         type: string
-  reponses:
+  responses:
     '200':
       description: Success
       content:
@@ -43,26 +43,26 @@ get:
           example:
             chatsList: [
               {
-                # userList: [
-                #   {
-                #     name: Administrator,
-                #     surname: Administracyjny,
-                #     email: admin@admin.pl,
-                #     username: admin
-                #   },
-                #   {
-                #     name: Przemek,
-                #     surname: Zdrzalus,
-                #     email: p@z.pl,
-                #     username: Przemus
-                #   },
-                #   {
-                #     name: Julia,
-                #     surname: Szymania
-                #     email: J@S.pl,
-                #     username: Julcia
-                #   }
-                # ],
+                userList: [
+                  {
+                    name: Administrator,
+                    surname: Administracyjny,
+                    email: admin@admin.pl,
+                    username: admin
+                  },
+                  {
+                    name: Przemek,
+                    surname: Zdrzalus,
+                    email: p@z.pl,
+                    username: Przemus
+                  },
+                  {
+                    name: Julia,
+                    surname: Szymania,
+                    email: J@S.pl,
+                    username: Julcia
+                  }
+                ],
                 chatName: testowy,
                 lastMessageDate: 2020-12-29T18:27:27.550+00:00,
                 id: 1
