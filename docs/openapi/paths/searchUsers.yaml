@@ -1,0 +1,92 @@
+get:
+  tags:
+    - Search
+  summary: Search user
+  description: Search user by name or/and surname
+  operationId: search
+  parameters:
+    - name: name
+      in: path
+      description: Searched user first name
+      required: false
+      schema:
+        type: string
+    - name: surname
+      in: path
+      description: Searched user surname
+      required: false
+      schema:
+        type: string
+  security:
+    - token: []
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            users: [
+              {
+                name: Administrator,
+                surname: Administracyjny,
+                email: admin@admin.pl,
+                username: admin
+              },
+              {
+                name: Julia,
+                surname: Szymanska,
+                email: j@s.pl,
+                username: juliaSzymanska
+              },
+              {
+                name: Przemyslaw,
+                surname: Zdrzalik,
+                email: p@z.pl,
+                username: przemyslawZdrzalik
+              },
+              {
+                name: Martyna,
+                surname: Piasecka,
+                email: m@p.pl,
+                username: martynaPiasecka
+              },
+              {
+                name: Hubert,
+                surname: Gawlowski,
+                email: h@g.pl,
+                username: hubertGawlowski
+              },
+              {
+                name: Kamil,
+                surname: Kiszko-Zgierski,
+                email: k@k.pl,
+                username: kamilKiszkoZgierski,
+              }
+            ]
+post:
+  tags:
+    - Search
+  summary: Search user
+  description: Search user by name or/and surname
+  operationId: search 
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            users: [
+              {
+                name: Administrator,
+                surname: Administracyjny,
+                email: admin@admin.pl,
+                username: admin
+              }
+            ]
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Search.yaml
+    description: Registration user object
+    required: true

@@ -16,11 +16,11 @@ servers:
   - url: "https://example.com/api/v1"
 paths:
   /registration:
-     $ref: paths/registration.yaml
-  "/users/{username}":
-    $ref: "paths/users@{username}.yaml"
-  /echo:
-    $ref: paths/echo.yaml
+    $ref: paths/registration.yaml
+  /login:
+    $ref: paths/login.yaml
+  /search:
+    $ref: paths/searchUsers.yaml
 components:
   securitySchemes:
     token:

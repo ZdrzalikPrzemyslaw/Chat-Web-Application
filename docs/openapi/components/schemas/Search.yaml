@@ -1,0 +1,12 @@
+type: object
+properties:
+  name:
+    description: Searched user first name
+    type: string
+    required: true
+    example: Administrator
+  surname: 
+    description: Searched user surname
+    type: string
+    required: true
+    example: Administracyjny

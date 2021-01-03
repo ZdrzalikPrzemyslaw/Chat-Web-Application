@@ -1,8 +1,0 @@
-type: oauth2
-flows:
-  implicit:
-    authorizationUrl: 'https://czatmat.azurewebsites.net/api/login'
-    scopes:
-      'user': Normal user
-      'superuser': Super user
-      'admin': Admin
