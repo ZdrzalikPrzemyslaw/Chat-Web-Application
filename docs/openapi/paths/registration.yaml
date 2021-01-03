@@ -27,7 +27,8 @@ post:
   description: Only logged user can edit user's information.
   operationId: editUser   
   security:
-    - token: []
+    - token: 
+      - user
   responses:
     '200':
       description: Success

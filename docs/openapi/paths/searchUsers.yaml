@@ -18,7 +18,8 @@ get:
       schema:
         type: string
   security:
-    - token: []
+    - token: 
+      - user
   responses:
     '200':
       description: Success
@@ -70,7 +71,8 @@ post:
   description: Search user by name or/and surname
   operationId: search 
   security:
-    - token: []
+    - token: 
+      - user
   responses:
     '200':
       description: Success

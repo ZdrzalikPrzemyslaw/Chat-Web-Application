@@ -5,7 +5,8 @@ put:
   description: Send message with the provided content
   operationId: sendMessage
   security:
-    - token: []
+    - token: 
+      - user
   parameters:
     - name: chatId
       in: path
@@ -40,8 +41,9 @@ get:
   summary: Get chat's message
   description: Get chat't message
   opearationId: getChatMessage
-  secutrity:
-    -token: []
+  security:
+    - token: 
+      - user
   parameters:
     - name: chatId
       in: path
@@ -98,7 +100,8 @@ post:
   description: Edit message with the provided content
   operationId: editChatMessage
   security:
-    - token: []
+    - token: 
+      - user
   parameters:
     - name: messageId
       in: path
