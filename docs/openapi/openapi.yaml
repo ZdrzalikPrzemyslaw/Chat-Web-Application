@@ -21,6 +21,8 @@ paths:
     $ref: paths/login.yaml
   /search:
     $ref: paths/searchUsers.yaml
+  /chat:
+    $ref: paths/chat.yaml
 components:
   securitySchemes:
     token:

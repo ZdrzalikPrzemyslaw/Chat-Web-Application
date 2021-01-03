@@ -1,0 +1,22 @@
+put:
+  tags:
+    - Chat
+  summary: Chat
+  description: 
+  operationId:    
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            message: User registered successfully!
+    '403':
+      description: User already exist or email is already in use!
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/User.yaml
+    description: Registration user object
+    required: true
