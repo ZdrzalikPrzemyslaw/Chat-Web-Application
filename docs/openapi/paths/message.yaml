@@ -1,0 +1,126 @@
+put:
+  tags:
+    - Message
+  summary: Send message
+  description: Send message with the provided content
+  operationId: sendMessage
+  security:
+    - token: []
+  parameters:
+    - name: chatId
+      in: path
+      description: Id of the chat for which our message is designed
+      required: true
+      schema:
+        type: int
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            message: Message successfully sent.
+    '404':
+      description: Chat with that id doesn't exist
+      content:
+        application/json:
+          example:
+            message: 'Error: Chat not found'
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Message.yaml
+    required: true
+
+get:
+  tags:
+    - Message
+  summary: Get chat's message
+  description: Get chat't message
+  opearationId: getChatMessage
+  secutrity:
+    -token: []
+  parameters:
+    - name: chatId
+      in: path
+      description: Id of the chat from which we get the message
+      required: true
+      schema:
+        type: int
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            messages: [
+                {
+                    text: Ja tez juz wychodze,
+                    createdAt: 2020-12-28T18:29:29.550+00:00,
+                    senderId: 3,
+                    base_key_id: -1,
+                    chatId: 2
+                },
+                {
+                    text: Tak mozemy juz isc,
+                    createdAt: 2020-12-28T18:25:27.550+00:00,
+                    senderId: 2,
+                    base_key_id: -1,
+                    chatId: 2
+                },
+                {
+                    text: Wychodzimy juz?,
+                    createdAt: 2020-12-28T18:24:27.550+00:00,
+                    senderId: 1,
+                    base_key_id: -1,
+                    chatId: 2
+                }
+            ]
+    '404':
+      description: Chat with that id doesn't exist
+      content:
+        application/json:
+          example:
+            message: 'Error: Chat not found'
+    '403':
+      description: User doesn't have access to this chat
+      content:
+        application/json:
+          example:
+            message: You don't have access to this chat.
+
+post:
+  tags:
+    - Message
+  summary: Edit message
+  description: Edit message with the provided content
+  operationId: editChatMessage
+  security:
+    - token: []
+  parameters:
+    - name: messageId
+      in: path
+      description: Id of the message to change
+      required: true
+      schema:
+        type: int
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            message: Message changed successfully.
+    '403':
+      description: User doesn't have access to this chat
+      content:
+        application/json:
+          example:
+            message: You don't have access to this message.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Message.yaml
+    required: true
