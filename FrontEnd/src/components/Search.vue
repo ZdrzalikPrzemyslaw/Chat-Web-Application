@@ -1,8 +1,8 @@
 <template>
   <div class="containter" id="main_container">
     <form>
-      <h1>CzatMat</h1>
       <div class="form-group">
+        <h1 class="md-4">CzatMat</h1>
         <!-- zrobiłam taki rozmiar jak ChatList.vue, bo nie wiedziałam jaki jest koncept -->
         <input
           type="text"
@@ -16,7 +16,7 @@
         <input
           type="button"
           v-on:click="returnData()"
-          class="btn  btn-sm btn-block"
+          class="btn  btn-sm btn-block sm-3"
           value="Search"
         />
       </div>
@@ -80,12 +80,13 @@ export default {
 
 h1 {
   color: black;
-  margin-left: 75px;
+  margin-left: 50px;
   font-weight: bold;
   font-family: "Kaushan Script";
-  font-size: 55px;
+  font-size: 45px;
+  display: block;
+  position: relative;
   margin-bottom: 40px;
-
 }
 
 #inputUser {
@@ -105,7 +106,6 @@ h1 {
   display: block;
   font-size: 1.0em;
   font-weight: bold;
-  padding: 0.5em 6em;
   position: relative;
   text-transform: uppercase;
   text-align: center;

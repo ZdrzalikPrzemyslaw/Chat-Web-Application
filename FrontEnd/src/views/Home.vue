@@ -1,15 +1,15 @@
 <template>
 <div class=".container-fluid">
   <div class="row">
-    <div class="col-2" id="firstColumn">
+    <div class="col-md-2" id="firstColumn">
       <Search @search-event="handleAppEvent"/>
       <ChatsList :chats='eventData'/>
     </div>
-    <div class="col-1"/>
-    <div class="col-6">
+    <div class="col-md-1"/>
+    <div class="col-md-6">
       <ConversationView/>
     </div>
-     <div class="col-2" id="lastColumn">
+     <div class="col-md-2" id="lastColumn">
       <Settings/>
     </div>
   </div>
@@ -57,7 +57,7 @@ export default {
 body {
   background: #00abb7;
 }
-.container *{
+.container-fluid *{
   width: 100%;
   table-layout: fixed;
 }
@@ -66,5 +66,6 @@ body {
 }
 #lastColumn {
   align-items: left;
+  margin: 10px;
 }
 </style>
