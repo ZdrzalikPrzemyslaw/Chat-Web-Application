@@ -26,6 +26,8 @@ paths:
     $ref: paths/chat.yaml
   /chat/message:
     $ref: paths/message.yaml
+  /chat/users:
+    $ref: paths/users.yaml
 components:
   securitySchemes:
     token:

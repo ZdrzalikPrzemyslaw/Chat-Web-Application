@@ -32,6 +32,7 @@ put:
         schema:
           $ref: ../components/schemas/Message.yaml
     required: true
+    description: Message text
 
 get:
   tags:
@@ -124,3 +125,4 @@ post:
         schema:
           $ref: ../components/schemas/Message.yaml
     required: true
+    description: New message text
