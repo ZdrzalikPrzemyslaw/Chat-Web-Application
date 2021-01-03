@@ -20,6 +20,7 @@ put:
           $ref: ../components/schemas/CreateChat.yaml
     description: Registration user object
     required: true
+
 get:
   tags:
     - Chat
@@ -68,3 +69,79 @@ get:
                 id: 1
               }
             ]
+
+delete:
+  tags:
+    - Chat
+  summary: Delete Chat
+  description: Delete chat with the specified id
+  operationId: deleteChat
+  security:
+    - token: []
+  parameters:
+    - name: chatId
+      in: path
+      description: Selected chat id
+      required: true
+      schema:
+        type: int
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            message: Chat successfully deleted.
+    '404':
+      description: Chat with that id doesn't exist
+      content:
+        application/json:
+          example:
+            message: 'Error: Chat not found'
+    '403':
+      description: User doesn't have access to this chat
+      content:
+        application/json:
+          example:
+            message: You don't have access to this chat.
+
+post:
+  tags:
+    - Chat
+  summary: Changes chat's name
+  description: Changes chat's name with specified value 
+  operationId: changeChatName
+  security:
+    - token: []
+  parameters:
+    - name: chatId
+      in: path
+      description: Selected chat id
+      required: true
+      schema:
+        type: int
+    - name: chatName
+      in: path
+      description: New chat name
+      required: true
+      schema:
+        type: String
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            message: Chat name changed successfully.
+    '404':
+      description: Chat with that id doesn't exist
+      content:
+        application/json:
+          example:
+            message: 'Error: Chat not found'
+    '403':
+      description: User doesn't have access to this chat
+      content:
+        application/json:
+          example:
+            message: You don't have access to this chat.
