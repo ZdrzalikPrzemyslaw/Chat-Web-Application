@@ -238,13 +238,13 @@ paths:
                         email: admin@admin.pl
                         username: admin
                       - name: Przemek
-                        surname: Zdrzalus
+                        surname: Zdrzalik
                         email: p@z.pl
-                        username: Przemus
+                        username: Przemek
                       - name: Julia
-                        surname: Szymania
+                        surname: Szymanska
                         email: J@S.pl
-                        username: Julcia
+                        username: Julia
                     chatName: testowy
                     lastMessageDate: 2020-12-29T18:27:27.550Z
                     id: 1

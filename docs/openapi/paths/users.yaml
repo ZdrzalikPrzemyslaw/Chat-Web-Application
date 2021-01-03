@@ -5,7 +5,8 @@ post:
   description: Add user to existing chat
   operationId: addUsersToExistingChat 
   security:
-    - token: []
+    - token: 
+      - user
   parameters:
     - name: chatId
       in: path
@@ -40,7 +41,8 @@ delete:
   description: Delete user from existing chat
   operationId: deleteUsersFromExistingChat 
   security:
-    - token: []
+    - token: 
+      - user
   parameters:
     - name: chatId
       in: path

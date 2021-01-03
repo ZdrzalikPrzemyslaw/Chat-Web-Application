@@ -5,7 +5,8 @@ put:
   description: Create chat with the selected users and name
   operationId: createChat
   security:
-    - token: []
+    - token: 
+      - super_user
   responses:
     '200':
       description: Success
@@ -27,8 +28,9 @@ get:
   summary: Find Chat
   description: Find Chat with given name
   opearationId: findChat
-  secutrity:
-    -token: []
+  security:
+    - token: 
+      - user
   parameters:
     - name: chatName
       in: path
@@ -53,15 +55,15 @@ get:
                   },
                   {
                     name: Przemek,
-                    surname: Zdrzalus,
+                    surname: Zdrzalik,
                     email: p@z.pl,
-                    username: Przemus
+                    username: Przemek
                   },
                   {
                     name: Julia,
-                    surname: Szymania,
+                    surname: Szymanska,
                     email: J@S.pl,
-                    username: Julcia
+                    username: Julia
                   }
                 ],
                 chatName: testowy,
@@ -77,7 +79,8 @@ delete:
   description: Delete chat with the specified id
   operationId: deleteChat
   security:
-    - token: []
+    - token: 
+      - user
   parameters:
     - name: chatId
       in: path
@@ -112,7 +115,8 @@ post:
   description: Changes chat's name with specified value 
   operationId: changeChatName
   security:
-    - token: []
+    - token: 
+      - user
   parameters:
     - name: chatId
       in: path

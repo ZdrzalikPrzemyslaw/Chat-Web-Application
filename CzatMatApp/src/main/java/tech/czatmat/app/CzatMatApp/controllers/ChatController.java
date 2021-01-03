@@ -208,6 +208,7 @@ public class ChatController {
         if (!chatsRepository.existsChatById(chatId)) {
             return ResponseEntity.status(404).body("Error: Chat not found");
         }
+        // TODO: 03.01.2021 Sprawdzać czy osoba zapraszająca do czatu jest w nim.
 
         for (var i : chatUsersRequest.getUsers()) {
             User user = userRepository.getUsersByUsername(i.getUsername())
@@ -230,13 +231,13 @@ public class ChatController {
             return ResponseEntity.status(404).body("Error: Chat not found");
         }
 
+        // TODO: 03.01.2021 Sprawdzać czy osoba usuwająca z czatu jest w nim.
+
         for (var i : chatUsersRequest.getUsers()) {
             User user = userRepository.getUsersByUsername(i.getUsername())
                     .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
             if (chatUsersRepository.existsByUserIdAndChatId(user.getID(), chatId)) {
-                System.out.println(chatId);
-                System.out.println(user.getID());
                 chatUsersRepository.deleteByChatIdAndUserId(chatId, user.getID());
             }
         }
