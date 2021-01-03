@@ -1,0 +1,27 @@
+put:
+  tags:
+    - Registration
+  summary: Register new user
+  description: Register user.
+  operationId: registration    
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            message: User registered successfully!
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/User.yaml
+    description: Registration user object
+    required: true
+  x-codeSamples:
+    - lang: "C#"
+      source:
+        $ref: "../code_samples/csharp/echo/post.cs"
+    - lang: PHP
+      source:
+        $ref: ../code_samples/PHP/echo/post.php

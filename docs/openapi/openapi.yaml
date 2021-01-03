@@ -1,0 +1,40 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: https://czatmat.azurewebsites.net/api
+  description: >
+
+    This is ChatMat API documentation.
+  
+tags:
+  - name: Registration
+    description: Example registration operation.
+  - name: User
+    description: Operations about user
+servers:
+  - url: "https://czatmat.azurewebsites.net/api/registration"
+  - url: "https://example.com/api/v1"
+paths:
+  /registration:
+     $ref: paths/registration.yaml
+  "/users/{username}":
+    $ref: "paths/users@{username}.yaml"
+  /echo:
+    $ref: paths/echo.yaml
+components:
+  securitySchemes:
+    main_auth:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: "http://example.com/api/oauth/dialog"
+          scopes:
+            "read:users": read users info
+            "write:users": modify or remove users
+    api_key:
+      type: apiKey
+      in: header
+      name: api_key
+    basic_auth:
+      type: http
+      scheme: basic

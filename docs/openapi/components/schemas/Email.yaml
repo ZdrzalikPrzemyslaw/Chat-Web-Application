@@ -1,0 +1,5 @@
+description: User email address
+type: string
+format: test
+maxLength: 100
+example: john.smith@example.com
