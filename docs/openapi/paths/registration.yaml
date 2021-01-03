@@ -11,6 +11,8 @@ put:
         application/json:
           example:
             message: User registered successfully!
+    '403':
+      description: User already exist or email is already in use!
   requestBody:
     content:
       application/json:
@@ -18,10 +20,31 @@ put:
           $ref: ../components/schemas/User.yaml
     description: Registration user object
     required: true
-  x-codeSamples:
-    - lang: "C#"
-      source:
-        $ref: "../code_samples/csharp/echo/post.cs"
-    - lang: PHP
-      source:
-        $ref: ../code_samples/PHP/echo/post.php
+post:
+  tags:
+    - Registration
+  summary: Edit existing user
+  description: Only logged user can edit user's information.
+  operationId: editUser   
+  security:
+    - token: []
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            message: User edited successfully!
+    '404':
+      description: User doesn't exist.
+      content:
+        application/json:
+          example:
+            message: User not found.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/EditUser.yaml
+    description: Edited user data
+    required: true
