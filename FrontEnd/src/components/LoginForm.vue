@@ -104,9 +104,12 @@ h2 {
   border-radius: 10px;
   font-size: 15px;
   font-weight: bold;
+  border: 1px solid gray;
+  background: gray;
 }
 
 #buttons > #loginBtn {
   background: #00abb7;
+  border: 1px solid #00abb7;
 }
 </style>

@@ -35,6 +35,7 @@
 
       <div class="container text-center" id="buttons">
         <button class="btn btn-primary" type="submit">Register</button>
+        <button class="btn btn-secondary" v-on:click="this.$router.push('/login')" id="back_button">Back To Login</button>
       </div>
     </Form>
   </div>
@@ -132,6 +133,12 @@ h2 {
   font-size: 15px;
   font-weight: bold;
   background: #00abb7;
+  border: 1px solid #00abb7;
+}
+#buttons > #back_button {
+  border: 1px solid gray;
+  border-radius: 10px;
+  background: gray;
 }
 
 </style>
