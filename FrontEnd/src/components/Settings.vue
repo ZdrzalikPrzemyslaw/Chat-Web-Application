@@ -1,6 +1,9 @@
 <template>
 		<div id="mainContainer" class="container-fluid">
-			<div id="settingsIcon" class="d-flex justify-content-right">
+      <div id="logout_button" class="d-flex">
+        <button class="logout_btn btn-sm text-right" v-on:click="logout">Logout</button>
+      </div>
+      <div id="settingsIcon" class="d-flex">
 				<button v-on:click="showMenu('.menu')" class="settings_btn btn">
 					<i style="color: white;" class="fas fa-user-cog"></i>
 				</button>
@@ -90,10 +93,14 @@
 						</form>
 					</div>
 				</div>
+
 			</div>
 </template>
 
 <script>
+import store from "@/store";
+import router from "@/router";
+
 export default {
   name: 'HelloWorld',
   data() {
@@ -111,9 +118,19 @@ export default {
       },
       confirmChange: function() {
 
-      }
+      },
+    logout: function () { // wylogowywanie usera za pomoca store
+      store.dispatch('auth/logout');
+      router.push('/login');
+    }
   }
 }
+/*
+div {
+  display: flex;
+  justify-content: space-between;
+}
+ */
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -128,6 +145,10 @@ export default {
    margin: 0;
    border: 4px solid #fff;
    border-radius: 10px;
+ }
+
+div > .container-fluid {
+  display: flex;
 }
 
 .menu {
@@ -137,6 +158,7 @@ export default {
 	width: 420px;
 	padding: 10px;
     z-index: 1000;
+  margin-top: 70px;
 }
 
 .name-block, .login-block, .email-block {
@@ -174,6 +196,19 @@ export default {
   height: 35px;
   top: 10px;
   margin-top: -23px;
+}
+
+.logout_btn {
+  padding: 0.5em 2.5em;
+  background: none;
+  border: 4px solid #fff;
+  border-radius: 10px;
+  color: #fff;
+  font-size: 1.0em;
+  font-weight: bold;
+  position: relative;
+  text-transform: uppercase;
+  margin: 0 20px 0 80px;
 }
 
 

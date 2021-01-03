@@ -20,11 +20,6 @@
       </div>
     </div>
 
-<!--    dodany button do wylogowywania w wersji roboczej, żeby tylko sprawdzic czy dziala-->
-    <div id="logout_button">
-      <button class="btn btn-secondary" v-on:click="logout">Logout</button>
-    </div>
-
     <!-- <div v-for="message in messages" v-bind:key="message">
       <div v-if="message[2] == 0" class="container">
         <p>{{ message[0] }}</p>
@@ -40,8 +35,7 @@
 
 <script>
 import axios from "axios";
-import store from '../store/index';
-import router from "@/router"; // odkomentowac do wyswietlenia tokenu
+
 export default {
   name: "ConversationView",
   data() {
@@ -69,10 +63,6 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
-    },
-    logout: function () { // wylogowywanie usera za pomoca store
-      store.dispatch('auth/logout');
-      router.push('/login');
     }
   },
 };
@@ -124,25 +114,6 @@ export default {
   font-weight: bold;
   padding: 5px 0;
   font-size: 20px;
-}
-
-#logout_button {
-  margin: 10px 3px 3px;
-}
-
-.btn {
-  margin-left: 3px;
-  background: #00abb7;
-  border: 4px solid #fff;
-  border-radius: 10px;
-  color: #fff;
-  display: block;
-  font-size: 1.0em;
-  font-weight: bold;
-  padding: 0.5em 6em;
-  position: relative;
-  text-transform: uppercase;
-  text-align: center;
 }
 
 </style>
