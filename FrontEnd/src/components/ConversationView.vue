@@ -53,24 +53,25 @@ export default {
     this.getPrzyklad();
   },
   methods: {
+
+    // TODO: Na potrzeby przykładu (zajęc) pobieramy wiadomosci z czatu nr 1
     getPrzyklad: function() {
       let self = this;
       const params = new URLSearchParams({
         chatId: 1,
       }).toString();
 
-      const config = {
-        headers: {
-          Authorization: authHeader(),
-        },
-      };
 
-      console.log(config);
+      console.log(authHeader());
 
       axios
         .get(
-          process.env.VUE_APP_BACKEND_URL + "/chat/message" + "?" + params,
-          { config }
+          process.env.VUE_APP_BACKEND_URL + "/chat/message" + "?" + params, 
+          {
+            headers: 
+              authHeader()
+            
+          }
         )
         .then(function(response) {
           console.log(response.data);
