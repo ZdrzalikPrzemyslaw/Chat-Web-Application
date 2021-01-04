@@ -32,7 +32,7 @@ import _ from "lodash";
 export default {
   name: "ConversationView",
   props: {
-    chatId: number
+    chatId: Number,
   },
   data() {
     return {
@@ -41,21 +41,28 @@ export default {
   },
 
   created() {
-    this.getPrzyklad();
+    this.getChatMessages();
   },
+
+  watch: {
+    chatId: function () {
+      this.getChatMessages();
+    },
+  },
+
   methods: {
     sortArrays(arrays) {
       return _.orderBy(arrays, "createdAt", "asc");
     },
 
-    // TODO: Na potrzeby przykładu (zajęc) pobieramy wiadomosci z czatu nr 1
-    getPrzyklad: function () {
+    getChatMessages() {
       let self = this;
-      const params = new URLSearchParams({
-        chatId: 1,
-      }).toString();
 
-      console.log(authHeader());
+      console.log(self.chatId);
+
+      const params = new URLSearchParams({
+        chatId: self.chatId,
+      }).toString();
 
       axios
         .get(process.env.VUE_APP_BACKEND_URL + "/chat/message" + "?" + params, {

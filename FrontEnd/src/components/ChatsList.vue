@@ -5,7 +5,7 @@
       v-for="chat in this.chats"
       v-bind:key="chat"
       id="OneChat"
-      @click="this.onClickChat(chat.chatId)"
+      @click="this.onClickChat(chat.id)"
     >
       <div class="row" id="UserName">
         {{ chat.chatName }}
@@ -28,14 +28,14 @@ export default {
   },
   methods: {
     onClickChat: function (chatId) {
-      self.$emit("search-event", chatId);
-      console.log("event emitted chat id to display");
+      this.$emit("search-event", chatId);
+      console.log("event emitted chat id to display", chatId);
     },
   },
-  created: function () {
-    self.$emit("search-event", this.chats[0].chatId);
-    console.log("event emitted chat id to display");
-  },
+  // created: function () {
+  //   self.$emit("search-event", this.chats[0].chatId);
+  //   console.log("event emitted chat id to display");
+  // },
 };
 </script>
 
