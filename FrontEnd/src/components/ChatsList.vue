@@ -2,10 +2,10 @@
   <div class=".container" id="main_container">
     <div class="col sm-3" v-for="chat in this.chats" v-bind:key="chat" id="OneChat" @click="this.onClickChat">
       <div class="row" id="UserName">
-        {{ chat.user }}
+        {{ chat.chatName }}
       </div>
       <div class="row" id="LastMessage">
-        {{ chat.message }}
+        {{ chat.lastMessageDate }}
       </div>
     </div>
   </div>

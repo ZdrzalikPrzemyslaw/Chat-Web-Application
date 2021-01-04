@@ -25,18 +25,14 @@
 
 <script>
 import _ from "underscore"; // używam underscora do przeszukiwania listy
+import authHeader from "../services/auth-header";
+import axios from "axios";
 
 export default {
   name: "Search",
   data() {
     return {
-      chats: [
-        { user: "Julia Szymanska", message: "Dobranoc" },
-        { user: "Martyna Piasecka", message: "Do zobaczenia" },
-        { user: "Przemyslaw Zdrzalik", message: "Zrobimy to jutro!" },
-        { user: "Hubert Gawłowski", message: "Kiedy wychodzimy?" },
-        { user: "Kamil Kiszko-Zgierski", message: "Ok" },
-      ],
+      chats: [],
       searchText: "",
       dataToReturn: [],
     };
@@ -70,10 +66,22 @@ export default {
   },
   // w created jest emitowanie calej listy, zeby na starcie sie ona pokazywala
   created: function () {
-    this.dataToReturn = this.chats;
+    let self = this;
 
-    this.$emit("search-event", this.dataToReturn);
-    console.log("event with all emitted");
+    axios
+      .get(process.env.VUE_APP_BACKEND_URL + "/chat", {
+        headers: authHeader(),
+      })
+      .then(function (response) {
+        self.chats = response.data.chatsList;
+        self.dataToReturn = self.chats;
+
+        self.$emit("search-event", self.dataToReturn);
+        console.log("event with all emitted");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   },
 };
 </script>
