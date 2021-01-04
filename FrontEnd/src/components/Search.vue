@@ -42,7 +42,7 @@ export default {
   },
 
   methods: {
-    search: function () {
+    search: function() {
       this.dataToReturn = [];
 
       // wyszukiwanie po użytkowniku
@@ -53,11 +53,13 @@ export default {
       });
 
       // ponizszy warunek, zeby mozna bylo zobaczyc wszystkie konwersacje, gdy nic nie jest wpisane
-      if (this.chats.user == "") this.dataToReturn = this.chats;
+      if (this.chats.user == "") {
+        this.dataToReturn = this.chats;
+      }
 
       console.log("this.dataToReturn", this.dataToReturn);
     },
-    returnData: function () {
+    returnData: function() {
       this.search();
       this.$emit("search-event", this.dataToReturn);
 
@@ -65,7 +67,7 @@ export default {
     },
   },
   // w created jest emitowanie calej listy, zeby na starcie sie ona pokazywala
-  created: function () {
+  created: function() {
     this.dataToReturn = [];
     this.dataToReturn = this.chats;
 
@@ -94,7 +96,6 @@ h1 {
   margin-top: 30px;
   border: 2px solid #fff;
   border-radius: 10px;
-
 }
 
 .btn {
@@ -104,7 +105,7 @@ h1 {
   border-radius: 10px;
   color: #fff;
   display: block;
-  font-size: 1.0em;
+  font-size: 1em;
   font-weight: bold;
   position: relative;
   text-transform: uppercase;
@@ -112,8 +113,7 @@ h1 {
 }
 
 .btn:hover {
-   color: black;
-   border: 4px solid black;
- }
-
+  color: black;
+  border: 4px solid black;
+}
 </style>

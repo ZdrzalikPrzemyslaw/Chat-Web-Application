@@ -4,7 +4,7 @@
       <div class="col">
         <img src="../assets/profile_pic.jpg" id="image" />
         <p id="user_name">Julia</p>
-<!--        <p id="token">{{ currentUser.accessToken}}</p> odkomentowac do wyswietlenia tokenu -->
+        <!--        <p id="token">{{ currentUser.accessToken}}</p> odkomentowac do wyswietlenia tokenu -->
       </div>
     </div>
 
@@ -35,6 +35,7 @@
 
 <script>
 import axios from "axios";
+import authHeader from "../services/auth-header";
 
 export default {
   name: "ConversationView",
@@ -52,18 +53,33 @@ export default {
     this.getPrzyklad();
   },
   methods: {
-    getPrzyklad: function () {
+    getPrzyklad: function() {
       let self = this;
+      const params = new URLSearchParams({
+        chatId: 1,
+      }).toString();
+
+      const config = {
+        headers: {
+          Authorization: authHeader(),
+        },
+      };
+
+      console.log(config);
+
       axios
-        .get(process.env.VUE_APP_BACKEND_URL + "/przyklad")
-        .then(function (response) {
+        .get(
+          process.env.VUE_APP_BACKEND_URL + "/chat/message" + "?" + params,
+          { config }
+        )
+        .then(function(response) {
           console.log(response.data);
           self.messages = response.data;
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.log(error);
         });
-    }
+    },
   },
 };
 </script>
@@ -115,5 +131,4 @@ export default {
   padding: 5px 0;
   font-size: 20px;
 }
-
 </style>
