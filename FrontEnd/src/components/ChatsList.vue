@@ -2,7 +2,7 @@
   <div class=".container" id="main_container">
     <div
       class="col sm-3"
-      v-for="chat in this.chats"
+      v-for="chat in sortArrays(this.chats)"
       v-bind:key="chat"
       id="OneChat"
       @click="this.onClickChat(chat.id)"
@@ -11,13 +11,15 @@
         {{ chat.chatName }}
       </div>
       <div class="row" id="LastMessage">
-        {{ chat.lastMessageDate }}
+        {{ getDateForChat(chat.lastMessageDate) }}
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import _ from "lodash";
+
 export default {
   name: "ChatsList",
   props: {
@@ -27,15 +29,41 @@ export default {
     return {};
   },
   methods: {
+    sortArrays(arrays) {
+      return _.orderBy(arrays, "lastMessageDate", "desc");
+    },
     onClickChat: function (chatId) {
       this.$emit("search-event", chatId);
       console.log("event emitted chat id to display", chatId);
     },
+    addZero: function (i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    },
+    getLastMessageTime(chat) {
+      let h = this.addZero(chat.getHours());
+      let m = this.addZero(chat.getMinutes());
+      let time = h + ":" + m;
+      return time;
+    },
+    getLastMessageDate(chat) {
+      let d = this.addZero(chat.getDay());
+      let m = this.addZero(chat.getMonth());
+      let y = this.addZero(chat.getYear()) + 1900;
+      let date = d + "-" + m + "-" + y;
+      return date;
+    },
+    getDateForChat(chat) {
+      if (
+        this.getLastMessageDate(chat) === this.getLastMessageDate(new Date())
+      ) {
+        return this.getLastMessageTime(chat);
+      }
+      return this.getLastMessageDate(chat);
+    },
   },
-  // created: function () {
-  //   self.$emit("search-event", this.chats[0].chatId);
-  //   console.log("event emitted chat id to display");
-  // },
 };
 </script>
 

@@ -43,6 +43,7 @@ export default {
     handleChatListAppEvent: function (data) {
       this.eventChatList = data;
       console.log("event chat list received");
+      this.eventChatId = this.eventChatList[0].id;
     },
     handleChatIdAppEvent: function (data) {
       this.eventChatId = data;
