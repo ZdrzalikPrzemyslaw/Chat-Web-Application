@@ -1,6 +1,6 @@
 <template>
   <div class=".container" id="main_container">
-    <div class="col sm-3" v-for="chat in this.chats" v-bind:key="chat" id="OneChat" @click="this.onClickChat">
+    <div class="col sm-3" v-for="chat in this.chats" v-bind:key="chat" id="OneChat" @click="this.onClickChat(chat.chatId)">
       <div class="row" id="UserName">
         {{ chat.chatName }}
       </div>
@@ -22,8 +22,9 @@ export default {
     }
   },
   methods: {
-    onClickChat: function () {
-    //    Tutaj trzeba będzie zrobić metodę onClick
+    onClickChat: function (chatId) {
+        self.$emit("search-event", chatId);
+        console.log("event emitted chat id to display");
     }
   }
 }

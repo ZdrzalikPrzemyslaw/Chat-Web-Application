@@ -2,12 +2,12 @@
 <div class=".container-fluid">
   <div class="row">
     <div class="col-md-2" id="firstColumn">
-      <Search @search-event="handleAppEvent"/>
-      <ChatsList :chats='eventData'/>
+      <Search @search-event="handleChatListAppEvent"/>
+      <ChatsList :chats='eventData' @search-event="handleChatIdAppEvent"/>
     </div>
     <div class="col-md-1"/>
     <div class="col-md-6">
-      <ConversationView/>
+      <ConversationView :messages='eventChatId'/>
     </div>
      <div class="col-md-2" id="lastColumn">
       <Settings/>
@@ -32,13 +32,18 @@ export default {
   },
   data() {
     return {
-      eventData: Array
+      eventChatList: Array,
+      eventChatId: number
     }
   },
   methods: {
-    handleAppEvent: function (data) {
-      this.eventData = data;
-      console.log('event received');    //color: #2c3e50;font-family: Arial ;
+    handleChatListAppEvent: function (data) {
+      this.eventChatList = data;
+      console.log('event chat list received');
+    }, 
+     handleChatIdAppEvent: function (data) {
+      this.eventChatId = data;
+      console.log('event chat id received');
     }
   }
 }

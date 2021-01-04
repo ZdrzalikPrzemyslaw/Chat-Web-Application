@@ -4,7 +4,6 @@
       <div class="col">
         <img src="../assets/profile_pic.jpg" id="image" />
         <p id="user_name">Julia</p>
-        <!--        <p id="token">{{ currentUser.accessToken}}</p> odkomentowac do wyswietlenia tokenu -->
       </div>
     </div>
 
@@ -32,16 +31,15 @@ import _ from "lodash";
 
 export default {
   name: "ConversationView",
+  props: {
+    chatId: number
+  },
   data() {
     return {
       messages: [],
     };
   },
-  // computed: {   // odkomentowac te 5 linijek do wyswietlenia tokenu
-  //   currentUser() {
-  //     return store.state.auth.user;
-  //   }
-  // },
+
   created() {
     this.getPrzyklad();
   },
