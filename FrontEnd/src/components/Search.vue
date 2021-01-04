@@ -76,6 +76,13 @@ export default {
         self.chats = response.data.chatsList;
         self.dataToReturn = self.chats;
 
+        // for (var i = 0; i < self.chats.length; i++) {
+        //   let data = self.chats[i].createdAt
+        //   let string1 = data.substr(0, 10);
+        //   let string2 = data.substr(12, 8);
+        //   self.chats[i].createdAt = string1.concat(" ", string2);
+        // }
+
         self.$emit("search-event", self.dataToReturn);
         console.log("event with all emitted");
       })
