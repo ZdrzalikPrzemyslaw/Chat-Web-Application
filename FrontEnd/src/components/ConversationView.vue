@@ -22,6 +22,20 @@
         </p>
       </div>
     </div>
+
+    <form class="row" id="inputWithButton">
+      <div class="col-md-10" id="textarea">
+        <textarea
+          class="form-control"
+          placeholder="Type your message..."
+          rows="3"
+          v-model="this.inputTextMessage"
+        ></textarea>
+      </div>
+      <div class="col-md-2" id="sendButton">
+        <button type="submit" class="btn btn-primary" v-on:click="sendMessage()">Send</button>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -39,6 +53,7 @@ export default {
   data() {
     return {
       messages: [],
+      inputTextMessage: "",
     };
   },
 
@@ -107,6 +122,29 @@ export default {
           console.log(error);
         });
     },
+
+    sendMessage() {
+      let self = this;
+      const params = new URLSearchParams({
+        chatId: self.chatId,
+      }).toString();
+
+      axios
+        .put(
+          process.env.VUE_APP_BACKEND_URL + "/chat/message" + "?" + params,
+          { text: self.inputTextMessage },
+          {
+            headers: authHeader(),
+          }
+        )
+        .then(function (response) {
+          console.log(response.data);
+          self.getChatMessages();
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
@@ -117,7 +155,7 @@ export default {
   background-color: #f1f1f1;
   border-radius: 20px;
   padding: 15px;
-  margin: 5px 0;
+  margin: 5px 0px;
 }
 
 .darker {
@@ -128,7 +166,6 @@ export default {
 .container img {
   float: left;
   max-width: 50px;
-  /* width: 100%; */
   margin-right: 20px;
   border-radius: 50%;
 }
@@ -144,5 +181,10 @@ export default {
   font-weight: bold;
   padding: 5px 0;
   font-size: 20px;
+}
+
+#inputWithButton {
+  margin-top: 15px;
+  padding: 5px;
 }
 </style>
