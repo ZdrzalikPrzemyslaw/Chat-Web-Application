@@ -9,26 +9,18 @@
     </div>
 
     <div v-for="(message, index, key) in sortArrays(messages)" :key="key">
-      <div v-if="message.senderId === 1" class="container">
-        <p>{{ message.text }}</p>
-        <p>{{ message.createdAt }}</p>
+      <div v-if="message.senderId === 1" class="container" id="ourMessage">
+        <p class="d-flex flex-row-reverse">{{ message.text }}</p>
+        <p class="d-flex flex-row-reverse" id="createAt">
+          {{ message.createdAt }}
+        </p>
       </div>
-      <div v-else class="container darker">
-        <p>{{ message.senderId }}</p>
-        <p>{{ message.text }}</p>
-        <p>{{ message.createdAt }}</p>
+      <div v-else class="container darker" id="theirMessage">
+        <p class="d-flex flex-row">{{ message.senderId }}</p>
+        <p class="d-flex flex-row">{{ message.text }}</p>
+        <p class="d-flex flex-row" id="createAt">{{ message.createdAt }}</p>
       </div>
     </div>
-    <!-- <div v-for="message in messages" v-bind:key="message">
-      <div v-if="message[2] == 0" class="container">
-        <p>{{ message[0] }}</p>
-        <span class="time-left">{{ message[1] }}</span>
-      </div>
-      <div v-else class="container darker">
-        <p>{{ message[0] }}</p>
-        <span class="time-right">{{ message[1] }}</span>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -74,7 +66,6 @@ export default {
         .then(function (response) {
           console.log(response.data);
           self.messages = response.data.messages;
-          // self.messages.reverse();
         })
         .catch(function (error) {
           console.log(error);
@@ -98,12 +89,6 @@ export default {
   background-color: #ddd;
 }
 
-/* .container::after {
-  content: "";
-  clear: both;
-  display: table;
-} */
-
 .container img {
   float: left;
   max-width: 50px;
@@ -112,17 +97,10 @@ export default {
   border-radius: 50%;
 }
 
-/* .time-right {
-  float: right;
-  color: #aaa;
-  font-size: 15px;
-} */
-
-/* .time-left {
-  float: left;
-  color: #aaa;
-  font-size: 15px;
-} */
+#createAt {
+  color: rgb(143, 141, 141);
+  font-size: 12px;
+}
 
 #user_name {
   text-align: left;
