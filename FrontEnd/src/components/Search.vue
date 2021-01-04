@@ -49,9 +49,9 @@ export default {
       }
 
       // wyszukiwanie po użytkowniku
-      _.each(this.chats, (user) => {
-        if (user.user.includes(this.searchText)) {
-          this.dataToReturn.push(user);
+      _.each(this.chats, (chat) => {
+        if (chat.chatName.includes(this.searchText)) {
+          this.dataToReturn.push(chat);
         }
       });
 
