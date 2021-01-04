@@ -11,6 +11,7 @@
       <div class="col-md-1" />
       <div class="col-md-6">
         <ConversationView :chatId="eventChatId" />
+        <SendMessage :chatId="eventChatId" />
       </div>
       <div class="col-md-2" id="lastColumn">
         <Settings />
@@ -24,6 +25,7 @@ import ChatsList from "../components/ChatsList";
 import ConversationView from "../components/ConversationView";
 import Settings from "../components/Settings";
 import Search from "../components/Search";
+import SendMessage from "../components/SendMessage";
 
 export default {
   name: "Home",
@@ -32,6 +34,7 @@ export default {
     Settings,
     ChatsList,
     ConversationView,
+    SendMessage,
   },
   data() {
     return {
