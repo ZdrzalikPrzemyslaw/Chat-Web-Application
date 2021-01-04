@@ -9,17 +9,16 @@
     </div>
 
     <div v-for="(message, index, key) in messages" :key="key">
-      <div v-if="message.userName === 'Julia'" class="container">
-        <p>{{ message.message }}</p>
-        <p>{{ message.date }}</p>
+      <div v-if="message.senderId === 1" class="container">
+        <p>{{ message.text }}</p>
+        <p>{{ message.createdAt }}</p>
       </div>
       <div v-else class="container darker">
-        <p>{{ message.userName }}</p>
-        <p>{{ message.message }}</p>
-        <p>{{ message.date }}</p>
+        <p>{{ message.senderId }}</p>
+        <p>{{ message.text }}</p>
+        <p>{{ message.createdAt }}</p>
       </div>
     </div>
-
     <!-- <div v-for="message in messages" v-bind:key="message">
       <div v-if="message[2] == 0" class="container">
         <p>{{ message[0] }}</p>
@@ -32,6 +31,7 @@
     </div> -->
   </div>
 </template>
+
 
 <script>
 import axios from "axios";
@@ -53,7 +53,7 @@ export default {
     this.getPrzyklad();
   },
   methods: {
-
+// TODO: zrobić sortowanie wiadomosci po dacie
     // TODO: Na potrzeby przykładu (zajęc) pobieramy wiadomosci z czatu nr 1
     getPrzyklad: function() {
       let self = this;
@@ -70,12 +70,12 @@ export default {
           {
             headers: 
               authHeader()
-            
           }
         )
         .then(function(response) {
           console.log(response.data);
-          self.messages = response.data;
+          self.messages = response.data.messages;
+          self.messages.reverse();
         })
         .catch(function(error) {
           console.log(error);
