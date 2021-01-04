@@ -8,7 +8,7 @@
       </div>
     </div>
 
-    <div v-for="(message, index, key) in messages" :key="key">
+    <div v-for="(message, index, key) in sortArrays(messages)" :key="key">
       <div v-if="message.senderId === 1" class="container">
         <p>{{ message.text }}</p>
         <p>{{ message.createdAt }}</p>
@@ -36,6 +36,7 @@
 <script>
 import axios from "axios";
 import authHeader from "../services/auth-header";
+import _ from "lodash";
 
 export default {
   name: "ConversationView",
@@ -53,31 +54,29 @@ export default {
     this.getPrzyklad();
   },
   methods: {
-// TODO: zrobić sortowanie wiadomosci po dacie
+    sortArrays(arrays) {
+      return _.orderBy(arrays, "createdAt", "asc");
+    },
+
     // TODO: Na potrzeby przykładu (zajęc) pobieramy wiadomosci z czatu nr 1
-    getPrzyklad: function() {
+    getPrzyklad: function () {
       let self = this;
       const params = new URLSearchParams({
         chatId: 1,
       }).toString();
 
-
       console.log(authHeader());
 
       axios
-        .get(
-          process.env.VUE_APP_BACKEND_URL + "/chat/message" + "?" + params, 
-          {
-            headers: 
-              authHeader()
-          }
-        )
-        .then(function(response) {
+        .get(process.env.VUE_APP_BACKEND_URL + "/chat/message" + "?" + params, {
+          headers: authHeader(),
+        })
+        .then(function (response) {
           console.log(response.data);
           self.messages = response.data.messages;
-          self.messages.reverse();
+          // self.messages.reverse();
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
