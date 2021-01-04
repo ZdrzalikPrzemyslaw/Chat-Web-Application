@@ -77,12 +77,7 @@ export default {
         self.dataToReturn = self.chats;
 
         for (var i = 0; i < self.chats.length; i++) {
-          // var date = new Date(self.chats[i].lastMessageDate)
           self.chats[i].lastMessageDate = new Date(self.chats[i].lastMessageDate)
-          // let data = self.chats[i].lastMessageDate
-          // let string1 = data.substr(0, 10);
-          // let string2 = data.substr(12, 8);
-          // self.chats[i].lastMessageDate = string1.concat(" ", string2);
         }
 
         self.$emit("search-event", self.dataToReturn);

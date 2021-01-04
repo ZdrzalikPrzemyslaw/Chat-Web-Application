@@ -11,13 +11,15 @@
       <div v-if="message.senderId === 1" class="container" id="ourMessage">
         <p class="d-flex flex-row-reverse">{{ message.text }}</p>
         <p class="d-flex flex-row-reverse" id="createAt">
-          {{ message.createdAt }}
+          {{ getDateForMessage(message.createdAt) }}
         </p>
       </div>
       <div v-else class="container darker" id="theirMessage">
         <p class="d-flex flex-row">{{ message.senderId }}</p>
         <p class="d-flex flex-row">{{ message.text }}</p>
-        <p class="d-flex flex-row" id="createAt">{{ message.createdAt }}</p>
+        <p class="d-flex flex-row" id="createAt">
+          {{ getDateForMessage(message.createdAt) }}
+        </p>
       </div>
     </div>
   </div>
@@ -54,6 +56,32 @@ export default {
     sortArrays(arrays) {
       return _.orderBy(arrays, "createdAt", "asc");
     },
+    addZero: function (i) {
+      if (i < 10) {
+        i = "0" + i;
+      }
+      return i;
+    },
+
+    getMessageTime(message) {
+      let h = this.addZero(message.getHours());
+      let m = this.addZero(message.getMinutes());
+      let time = h + ":" + m;
+      return time;
+    },
+    getMessageDate(message) {
+      let d = this.addZero(message.getDay());
+      let m = this.addZero(message.getMonth());
+      let y = this.addZero(message.getYear()) + 1900;
+      let date = d + "-" + m + "-" + y + " " + this.getMessageTime(message);
+      return date;
+    },
+    getDateForMessage(message) {
+      if (this.getMessageDate(message) === this.getMessageDate(new Date())) {
+        return this.getMessageTime(message);
+      }
+      return this.getMessageDate(message);
+    },
 
     getChatMessages() {
       let self = this;
@@ -71,6 +99,9 @@ export default {
         .then(function (response) {
           console.log(response.data);
           self.messages = response.data.messages;
+          for (var i = 0; i < self.messages.length; i++) {
+            self.messages[i].createdAt = new Date(self.messages[i].createdAt);
+          }
         })
         .catch(function (error) {
           console.log(error);
