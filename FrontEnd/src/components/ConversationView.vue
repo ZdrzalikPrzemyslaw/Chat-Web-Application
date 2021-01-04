@@ -4,6 +4,14 @@
       <div class="col">
         <img src="../assets/profile_pic.jpg" id="image" />
         <p id="user_name">Julia</p>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          id="deleteButton"
+          v-on:click="deleteChat()"
+        >
+          Delete
+        </button>
       </div>
     </div>
 
@@ -107,6 +115,24 @@ export default {
           console.log(error);
         });
     },
+
+    deleteChat() {
+      let self = this;
+      const params = new URLSearchParams({
+        chatId: self.chatId,
+      }).toString();
+
+      axios
+        .delete(process.env.VUE_APP_BACKEND_URL + "/chat" + "?" + params, {
+          headers: authHeader(),
+        })
+        .then(function (response) {
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
@@ -130,6 +156,12 @@ export default {
   max-width: 50px;
   margin-right: 20px;
   border-radius: 50%;
+}
+
+#deleteButton {
+  float: right;
+  max-width: 100px;
+  margin-left: 25px;
 }
 
 #createAt {

@@ -35,7 +35,14 @@ export default {
       chats: [],
       searchText: "",
       dataToReturn: [],
+      timer: null,
     };
+  },
+
+  mounted: function () {
+    this.timer = setInterval(() => {
+      this.returnData();
+    }, 1000);
   },
 
   methods: {
@@ -58,34 +65,44 @@ export default {
       console.log("this.dataToReturn", this.dataToReturn);
     },
     returnData: function () {
+      this.getChats();
       this.search();
       this.$emit("search-event", this.dataToReturn);
 
       console.log("event emitted");
     },
+    getChats() {
+      let self = this;
+
+      axios
+        .get(process.env.VUE_APP_BACKEND_URL + "/chat", {
+          headers: authHeader(),
+        })
+        .then(function (response) {
+          self.chats = response.data.chatsList;
+          self.dataToReturn = self.chats;
+
+          for (var i = 0; i < self.chats.length; i++) {
+            self.chats[i].lastMessageDate = new Date(
+              self.chats[i].lastMessageDate
+            );
+          }
+
+          self.$emit("search-event", self.dataToReturn);
+          console.log("event with all emitted");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
   // w created jest emitowanie calej listy, zeby na starcie sie ona pokazywala
   created: function () {
-    let self = this;
+    this.getChats();
+  },
 
-    axios
-      .get(process.env.VUE_APP_BACKEND_URL + "/chat", {
-        headers: authHeader(),
-      })
-      .then(function (response) {
-        self.chats = response.data.chatsList;
-        self.dataToReturn = self.chats;
-
-        for (var i = 0; i < self.chats.length; i++) {
-          self.chats[i].lastMessageDate = new Date(self.chats[i].lastMessageDate)
-        }
-
-        self.$emit("search-event", self.dataToReturn);
-        console.log("event with all emitted");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+  beforeUnmount() {
+    clearInterval(this.timer);
   },
 };
 </script>
