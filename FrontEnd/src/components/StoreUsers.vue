@@ -20,16 +20,15 @@ export default {
   },
 
   methods: {
-    getUsers() {
-      let self = this;
+    getUsers(userId) {
       const params = new URLSearchParams({
-        chatId: self.chatId,
+        id: userId,
       }).toString();
 
       axios
-        .put(
-          process.env.VUE_APP_BACKEND_URL + "/chat/message" + "?" + params,
-          { text: self.inputTextMessage },
+        .get(
+          process.env.VUE_APP_BACKEND_URL + "/search/id" + "?" + params, 
+          null,
           {
             headers: authHeader(),
           }

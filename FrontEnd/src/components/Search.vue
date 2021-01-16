@@ -49,9 +49,11 @@ export default {
     search: function () {
       this.dataToReturn = [];
       // ponizszy warunek, zeby mozna bylo zobaczyc wszystkie konwersacje, gdy nic nie jest wpisane
+      console.log(this.chats)
       if (this.searchText === "") {
         this.dataToReturn = this.chats;
         console.log("this.dataToReturn", this.dataToReturn);
+        this.$emit("search-event", this.dataToReturn);
         return;
       }
 
@@ -62,18 +64,17 @@ export default {
         }
       });
 
+      this.$emit("search-event", this.dataToReturn);
+
       console.log("this.dataToReturn", this.dataToReturn);
     },
     returnData: function () {
       this.getChats();
-      this.search();
-      this.$emit("search-event", this.dataToReturn);
 
       console.log("event emitted");
     },
     getChats() {
       let self = this;
-
       axios
         .get(process.env.VUE_APP_BACKEND_URL + "/chat", {
           headers: authHeader(),
@@ -87,9 +88,7 @@ export default {
               self.chats[i].lastMessageDate
             );
           }
-
-          self.$emit("search-event", self.dataToReturn);
-          console.log("event with all emitted");
+          self.search();
         })
         .catch(function (error) {
           console.log(error);
