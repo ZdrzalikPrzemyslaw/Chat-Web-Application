@@ -23,7 +23,6 @@
 </template>
 
 <script>
-import _ from "underscore"; // używam underscora do przeszukiwania listy
 import authHeader from "../services/auth-header";
 import axios from "axios";
 
@@ -38,36 +37,19 @@ export default {
   },
 
   methods: {
-    search: function () {
-      this.dataToReturn = [];
-      // ponizszy warunek, zeby mozna bylo zobaczyc wszystkie konwersacje, gdy nic nie jest wpisane
-      console.log(this.chats)
-      if (this.searchText === "") {
-        this.dataToReturn = this.chats;
-        console.log("this.dataToReturn", this.dataToReturn);
-        this.$emit("search-event", this.dataToReturn);
-        return;
-      }
 
-      // wyszukiwanie po użytkowniku
-      _.each(this.chats, (chat) => {
-        if (chat.chatName.includes(this.searchText)) {
-          this.dataToReturn.push(chat);
-        }
-      });
-
-      this.$emit("search-event", this.dataToReturn);
-
-      console.log("this.dataToReturn", this.dataToReturn);
-    },
     returnData: function () {
       this.getChats();
-
-      console.log("event emitted");
     },
 
-    getChats(name, surname) {
+    getChats() {
       let self = this;
+      let res = this.searchText.split(" ");
+      let name = res[0];
+      let surname = "";
+      if(res[1]) {
+        surname = res[1];
+      }
       const params = new URLSearchParams({
         name: name,
         surname: surname
@@ -79,13 +61,9 @@ export default {
         .then(function (response) {
           self.chats = response.data.users;
           self.dataToReturn = self.chats;
-
-          for (var i = 0; i < self.chats.length; i++) {
-            self.chats[i].lastMessageDate = new Date(
-              self.chats[i].lastMessageDate
-            );
-          }
-          self.search();
+          console.log(self.dataToReturn)
+          self.$emit("search-event", self.dataToReturn);
+          console.log("event emitted");
         })
         .catch(function (error) {
           console.log(error);

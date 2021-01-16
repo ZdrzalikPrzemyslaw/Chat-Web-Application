@@ -8,8 +8,25 @@ public class UserDataResponse {
     private String surname;
     private String email;
     private String username;
+    private int id;
 
     private UserDataResponse() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public UserDataResponse(User user) {
+        this.name = user.getName();
+        this.surname = user.getSurname();
+        this.email = user.getEmail();
+        this.username = user.getUsername();
+        this.id = user.getID();
     }
 
     public String getUsername() {
@@ -18,13 +35,6 @@ public class UserDataResponse {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public UserDataResponse(User user) {
-        this.name = user.getName();
-        this.surname = user.getSurname();
-        this.email = user.getEmail();
-        this.username = user.getUsername();
     }
 
     public String getSurname() {
