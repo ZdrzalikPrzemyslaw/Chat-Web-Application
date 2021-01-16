@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="card-image"
-    :style="{ backgroundImage: 'url(' + require('./background.jpg') + ')'}"
-  >
+  <div class="card-image" id="back">
     <div class=".container-fluid">
       <div class="row">
         <div class="col-md-2" id="firstColumn">
@@ -84,8 +81,14 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   width: 100%;
+  height: 100%;
+    background-image: url("background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   font-size: 20px;
 }
+
 .container-fluid * {
   width: 100%;
   table-layout: fixed;
