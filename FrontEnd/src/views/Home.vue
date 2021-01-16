@@ -58,22 +58,14 @@ export default {
       this.eventChatId = this.eventChatList[0].id;
     },
     handleChatIdAppEvent: function (data) {
-      if (typeof data === Number) {
         this.eventChatId = data;
         console.log("event chat id received");
-      } else {
-        this.eventChatId = null;
-      }
     },
     handleBoolAppEvent: function (data) {
       this.eventBool = data;
     },
     handleSendMessageAppEvent: function () {
       this.$refs.send.getChatMessages();
-    },
-    created() {
-      this.eventChatId = null;
-      this.eventBool = false;
     },
   },
 };
