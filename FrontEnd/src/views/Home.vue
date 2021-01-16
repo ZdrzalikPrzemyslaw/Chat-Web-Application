@@ -24,7 +24,10 @@
       </div>
       <div class="col-md-2" id="lastColumn">
         <Settings />
-        <search-users/>
+        <search-users 
+        @search-event="handleUserListAppEvent"/>
+        <user-list 
+        :users="eventUserList"/>
       </div>
     </div>
   </div>
@@ -37,6 +40,7 @@ import Settings from "../components/Settings";
 import SearchChats from "../components/SearchChats";
 import SendMessage from "../components/SendMessage";
 import SearchUsers from '../components/SearchUsers.vue';
+import UserList from '../components/UserList.vue';
 
 export default {
   name: "Home",
@@ -47,10 +51,12 @@ export default {
     ConversationView,
     SendMessage,
     SearchUsers,
+    UserList,
   },
   data() {
     return {
       eventChatList: Array,
+      eventUserList: Array,
       eventChatId: Number,
       eventBool: Boolean,
     };
@@ -59,6 +65,10 @@ export default {
     handleChatListAppEvent: function (data) {
       this.eventChatList = data;
       console.log("event chat list received");
+    },
+    handleUserListAppEvent: function (data) {
+      this.eventUserList = data;
+      console.log("event user list received");
     },
     handleChatIdAppEvent: function (data) {
       this.eventChatId = data;
