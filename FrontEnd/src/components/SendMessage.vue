@@ -55,6 +55,8 @@ export default {
         )
         .then(function (response) {
           console.log(response.data);
+          self.inputTextMessage = "";
+          self.$emit("send-message");
         })
         .catch(function (error) {
           console.log(error);

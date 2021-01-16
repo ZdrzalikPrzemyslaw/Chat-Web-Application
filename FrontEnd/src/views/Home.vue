@@ -13,8 +13,13 @@
         <ConversationView
           :chatId="eventChatId"
           @search-event="handleBoolAppEvent"
+          ref="send"
         />
-        <SendMessage :chatId="eventChatId" v-if="eventBool" />
+        <SendMessage
+          :chatId="eventChatId"
+          v-if="eventBool"
+          @send-message="handleSendMessageAppEvent"
+        />
       </div>
       <div class="col-md-2" id="lastColumn">
         <Settings />
@@ -62,6 +67,9 @@ export default {
     },
     handleBoolAppEvent: function (data) {
       this.eventBool = data;
+    },
+    handleSendMessageAppEvent: function () {
+      this.$refs.send.getChatMessages();
     },
     created() {
       this.eventChatId = null;
