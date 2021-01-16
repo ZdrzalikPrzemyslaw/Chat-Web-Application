@@ -145,6 +145,7 @@ export default {
 </script>
 
 <style scoped>
+
 .container {
   border: 2px solid rgb(97, 95, 95);
   background-color: #f1f1f1;

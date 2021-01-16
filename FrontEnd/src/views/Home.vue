@@ -1,28 +1,34 @@
 <template>
-  <div class=".container-fluid">
-    <div class="row">
-      <div class="col-md-2" id="firstColumn">
-        <Search @search-event="handleChatListAppEvent" />
-        <ChatsList
-          :chats="eventChatList"
-          @search-event="handleChatIdAppEvent"
-        />
-      </div>
-      <div class="col-md-1" />
-      <div class="col-md-6">
-        <ConversationView
-          :chatId="eventChatId"
-          @search-event="handleBoolAppEvent"
-          ref="send"
-        />
-        <SendMessage
-          :chatId="eventChatId"
-          v-if="eventBool"
-          @send-message="handleSendMessageAppEvent"
-        />
-      </div>
-      <div class="col-md-2" id="lastColumn">
-        <Settings />
+  <div
+    class="card-image"
+    :style="{ backgroundImage: 'url(' + require('./background.jpg') + ')' }"
+  >
+    <div class=".container-fluid">
+      <div class="row">
+        <div class="col-md-2" id="firstColumn">
+          <Search @search-event="handleChatListAppEvent" />
+          <ChatsList
+            :chats="eventChatList"
+            @search-event="handleChatIdAppEvent"
+          />
+        </div>
+        <div class="col-md-1" />
+        <div class="col-md-6">
+          <ConversationView
+            :chatId="eventChatId"
+            @search-event="handleBoolAppEvent"
+            ref="send"
+            id="centerColumn"
+          />
+          <SendMessage
+            :chatId="eventChatId"
+            v-if="eventBool"
+            @send-message="handleSendMessageAppEvent"
+          />
+        </div>
+        <div class="col-md-2" id="lastColumn">
+          <Settings />
+        </div>
       </div>
     </div>
   </div>
@@ -58,8 +64,8 @@ export default {
       this.eventChatId = this.eventChatList[0].id;
     },
     handleChatIdAppEvent: function (data) {
-        this.eventChatId = data;
-        console.log("event chat id received");
+      this.eventChatId = data;
+      console.log("event chat id received");
     },
     handleBoolAppEvent: function (data) {
       this.eventBool = data;
@@ -77,12 +83,8 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  margin-top: 60px;
   width: 100%;
   font-size: 16px;
-}
-body {
-  background: #00abb7;
 }
 .container-fluid * {
   width: 100%;
@@ -94,5 +96,8 @@ body {
 #lastColumn {
   align-items: left;
   margin: 10px;
+}
+#centerColumn {
+  margin-top: 60px;
 }
 </style>
