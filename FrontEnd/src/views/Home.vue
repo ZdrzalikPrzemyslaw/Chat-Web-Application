@@ -1,31 +1,31 @@
 <template>
-    <div class=".container-fluid">
-      <div class="row">
-        <div class="col-md-2" id="firstColumn">
-          <Search @search-event="handleChatListAppEvent" />
-          <ChatsList
-            :chats="eventChatList"
-            @search-event="handleChatIdAppEvent"
-          />
-        </div>
-        <div class="col-md-1" />
-        <div class="col-md-6">
-          <ConversationView
-            :chatId="eventChatId"
-            @search-event="handleBoolAppEvent"
-            ref="send"
-            id="centerColumn"
-          />
-          <SendMessage
-            :chatId="eventChatId"
-            v-if="eventBool"
-            @send-message="handleSendMessageAppEvent"
-          />
-        </div>
-        <div class="col-md-2" id="lastColumn">
-          <Settings />
-        </div>
+  <div class=".container-fluid">
+    <div class="row">
+      <div class="col-md-2" id="firstColumn">
+        <Search @search-event="handleChatListAppEvent" />
+        <ChatsList
+          :chats="eventChatList"
+          @search-event="handleChatIdAppEvent"
+        />
       </div>
+      <div class="col-md-1" />
+      <div class="col-md-6">
+        <ConversationView
+          :chatId="eventChatId"
+          @search-event="handleBoolAppEvent"
+          ref="send"
+          id="centerColumn"
+        />
+        <SendMessage
+          :chatId="eventChatId"
+          v-if="eventBool"
+          @send-message="handleSendMessageAppEvent"
+        />
+      </div>
+      <div class="col-md-2" id="lastColumn">
+        <Settings />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -80,12 +80,14 @@ export default {
   text-align: center;
   width: 100%;
   height: 100%;
+  font-size: 20px;
+}
+body {
   background-image: url("background.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-attachment: fixed;
-  font-size: 20px;
 }
 
 .container-fluid * {

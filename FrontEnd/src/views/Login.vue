@@ -1,18 +1,25 @@
 <template>
-  <LoginForm  class="justify-center"/>
+  <LoginForm class="justify-center" />
 </template>
 
 <script>
 import LoginForm from "../components/LoginForm";
 export default {
-  name: 'Login',
+  name: "Login",
   components: {
-    LoginForm
-  }
-}
+    LoginForm,
+  },
+};
 </script>
 
 <style>
+body {
+  background-image: url("background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
