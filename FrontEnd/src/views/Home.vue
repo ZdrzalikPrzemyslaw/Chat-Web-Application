@@ -1,7 +1,7 @@
 <template>
   <div
     class="card-image"
-    :style="{ backgroundImage: 'url(' + require('./background.jpg') + ')' }"
+    :style="{ backgroundImage: 'url(' + require('./background.jpg') + ')'}"
   >
     <div class=".container-fluid">
       <div class="row">
@@ -84,7 +84,7 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   width: 100%;
-  font-size: 16px;
+  font-size: 20px;
 }
 .container-fluid * {
   width: 100%;

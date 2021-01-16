@@ -150,7 +150,7 @@ export default {
   border: 2px solid rgb(97, 95, 95);
   background-color: #f1f1f1;
   border-radius: 20px;
-  padding: 15px;
+  padding: 8px;
   margin: 5px 0px;
 }
 
@@ -174,14 +174,14 @@ export default {
 
 #createAt {
   color: rgb(143, 141, 141);
-  font-size: 12px;
+  font-size: 17px;
 }
 
 #user_name {
   text-align: left;
   margin: auto;
   font-weight: bold;
-  padding: 5px 0;
-  font-size: 20px;
+  padding: 2px 0;
+  font-size: 25px;
 }
 </style>
