@@ -44,10 +44,14 @@ export default {
 
     getChats() {
       let self = this;
-      let res = this.searchText.split(" ");
+      this.searchText = this.searchText.trim();
+      let res = this.searchText.split(/[ ,]+/);
       let name = res[0];
       let surname = "";
-      if(res[1]) {
+      if(!res[1]) {
+        surname = name;
+      }
+      else {
         surname = res[1];
       }
       const params = new URLSearchParams({
