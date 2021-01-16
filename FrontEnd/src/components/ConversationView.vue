@@ -51,6 +51,7 @@ export default {
   },
 
   created() {
+    this.$emit("search-event", false);
     this.getChatMessages();
   },
 
@@ -93,27 +94,33 @@ export default {
 
     getChatMessages() {
       let self = this;
+      console.log("Chat", self.chatId);
+      if (self.chatId != null) {
+        const params = new URLSearchParams({
+          chatId: self.chatId,
+        }).toString();
 
-      console.log(self.chatId);
-
-      const params = new URLSearchParams({
-        chatId: self.chatId,
-      }).toString();
-
-      axios
-        .get(process.env.VUE_APP_BACKEND_URL + "/chat/message" + "?" + params, {
-          headers: authHeader(),
-        })
-        .then(function (response) {
-          console.log(response.data);
-          self.messages = response.data.messages;
-          for (var i = 0; i < self.messages.length; i++) {
-            self.messages[i].createdAt = new Date(self.messages[i].createdAt);
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        axios
+          .get(
+            process.env.VUE_APP_BACKEND_URL + "/chat/message" + "?" + params,
+            {
+              headers: authHeader(),
+            }
+          )
+          .then(function (response) {
+            console.log(response.data);
+            self.messages = response.data.messages;
+            for (var i = 0; i < self.messages.length; i++) {
+              self.messages[i].createdAt = new Date(self.messages[i].createdAt);
+            }
+            this.$emit("search-event", true);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        this.$emit("search-event", false);
+      }
     },
 
     deleteChat() {

@@ -10,8 +10,8 @@
       </div>
       <div class="col-md-1" />
       <div class="col-md-6">
-        <ConversationView :chatId="eventChatId" />
-        <SendMessage :chatId="eventChatId" />
+        <ConversationView :chatId="eventChatId" @search-event="handleBoolAppEvent"/>
+        <SendMessage :chatId="eventChatId" v-if="eventBool"/>
       </div>
       <div class="col-md-2" id="lastColumn">
         <Settings />
@@ -40,6 +40,7 @@ export default {
     return {
       eventChatList: Array,
       eventChatId: Number,
+      eventBool: Boolean,
     };
   },
   methods: {
@@ -51,6 +52,13 @@ export default {
     handleChatIdAppEvent: function (data) {
       this.eventChatId = data;
       console.log("event chat id received");
+    },
+    handleBoolAppEvent: function (data) {
+      this.eventBool = data;
+    },
+    created() {
+      this.eventChatId = null;
+      this.eventBool = false;
     },
   },
 };

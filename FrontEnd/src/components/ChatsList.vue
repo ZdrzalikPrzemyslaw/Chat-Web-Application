@@ -28,11 +28,15 @@ export default {
   data() {
     return {};
   },
+  created: function() {
+      this.$emit("search-event", null);
+  },
   methods: {
     sortArrays(arrays) {
       return _.orderBy(arrays, "lastMessageDate", "desc");
     },
     onClickChat: function (chatId) {
+      console.log(chatId);
       this.$emit("search-event", chatId);
       console.log("event emitted chat id to display", chatId);
     },
