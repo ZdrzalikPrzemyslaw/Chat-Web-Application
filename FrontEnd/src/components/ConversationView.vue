@@ -113,7 +113,7 @@ export default {
             for (var i = 0; i < self.messages.length; i++) {
               self.messages[i].createdAt = new Date(self.messages[i].createdAt);
             }
-            this.$emit("search-event", true);
+            self.$emit("search-event", true);
           })
           .catch(function (error) {
             console.log(error);

@@ -10,8 +10,11 @@
       </div>
       <div class="col-md-1" />
       <div class="col-md-6">
-        <ConversationView :chatId="eventChatId" @search-event="handleBoolAppEvent"/>
-        <SendMessage :chatId="eventChatId" v-if="eventBool"/>
+        <ConversationView
+          :chatId="eventChatId"
+          @search-event="handleBoolAppEvent"
+        />
+        <SendMessage :chatId="eventChatId" v-if="eventBool" />
       </div>
       <div class="col-md-2" id="lastColumn">
         <Settings />
@@ -50,8 +53,12 @@ export default {
       this.eventChatId = this.eventChatList[0].id;
     },
     handleChatIdAppEvent: function (data) {
-      this.eventChatId = data;
-      console.log("event chat id received");
+      if (typeof data === Number) {
+        this.eventChatId = data;
+        console.log("event chat id received");
+      } else {
+        this.eventChatId = null;
+      }
     },
     handleBoolAppEvent: function (data) {
       this.eventBool = data;
