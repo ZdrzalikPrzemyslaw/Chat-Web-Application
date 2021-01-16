@@ -11,7 +11,7 @@
       </div>
       <div class="col-md-2" id="sendButton">
         <button
-          type="submit"
+          type="button"
           class="btn btn-primary"
           v-on:click="sendMessage()"
         >
