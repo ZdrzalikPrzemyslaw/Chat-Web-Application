@@ -7,7 +7,7 @@
           type="text"
           v-model="this.searchText"
           id="inputUser"
-          placeholder="Name and Surname"
+          placeholder="Chat Name"
           class="form-control"
         />
       </div>

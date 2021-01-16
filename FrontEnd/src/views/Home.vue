@@ -2,7 +2,7 @@
   <div class=".container-fluid">
     <div class="row">
       <div class="col-md-2" id="firstColumn">
-        <Search @search-event="handleChatListAppEvent" />
+        <SearchChats @search-event="handleChatListAppEvent" />
         <ChatsList
           :chats="eventChatList"
           @search-event="handleChatIdAppEvent"
@@ -24,6 +24,7 @@
       </div>
       <div class="col-md-2" id="lastColumn">
         <Settings />
+        <search-users/>
       </div>
     </div>
   </div>
@@ -33,17 +34,19 @@
 import ChatsList from "../components/ChatsList";
 import ConversationView from "../components/ConversationView";
 import Settings from "../components/Settings";
-import Search from "../components/Search";
+import SearchChats from "../components/SearchChats";
 import SendMessage from "../components/SendMessage";
+import SearchUsers from '../components/SearchUsers.vue';
 
 export default {
   name: "Home",
   components: {
-    Search,
+    SearchChats,
     Settings,
     ChatsList,
     ConversationView,
     SendMessage,
+    SearchUsers,
   },
   data() {
     return {
