@@ -138,12 +138,12 @@ div {
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css");
  .settings_btn {
    background-color: #00abb7;
-   color: white;
+   color: rgba(245, 245, 245, 0.8);
    padding: 10px;
    font-size: 22px;
    cursor: pointer;
    margin: 0;
-   border: 4px solid #fff;
+   border: 4px solid rgba(245, 245, 245, 0.8);
    border-radius: 10px;
  }
 
@@ -201,9 +201,9 @@ div > .container-fluid {
 .logout_btn {
   padding: 0.5em 2.5em;
   background: none;
-  border: 4px solid #fff;
+  border: 4px solid rgba(245, 245, 245, 0.8);
   border-radius: 10px;
-  color: #fff;
+  color: rgba(245, 245, 245, 0.8);
   font-size: 1.0em;
   font-weight: bold;
   position: relative;

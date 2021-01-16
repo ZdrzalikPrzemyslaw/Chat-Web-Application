@@ -124,16 +124,16 @@ h1 {
 #inputUser {
   margin-left: 50px;
   margin-top: 30px;
-  border: 2px solid #fff;
+  border: 2px solid rgba(245, 245, 245, 0.8);
   border-radius: 10px;
 }
 
 .btn {
   margin-left: 50px;
   background: none;
-  border: 4px solid #fff;
+  border: 4px solid rgba(245, 245, 245, 0.8);
   border-radius: 10px;
-  color: #fff;
+  color: rgba(245, 245, 245, 0.8);
   display: block;
   font-size: 1em;
   font-weight: bold;
@@ -143,7 +143,7 @@ h1 {
 }
 
 .btn:hover {
-  color: black;
-  border: 4px solid black;
+  color: rgb(48, 47, 47, 0.8);
+  border: 4px solid rgb(48, 47, 47, 0.8);
 }
 </style>

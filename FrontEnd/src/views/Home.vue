@@ -96,11 +96,11 @@ body {
   table-layout: fixed;
 }
 #firstColumn {
-  margin: 10px;
+  margin: 60px 10px;
 }
 #lastColumn {
   align-items: left;
-  margin: 10px;
+  margin: 15px 10px;
 }
 #centerColumn {
   margin-top: 60px;
