@@ -10,8 +10,17 @@
       </div>
       <div class="col-md-1" />
       <div class="col-md-6">
-        <ConversationView :chatId="eventChatId" />
-        <SendMessage :chatId="eventChatId" />
+        <ConversationView
+          :chatId="eventChatId"
+          @search-event="handleBoolAppEvent"
+          ref="send"
+          id="centerColumn"
+        />
+        <SendMessage
+          :chatId="eventChatId"
+          v-if="eventBool"
+          @send-message="handleSendMessageAppEvent"
+        />
       </div>
       <div class="col-md-2" id="lastColumn">
         <Settings />
@@ -40,6 +49,7 @@ export default {
     return {
       eventChatList: Array,
       eventChatId: Number,
+      eventBool: Boolean,
     };
   },
   methods: {
@@ -52,6 +62,12 @@ export default {
       this.eventChatId = data;
       console.log("event chat id received");
     },
+    handleBoolAppEvent: function (data) {
+      this.eventBool = data;
+    },
+    handleSendMessageAppEvent: function () {
+      this.$refs.send.getChatMessages();
+    },
   },
 };
 </script>
@@ -62,22 +78,31 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  margin-top: 60px;
   width: 100%;
-  font-size: 16px;
+  height: 100%;
+  font-size: 20px;
 }
 body {
-  background: #00abb7;
+  background-image: url("background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
+
 .container-fluid * {
   width: 100%;
+  height: 100%;
   table-layout: fixed;
 }
 #firstColumn {
-  margin: 10px;
+  margin: 60px 10px;
 }
 #lastColumn {
   align-items: left;
-  margin: 10px;
+  margin: 15px 10px;
+}
+#centerColumn {
+  margin-top: 60px;
 }
 </style>

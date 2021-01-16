@@ -39,11 +39,11 @@ export default {
     };
   },
 
-  mounted: function () {
-    this.timer = setInterval(() => {
-      this.returnData();
-    }, 1000);
-  },
+  // mounted: function () {
+  //   this.timer = setInterval(() => {
+  //     this.returnData();
+  //   }, 1000);
+  // },
 
   methods: {
     search: function () {
@@ -101,9 +101,9 @@ export default {
     this.getChats();
   },
 
-  beforeUnmount() {
-    clearInterval(this.timer);
-  },
+  // beforeUnmount() {
+  //   clearInterval(this.timer);
+  // },
 };
 </script>
 
@@ -111,7 +111,7 @@ export default {
 @import url("http://fonts.googleapis.com/css?family=Kaushan+Script");
 
 h1 {
-  color: black;
+  color: rgba(245, 245, 245, 0.8);
   margin-left: 50px;
   font-weight: bold;
   font-family: "Kaushan Script";
@@ -124,16 +124,16 @@ h1 {
 #inputUser {
   margin-left: 50px;
   margin-top: 30px;
-  border: 2px solid #fff;
+  border: 2px solid rgba(245, 245, 245, 0.8);
   border-radius: 10px;
 }
 
 .btn {
   margin-left: 50px;
   background: none;
-  border: 4px solid #fff;
+  border: 4px solid rgba(245, 245, 245, 0.8);
   border-radius: 10px;
-  color: #fff;
+  color: rgba(245, 245, 245, 0.8);
   display: block;
   font-size: 1em;
   font-weight: bold;
@@ -143,7 +143,7 @@ h1 {
 }
 
 .btn:hover {
-  color: black;
-  border: 4px solid black;
+  color: rgb(48, 47, 47, 0.8);
+  border: 4px solid rgb(48, 47, 47, 0.8);
 }
 </style>

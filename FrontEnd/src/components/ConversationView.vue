@@ -51,6 +51,7 @@ export default {
   },
 
   created() {
+    this.$emit("search-event", false);
     this.getChatMessages();
   },
 
@@ -93,27 +94,33 @@ export default {
 
     getChatMessages() {
       let self = this;
+      console.log("Chat", self.chatId);
+      if (self.chatId != null) {
+        const params = new URLSearchParams({
+          chatId: self.chatId,
+        }).toString();
 
-      console.log(self.chatId);
-
-      const params = new URLSearchParams({
-        chatId: self.chatId,
-      }).toString();
-
-      axios
-        .get(process.env.VUE_APP_BACKEND_URL + "/chat/message" + "?" + params, {
-          headers: authHeader(),
-        })
-        .then(function (response) {
-          console.log(response.data);
-          self.messages = response.data.messages;
-          for (var i = 0; i < self.messages.length; i++) {
-            self.messages[i].createdAt = new Date(self.messages[i].createdAt);
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        axios
+          .get(
+            process.env.VUE_APP_BACKEND_URL + "/chat/message" + "?" + params,
+            {
+              headers: authHeader(),
+            }
+          )
+          .then(function (response) {
+            console.log(response.data);
+            self.messages = response.data.messages;
+            for (var i = 0; i < self.messages.length; i++) {
+              self.messages[i].createdAt = new Date(self.messages[i].createdAt);
+            }
+            self.$emit("search-event", true);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+        this.$emit("search-event", false);
+      }
     },
 
     deleteChat() {
@@ -138,11 +145,12 @@ export default {
 </script>
 
 <style scoped>
+
 .container {
   border: 2px solid rgb(97, 95, 95);
-  background-color: #f1f1f1;
+  background-color: rgba(245, 245, 245, 0.5);
   border-radius: 20px;
-  padding: 15px;
+  padding: 8px 12px;
   margin: 5px 0px;
 }
 
@@ -166,14 +174,14 @@ export default {
 
 #createAt {
   color: rgb(143, 141, 141);
-  font-size: 12px;
+  font-size: 17px;
 }
 
 #user_name {
   text-align: left;
   margin: auto;
   font-weight: bold;
-  padding: 5px 0;
-  font-size: 20px;
+  padding: 2px 0;
+  font-size: 25px;
 }
 </style>

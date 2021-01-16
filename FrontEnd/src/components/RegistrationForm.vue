@@ -122,7 +122,7 @@ h2 {
   border: 1px solid gray;
   border-radius: 10px;
   padding: 10px 30px;
-  background: #dcdcdc;
+  background: rgba(245, 245, 245, 0.5);
 }
 
 #buttons > button {
