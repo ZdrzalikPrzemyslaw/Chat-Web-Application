@@ -1,5 +1,4 @@
 <template>
-  <div class="card-image" id="back">
     <div class=".container-fluid">
       <div class="row">
         <div class="col-md-2" id="firstColumn">
@@ -27,7 +26,6 @@
           <Settings />
         </div>
       </div>
-    </div>
   </div>
 </template>
 
@@ -82,15 +80,17 @@ export default {
   text-align: center;
   width: 100%;
   height: 100%;
-    background-image: url("background.png");
+  background-image: url("background.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   font-size: 20px;
 }
 
 .container-fluid * {
   width: 100%;
+  height: 100%;
   table-layout: fixed;
 }
 #firstColumn {
