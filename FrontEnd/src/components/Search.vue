@@ -111,7 +111,7 @@ export default {
 @import url("http://fonts.googleapis.com/css?family=Kaushan+Script");
 
 h1 {
-  color: black;
+  color: rgba(245, 245, 245, 0.8);
   margin-left: 50px;
   font-weight: bold;
   font-family: "Kaushan Script";

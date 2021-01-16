@@ -69,7 +69,7 @@ export default {
 <style scoped>
 .container {
   border: 2px solid rgb(97, 95, 95);
-  background-color: #f1f1f1;
+  background-color: rgba(245, 245, 245, 0.5);
   border-radius: 20px;
   padding: 15px;
   margin: 5px 0px;

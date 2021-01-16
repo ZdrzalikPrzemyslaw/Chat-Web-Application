@@ -77,7 +77,7 @@ export default {
   text-align: left;
   cursor: pointer;
   width: 100%;
-  background: #d4d4d4;
+  background: rgba(245, 245, 245, 0.5);
   margin: 10px 5px 5px 50px;
   border-radius: 10px;
   color: black;
