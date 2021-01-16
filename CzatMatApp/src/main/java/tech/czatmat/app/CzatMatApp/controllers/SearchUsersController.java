@@ -42,5 +42,12 @@ public class SearchUsersController {
         return ResponseEntity.ok(new SearchMultipleUsersResponse(userRepository.getUsersByNameContainsAndSurnameContains(searchNameSurnameRequest.getName(), searchNameSurnameRequest.getSurname())));
     }
 
+    @Transactional
+    @RequestMapping(value = "/id", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<?> getUsersById(@RequestParam(value = "id", required = true) int id) {
+        return ResponseEntity.ok(new SearchMultipleUsersResponse(userRepository.getUsersByID(id)));
+    }
+
+
 
 }

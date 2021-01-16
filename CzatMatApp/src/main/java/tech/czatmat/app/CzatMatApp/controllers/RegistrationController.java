@@ -106,7 +106,5 @@ public class RegistrationController {
         }
 
         return ResponseEntity.status(404).body(new MessageResponse("User not found."));
-
     }
-
 }
