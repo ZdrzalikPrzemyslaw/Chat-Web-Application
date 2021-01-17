@@ -26,6 +26,9 @@
 </template>
 
 <script>
+import axios from "axios";
+import authHeader from "../services/auth-header";
+
 export default {
   name: "UserList",
   props: {
@@ -35,14 +38,35 @@ export default {
   data() {
     return {
       usersInChat: [],
+      chat: [],
     };
   },
   watch: {
-    chatId: function () {},
+    chatId: function () {
+      this.getChatFromId();
+    },
   },
   created: function () {},
   methods: {
-    getChatFromId() {},
+    getChatFromId() {
+      let self = this;
+      const params = new URLSearchParams({
+        id: self.chatId,
+      }).toString();
+
+      axios
+        .get(process.env.VUE_APP_BACKEND_URL + "/chat/id" + "?" + params, {
+          headers: authHeader(),
+        })
+        .then(function (response) {
+          self.chat = response.data;
+          self.usersInChat = response.data.users;
+          console.log(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
   },
 };
 </script>
