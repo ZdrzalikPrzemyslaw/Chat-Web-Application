@@ -105,6 +105,7 @@ export default {
         for (const j in this.usersInChat) {
           if (this.searchedUsers[i].id === this.usersInChat[j].id) {
             this.searchedUsers.splice(i, 1);
+            break;
           }
         }
       }
