@@ -46,8 +46,6 @@ export default {
   methods: {
     returnData: function() {
       this.getChats();
-
-      console.log("event emitted");
     },
     getChats() {
       let self = this;
@@ -68,7 +66,6 @@ export default {
               self.chats[i].lastMessageDate
             );
           }
-          console.log(self.dataToReturn)
           self.$emit("search-event", self.dataToReturn);
         })
         .catch(function(error) {

@@ -1,11 +1,25 @@
 <template>
   <div class=".container" id="main_container">
-    <div class="col sm-3" v-for="user in users" v-bind:key="user" id="OneChat">
-      <div class="row" id="UserName">
-        {{ user.name }}
-      </div>
-      <div class="row" id="UserSurname">
-        {{ user.surname }}
+    <div v-for="user in users" v-bind:key="user">
+      <div class="row" id="OneChat">
+        <div class="col sm-3">
+          <div class="row" id="UserName">
+            {{ user.name }}
+          </div>
+          <div class="row" id="UserSurname">
+            {{ user.surname }}
+          </div>
+        </div>
+        <div class="col sm-3">
+          <div class="row" id="but">
+            <input
+              type="button"
+              id="but"
+              class="btn btn-sm btn-block sm-3"
+              value="+"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -16,11 +30,12 @@ export default {
   name: "ChatsList",
   props: {
     users: Array,
+    chatId: Number,
   },
   data() {
     return {};
   },
-  created: function() {},
+  created: function () {},
   methods: {},
 };
 </script>
@@ -40,11 +55,14 @@ export default {
 #UserName {
   font-weight: bold;
   padding: 5px 0;
-  margin-left: 5px;
 }
 
 #LastMessage {
   opacity: 0.9;
   margin-left: 5px;
+}
+
+#but {
+  font-size: 45px;
 }
 </style>

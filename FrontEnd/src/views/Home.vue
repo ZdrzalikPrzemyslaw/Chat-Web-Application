@@ -24,10 +24,8 @@
       </div>
       <div class="col-md-2" id="lastColumn">
         <Settings />
-        <search-users 
-        @search-event="handleUserListAppEvent"/>
-        <user-list 
-        :users="eventUserList"/>
+        <SearchUsers @search-event="handleUserListAppEvent" />
+        <UserList :chatId="eventChatId" :users="eventUserList" />
       </div>
     </div>
   </div>
@@ -39,8 +37,8 @@ import ConversationView from "../components/ConversationView";
 import Settings from "../components/Settings";
 import SearchChats from "../components/SearchChats";
 import SendMessage from "../components/SendMessage";
-import SearchUsers from '../components/SearchUsers.vue';
-import UserList from '../components/UserList.vue';
+import SearchUsers from "../components/SearchUsers.vue";
+import UserList from "../components/UserList.vue";
 
 export default {
   name: "Home",
@@ -64,15 +62,12 @@ export default {
   methods: {
     handleChatListAppEvent: function (data) {
       this.eventChatList = data;
-      console.log("event chat list received");
     },
     handleUserListAppEvent: function (data) {
       this.eventUserList = data;
-      console.log("event user list received");
     },
     handleChatIdAppEvent: function (data) {
       this.eventChatId = data;
-      console.log("event chat id received");
     },
     handleBoolAppEvent: function (data) {
       this.eventBool = data;
@@ -95,7 +90,7 @@ export default {
   font-size: 20px;
 }
 body {
-  background-image: url("background.png");
+  background-image: url("bac.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
