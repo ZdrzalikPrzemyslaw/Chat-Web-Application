@@ -1,6 +1,6 @@
 <template>
   <div class=".container" id="main_container">
-    <div v-for="user in usersInChat" v-bind:key="user">
+    <div v-for="user in users" v-bind:key="user">
       <div class="row" id="OneChat">
         <div class="col sm-3">
           <div class="row" id="UserName">
@@ -27,23 +27,16 @@
 
 <script>
 export default {
-  name: "UserList",
+  name: "ChatsList",
   props: {
-    usersFromSearch: Array,
+    users: Array,
     chatId: Number,
   },
   data() {
-    return {
-      usersInChat: [],
-    };
-  },
-  watch: {
-    chatId: function () {},
+    return {};
   },
   created: function () {},
-  methods: {
-    getChatFromId() {},
-  },
+  methods: {},
 };
 </script>
 

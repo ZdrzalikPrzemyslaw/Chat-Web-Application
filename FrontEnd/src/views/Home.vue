@@ -27,7 +27,7 @@
       <div class="col-md-2" id="lastColumn">
         <Settings />
         <SearchUsers @search-event="handleUserListAppEvent" />
-        <UserList :chatId="eventChatId" :users="eventUserList" />
+        <UserList :chatId="eventChatId" :usersFromSearch="eventUserList" />
       </div>
     </div>
   </div>
