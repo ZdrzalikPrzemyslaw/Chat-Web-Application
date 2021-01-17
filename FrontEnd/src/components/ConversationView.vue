@@ -23,7 +23,7 @@
         </p>
       </div>
       <div v-else class="container darker" id="theirMessage">
-        <p class="d-flex flex-row">{{ message.senderId }}</p>
+        <p class="d-flex flex-row">{{ message.name }}</p>
         <p class="d-flex flex-row">{{ message.text }}</p>
         <p class="d-flex flex-row" id="createAt">
           {{ getDateForMessage(message.createdAt) }}
@@ -47,10 +47,12 @@ export default {
   data() {
     return {
       messages: [],
+      usersList: new Map(),
     };
   },
 
   created() {
+    this.usersList = new Map();
     this.$emit("search-event", false);
     this.getChatMessages();
   },
@@ -112,8 +114,32 @@ export default {
             self.messages = response.data.messages;
             for (var i = 0; i < self.messages.length; i++) {
               self.messages[i].createdAt = new Date(self.messages[i].createdAt);
+              if (self.usersList.get(self.messages[i].senderId) === undefined) {
+                const par = new URLSearchParams({
+                  id: self.messages[i].senderId,
+                }).toString();
+                let insideSelf = self;
+                axios
+                  .get(
+                    process.env.VUE_APP_BACKEND_URL + "/search/id" + "?" + par,
+                    {
+                      headers: authHeader(),
+                    }
+                  )
+                  .then(function () {
+                    insideSelf.usersList.set(
+                      insideSelf.messages[i].senderId,
+                      response.data
+                    );
+                    insideSelf.messages[i]["userName"] = response.data.name;
+                    insideSelf.messages[i]["userSurname"] = response.data.surname;
+                    console.log( insideSelf.messages[i]);
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+              }
             }
-            self.$emit("search-event", true);
           })
           .catch(function (error) {
             console.log(error);
@@ -145,7 +171,6 @@ export default {
 </script>
 
 <style scoped>
-
 .container {
   border: 2px solid rgb(97, 95, 95);
   background-color: rgba(245, 245, 245, 0.5);

@@ -12,7 +12,12 @@
         </div>
         <div class="col sm-3">
           <div class="row" id="but">
-            <input type="button" id="but" class="btn btn-sm btn-block sm-3" value="+" />
+            <input
+              type="button"
+              id="but"
+              class="btn btn-sm btn-block sm-3"
+              value="+"
+            />
           </div>
         </div>
       </div>
@@ -25,6 +30,7 @@ export default {
   name: "ChatsList",
   props: {
     users: Array,
+    chatId: Number,
   },
   data() {
     return {};
