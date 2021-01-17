@@ -125,5 +125,6 @@ h1 {
 .btn:hover {
   color: rgb(48, 47, 47, 0.8);
   border: 4px solid rgb(48, 47, 47, 0.8);
+  background: rgba(245, 245, 245, 0.8);
 }
 </style>

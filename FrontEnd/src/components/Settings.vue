@@ -252,4 +252,10 @@ div > .container-fluid {
   text-transform: uppercase;
   margin: 0 20px 0 80px;
 }
+
+.logout_btn:hover {
+  color: rgb(48, 47, 47, 0.8);
+  border: 4px solid rgb(48, 47, 47, 0.8);
+  background: rgba(245, 245, 245, 0.8);
+}
 </style>
