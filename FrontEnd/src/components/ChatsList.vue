@@ -25,6 +25,14 @@ export default {
   props: {
     chats: Array,
   },
+  watch: {
+    chats: function () {
+      if (this.chats[0]) {
+        this.$emit("search-event", this.sortArrays(this.chats)[0].id);
+      }
+    },
+  },
+
   data() {
     return {};
   },

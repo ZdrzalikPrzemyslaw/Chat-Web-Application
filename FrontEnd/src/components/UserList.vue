@@ -1,11 +1,6 @@
 <template>
   <div class=".container" id="main_container">
-    <div
-      class="col sm-3"
-      v-for="user in users"
-      v-bind:key="user"
-      id="OneChat"
-    >
+    <div class="col sm-3" v-for="user in users" v-bind:key="user" id="OneChat">
       <div class="row" id="UserName">
         {{ user.name }}
       </div>
@@ -17,7 +12,6 @@
 </template>
 
 <script>
-
 export default {
   name: "ChatsList",
   props: {
@@ -26,11 +20,8 @@ export default {
   data() {
     return {};
   },
-  created: function() {
-  },
-  methods: {
-  
-  },
+  created: function() {},
+  methods: {},
 };
 </script>
 
