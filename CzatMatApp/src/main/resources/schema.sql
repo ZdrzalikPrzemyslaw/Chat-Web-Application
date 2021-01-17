@@ -113,50 +113,50 @@ insert into authorities(username, role_name)
 values ('user_zwykly', 'ROLE_USER')
 
 insert into [users] (username, password, name, surname, email, enabled)
-values ('Przemus', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS', 'Przemek', 'Zdrzalus', 'p@z.pl', 1)
+values ('pZdrzalik', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS', 'Przemyslaw', 'Zdrzalik', 'P@Z.pl', 1)
 
 insert into authorities(username, role_name)
-values ('Przemus', 'ROLE_USER')
+values ('pZdrzalik', 'ROLE_USER')
 
 insert into authorities(username, role_name)
-values ('Przemus', 'ROLE_SUPER_USER')
+values ('pZdrzalik', 'ROLE_SUPER_USER')
 
 insert into [users] (username, password, name, surname, email, enabled)
-values ('Julcia', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS', 'Julia', 'Szymania', 'J@S.pl', 1)
+values ('jSzymanska', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS', 'Julia', 'Szymanska', 'J@S.pl', 1)
 
 insert into authorities(username, role_name)
-values ('Julcia', 'ROLE_USER')
+values ('jSzymanska', 'ROLE_USER')
 
 insert into [users] (username, password, name, surname, email, enabled)
-values ('Witek', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS', 'Witeczek', 'Pietrzak', 'W@P.pl', 1)
+values ('hGawlowski', '$2a$10$lgrAbmBcu5S/IQiFijAYDeDp9A39rghMTti/.Kd4idYDtKGJCK1iS', 'Hubert', 'Gawlowski', 'H@G.pl', 1)
 
 insert into authorities(username, role_name)
-values ('Witek', 'ROLE_USER')
+values ('hGawlowski', 'ROLE_USER')
 
 insert into chats(owner_id, name, created_at)
-values (1, 'testowy', CONVERT(DATETIME, '2020.12.29 19:21:27.55'))
+values (1, 'testowyChat', CONVERT(DATETIME, '2020.12.29 19:21:27.55'))
 
 insert into chats(owner_id, name, created_at)
-values (3, 'kolejny', CONVERT(DATETIME, '2020.12.28 19:23:27.55'))
+values (3, 'kolejnyChat', CONVERT(DATETIME, '2020.12.28 19:23:27.55'))
 
 insert into chat_users(chat_id, user_id)
 VALUES (1, 3), (1, 4), (1, 1), (2, 4), (2, 1), (2, 3)
 
 insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
-values (1, 1, 'elko pierwsza mes w 1 chacie', CONVERT(DATETIME, '2020.12.29 19:25:27.55'), -1);
+values (1, 4, 'Pierwsza wiadomosc w czacie', CONVERT(DATETIME, '2020.12.29 19:21:28.55'), -1);
 
 insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
-values (1, 3, 'elko melko siemka hejka', CONVERT(DATETIME, '2020.12.29 19:27:27.55'), -1);
+values (1, 1, 'Druga wiadomosc w czacie', CONVERT(DATETIME, '2020.12.29 19:25:27.55'), -1);
 
 insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
-values (1, 4, 'hejka tu lenka', CONVERT(DATETIME, '2020.12.29 19:21:28.55'), -1);
+values (1, 3, 'Trzecia wiadomosc w czacie', CONVERT(DATETIME, '2020.12.29 19:27:27.55'), -1);
 
 insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
-values (2, 1, 'przmeus elko melko chodz na piwerko', CONVERT(DATETIME, '2020.12.28 19:24:27.55'), -1);
+values (2, 1, 'Pierwsza wiadomosc w czacie drugim', CONVERT(DATETIME, '2020.12.28 19:24:27.55'), -1);
 
 insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
-values (2, 1, 'no dobra jednak nie chodz', CONVERT(DATETIME, '2020.12.28 19:25:27.55'), -1);
+values (2, 1, 'Druga wiadomosc w czacie drugim', CONVERT(DATETIME, '2020.12.28 19:25:27.55'), -1);
 
 insert into chat_messages (chat_id, user_id, text, created_at, base_key_id)
-values (2, 3, 'nie ide bo nie chce', CONVERT(DATETIME, '2020.12.28 19:29:29.55'), -1);
+values (2, 3, 'Trzecia wiadomosc w czacie drugim', CONVERT(DATETIME, '2020.12.28 19:29:29.55'), -1);
 

@@ -5,7 +5,7 @@
         Logout
       </button>
     </div>
-    <div id="settingsIcon" class="d-flex">
+    <!-- <div id="settingsIcon" class="d-flex">
       <button v-on:click="showMenu('.menu')" class="settings_btn btn">
         <i style="color: white;" class="fas fa-user-cog"></i>
       </button>
@@ -133,8 +133,8 @@
           <input type="checkbox" value="Show password" />
           <input type="button" value="Submit" />
         </form>
-      </div>
-    </div>
+      </div> -->
+    <!-- </div> -->
   </div>
 </template>
 
@@ -153,10 +153,10 @@ export default {
     };
   },
   methods: {
-    showMenu: function(managedClass) {
-      const menuButton = document.querySelector(managedClass);
-      menuButton.classList.toggle("menu--active");
-    },
+    // showMenu: function(managedClass) {
+    //   const menuButton = document.querySelector(managedClass);
+    //   menuButton.classList.toggle("menu--active");
+    // },
     confirmChange: function() {},
     logout: function() {
       // wylogowywanie usera za pomoca store

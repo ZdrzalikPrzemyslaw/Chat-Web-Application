@@ -2,11 +2,13 @@
   <div class="container" id="main_container">
     <div class="row">
       <div class="col">
-        <img src="../assets/profile_pic.jpg" id="image" />
-        <p id="user_name">Julia</p>
+        <p id="user_name">{{chatName}}</p>
+      </div>
+      <div class="col">
         <button
           type="submit"
-          class="btn btn-primary"
+          class="btn btn-primary float-right"
+          value=".float-right"
           id="deleteButton"
           v-on:click="deleteChat()"
         >
@@ -16,7 +18,11 @@
     </div>
 
     <div v-for="(message, index, key) in sortArrays(messages)" :key="key">
-      <div v-if="message.senderId === 1" class="container" id="ourMessage">
+      <div
+        v-if="message.senderId === getCurrentUserId()"
+        class="container"
+        id="ourMessage"
+      >
         <p class="d-flex flex-row-reverse">{{ message.text }}</p>
         <p class="d-flex flex-row-reverse" id="createAt">
           {{ getDateForMessage(message.createdAt) }}
@@ -39,12 +45,14 @@
 <script>
 import axios from "axios";
 import authHeader from "../services/auth-header";
+import userId from "../services/user-id";
 import _ from "lodash";
 
 export default {
   name: "ConversationView",
   props: {
     chatId: Number,
+    chatName: String,
   },
   data() {
     return {
@@ -60,6 +68,7 @@ export default {
 
   watch: {
     chatId: function () {
+      this.$emit("search-event", true);
       this.getChatMessages();
     },
   },
@@ -75,27 +84,28 @@ export default {
       return i;
     },
 
+    getCurrentUserId() {
+      return userId();
+    },
+
     getNameAndSurnameForMessage(message) {
-      // console.log("GEETT   " + this.usersList.entries());
       let self = this;
       if (self.usersList.get(message.senderId) === undefined) {
-      const par = new URLSearchParams({
-        id: message.senderId,
-      }).toString();
-      axios
-        .get(process.env.VUE_APP_BACKEND_URL + "/search/id" + "?" + par, {
-          headers: authHeader(),
-        })
-        .then(function (response) {
-          self.usersList.set(message.senderId, response.data);
-          // return response.data.name + " " + response.data.surname;
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        const par = new URLSearchParams({
+          id: message.senderId,
+        }).toString();
+        axios
+          .get(process.env.VUE_APP_BACKEND_URL + "/search/id" + "?" + par, {
+            headers: authHeader(),
+          })
+          .then(function (response) {
+            self.usersList.set(message.senderId, response.data);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
       } else {
         let mes = self.usersList.get(message.senderId);
-        console.log(mes.users[0]);
         return mes.users[0].name + " " + mes.users[0].surname;
       }
     },
@@ -191,9 +201,10 @@ export default {
 }
 
 #deleteButton {
-  float: right;
   max-width: 100px;
-  margin-left: 25px;
+  max-height: 50px;
+  margin-right: 30px;
+  margin-top: 5px;
 }
 
 #createAt {
@@ -202,10 +213,11 @@ export default {
 }
 
 #user_name {
-  text-align: left;
-  margin: auto;
+  text-align: start;
   font-weight: bold;
   padding: 2px 0;
+  margin-left: 30px;
+  margin-top: 5px;
   font-size: 25px;
 }
 </style>

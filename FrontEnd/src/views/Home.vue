@@ -6,12 +6,14 @@
         <ChatsList
           :chats="eventChatList"
           @search-event="handleChatIdAppEvent"
+          @search-event-name="handleChatNameAppEvent"
         />
       </div>
       <div class="col-md-1" />
       <div class="col-md-6">
         <ConversationView
           :chatId="eventChatId"
+          :chatName="eventChatName"
           @search-event="handleBoolAppEvent"
           ref="send"
           id="centerColumn"
@@ -56,6 +58,7 @@ export default {
       eventChatList: Array,
       eventUserList: Array,
       eventChatId: Number,
+      eventChatName: String,
       eventBool: Boolean,
     };
   },
@@ -74,6 +77,9 @@ export default {
     },
     handleSendMessageAppEvent: function () {
       this.$refs.send.getChatMessages();
+    },
+    handleChatNameAppEvent: function (data) {
+      this.eventChatName = data;
     },
   },
 };
