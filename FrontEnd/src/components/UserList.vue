@@ -15,6 +15,7 @@
             <input
               type="button"
               id="but"
+              v-on:click="deleteUserFromChat(user.username)"
               class="btn btn-sm btn-block sm-3"
               value="-"
             />
@@ -61,6 +62,34 @@ export default {
         .then(function (response) {
           self.chat = response.data.chatsList[0];
           self.usersInChat = response.data.chatsList[0].userList;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+
+    deleteUserFromChat(userName) {
+      let self = this;
+      const params = new URLSearchParams({
+        chatId: self.chatId,
+      }).toString();
+      axios
+        .delete(
+          process.env.VUE_APP_BACKEND_URL + "/chat/users" + "?" + params,
+          {
+            headers: authHeader(),
+            data: {
+              users: [{ username: userName }],
+            },
+          }
+        )
+        .then(function () {
+          for (const i in self.usersInChat) {
+            if (self.usersInChat[i].username === userName) {
+              self.usersInChat.splice(i, 1);
+              break;
+            }
+          }
         })
         .catch(function (error) {
           console.log(error);
