@@ -62,15 +62,12 @@ export default {
   methods: {
     handleChatListAppEvent: function (data) {
       this.eventChatList = data;
-      console.log("event chat list received");
     },
     handleUserListAppEvent: function (data) {
       this.eventUserList = data;
-      console.log("event user list received");
     },
     handleChatIdAppEvent: function (data) {
       this.eventChatId = data;
-      console.log("event chat id received");
     },
     handleBoolAppEvent: function (data) {
       this.eventBool = data;

@@ -65,9 +65,7 @@ export default {
         .then(function (response) {
           self.chats = response.data.users;
           self.dataToReturn = self.chats;
-          console.log(self.dataToReturn)
           self.$emit("search-event", self.dataToReturn);
-          console.log("event emitted");
         })
         .catch(function (error) {
           console.log(error);

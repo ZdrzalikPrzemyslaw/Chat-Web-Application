@@ -96,7 +96,6 @@ export default {
 
     getChatMessages() {
       let self = this;
-      console.log("Chat", self.chatId);
       if (self.chatId != null) {
         const params = new URLSearchParams({
           chatId: self.chatId,
@@ -110,7 +109,6 @@ export default {
             }
           )
           .then(function (response) {
-            console.log(response.data);
             self.messages = response.data.messages;
             for (var i = 0; i < self.messages.length; i++) {
               self.messages[i].createdAt = new Date(self.messages[i].createdAt);
@@ -118,7 +116,7 @@ export default {
                 const par = new URLSearchParams({
                   id: self.messages[i].senderId,
                 }).toString();
-                let insideSelf = self;
+
                 axios
                   .get(
                     process.env.VUE_APP_BACKEND_URL + "/search/id" + "?" + par,
@@ -127,13 +125,17 @@ export default {
                     }
                   )
                   .then(function () {
+                    console.log(self.messages);
+                    console.log("i ---> " + i);
+                    let insideSelf = self;
                     insideSelf.usersList.set(
                       insideSelf.messages[i].senderId,
                       response.data
                     );
                     insideSelf.messages[i]["userName"] = response.data.name;
-                    insideSelf.messages[i]["userSurname"] = response.data.surname;
-                    console.log( insideSelf.messages[i]);
+                    insideSelf.messages[i]["userSurname"] =
+                      response.data.surname;
+                    // console.log(insideSelf.messages[i]);
                   })
                   .catch(function (error) {
                     console.log(error);

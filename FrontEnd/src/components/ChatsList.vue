@@ -44,9 +44,7 @@ export default {
       return _.orderBy(arrays, "lastMessageDate", "desc");
     },
     onClickChat: function (chatId) {
-      console.log(chatId);
       this.$emit("search-event", chatId);
-      console.log("event emitted chat id to display", chatId);
     },
     addZero: function (i) {
       if (i < 10) {
