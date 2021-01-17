@@ -40,7 +40,6 @@ export default {
   },
   created: function () {
     this.$emit("search-event", null);
-    this.$emit("search-event-name", null);
   },
   methods: {
     sortArrays(arrays) {

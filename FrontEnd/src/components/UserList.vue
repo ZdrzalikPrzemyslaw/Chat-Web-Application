@@ -16,7 +16,7 @@
               type="button"
               id="but"
               class="btn btn-sm btn-block sm-3"
-              value="+"
+              value="-"
             />
           </div>
         </div>
@@ -59,9 +59,8 @@ export default {
           headers: authHeader(),
         })
         .then(function (response) {
-          self.chat = response.data;
-          self.usersInChat = response.data.users;
-          console.log(response.data);
+          self.chat = response.data.chatsList[0];
+          self.usersInChat = response.data.chatsList[0].userList;
         })
         .catch(function (error) {
           console.log(error);
