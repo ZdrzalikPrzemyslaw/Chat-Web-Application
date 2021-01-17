@@ -23,7 +23,9 @@
         </p>
       </div>
       <div v-else class="container darker" id="theirMessage">
-        <p class="d-flex flex-row">{{ message.name }}</p>
+        <p class="d-flex flex-row">
+          {{ getNameAndSurnameForMessage(message) }}
+        </p>
         <p class="d-flex flex-row">{{ message.text }}</p>
         <p class="d-flex flex-row" id="createAt">
           {{ getDateForMessage(message.createdAt) }}
@@ -54,7 +56,6 @@ export default {
   created() {
     this.usersList = new Map();
     this.$emit("search-event", false);
-    this.getChatMessages();
   },
 
   watch: {
@@ -72,6 +73,31 @@ export default {
         i = "0" + i;
       }
       return i;
+    },
+
+    getNameAndSurnameForMessage(message) {
+      // console.log("GEETT   " + this.usersList.entries());
+      let self = this;
+      if (self.usersList.get(message.senderId) === undefined) {
+      const par = new URLSearchParams({
+        id: message.senderId,
+      }).toString();
+      axios
+        .get(process.env.VUE_APP_BACKEND_URL + "/search/id" + "?" + par, {
+          headers: authHeader(),
+        })
+        .then(function (response) {
+          self.usersList.set(message.senderId, response.data);
+          // return response.data.name + " " + response.data.surname;
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      } else {
+        let mes = self.usersList.get(message.senderId);
+        console.log(mes.users[0]);
+        return mes.users[0].name + " " + mes.users[0].surname;
+      }
     },
 
     getMessageTime(message) {
@@ -112,35 +138,6 @@ export default {
             self.messages = response.data.messages;
             for (var i = 0; i < self.messages.length; i++) {
               self.messages[i].createdAt = new Date(self.messages[i].createdAt);
-              if (self.usersList.get(self.messages[i].senderId) === undefined) {
-                const par = new URLSearchParams({
-                  id: self.messages[i].senderId,
-                }).toString();
-
-                axios
-                  .get(
-                    process.env.VUE_APP_BACKEND_URL + "/search/id" + "?" + par,
-                    {
-                      headers: authHeader(),
-                    }
-                  )
-                  .then(function () {
-                    console.log(self.messages);
-                    console.log("i ---> " + i);
-                    let insideSelf = self;
-                    insideSelf.usersList.set(
-                      insideSelf.messages[i].senderId,
-                      response.data
-                    );
-                    insideSelf.messages[i]["userName"] = response.data.name;
-                    insideSelf.messages[i]["userSurname"] =
-                      response.data.surname;
-                    // console.log(insideSelf.messages[i]);
-                  })
-                  .catch(function (error) {
-                    console.log(error);
-                  });
-              }
             }
           })
           .catch(function (error) {
