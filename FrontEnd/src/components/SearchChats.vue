@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import _ from "underscore"; // używam underscora do przeszukiwania listy
 import authHeader from "../services/auth-header";
 import axios from "axios";
 
@@ -35,7 +34,6 @@ export default {
       chats: [],
       searchText: "",
       dataToReturn: [],
-      timer: null,
     };
   },
 
@@ -46,40 +44,22 @@ export default {
   // },
 
   methods: {
-    search: function () {
-      this.dataToReturn = [];
-      // ponizszy warunek, zeby mozna bylo zobaczyc wszystkie konwersacje, gdy nic nie jest wpisane
-      console.log(this.chats)
-      if (this.searchText === "") {
-        this.dataToReturn = this.chats;
-        console.log("this.dataToReturn", this.dataToReturn);
-        this.$emit("search-event", this.dataToReturn);
-        return;
-      }
-
-      // wyszukiwanie po użytkowniku
-      _.each(this.chats, (chat) => {
-        if (chat.chatName.includes(this.searchText)) {
-          this.dataToReturn.push(chat);
-        }
-      });
-
-      this.$emit("search-event", this.dataToReturn);
-
-      console.log("this.dataToReturn", this.dataToReturn);
-    },
-    returnData: function () {
+    returnData: function() {
       this.getChats();
 
       console.log("event emitted");
     },
     getChats() {
       let self = this;
+
+      const params = new URLSearchParams({
+        chatName: this.searchText,
+      }).toString();
       axios
-        .get(process.env.VUE_APP_BACKEND_URL + "/chat", {
+        .get(process.env.VUE_APP_BACKEND_URL + "/chat" + "?" + params, {
           headers: authHeader(),
         })
-        .then(function (response) {
+        .then(function(response) {
           self.chats = response.data.chatsList;
           self.dataToReturn = self.chats;
 
@@ -88,15 +68,16 @@ export default {
               self.chats[i].lastMessageDate
             );
           }
-          self.search();
+          console.log(self.dataToReturn)
+          self.$emit("search-event", self.dataToReturn);
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.log(error);
         });
     },
   },
   // w created jest emitowanie calej listy, zeby na starcie sie ona pokazywala
-  created: function () {
+  created: function() {
     this.getChats();
   },
 
@@ -144,5 +125,6 @@ h1 {
 .btn:hover {
   color: rgb(48, 47, 47, 0.8);
   border: 4px solid rgb(48, 47, 47, 0.8);
+  background: rgba(245, 245, 245, 0.8);
 }
 </style>

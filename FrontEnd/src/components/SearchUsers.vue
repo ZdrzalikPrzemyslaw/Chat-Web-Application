@@ -44,10 +44,14 @@ export default {
 
     getChats() {
       let self = this;
-      let res = this.searchText.split(" ");
+      this.searchText = this.searchText.trim();
+      let res = this.searchText.split(/[ ,]+/);
       let name = res[0];
       let surname = "";
-      if(res[1]) {
+      if(!res[1]) {
+        surname = name;
+      }
+      else {
         surname = res[1];
       }
       const params = new URLSearchParams({
@@ -115,5 +119,6 @@ h1 {
 .btn:hover {
   color: rgb(48, 47, 47, 0.8);
   border: 4px solid rgb(48, 47, 47, 0.8);
+  background: rgba(245, 245, 245, 0.8);
 }
 </style>
