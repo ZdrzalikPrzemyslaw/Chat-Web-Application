@@ -1,0 +1,30 @@
+get:
+  tags:
+    - SearchId
+  summary: Search user 
+  description: Search user by Id
+  operationId: searchId
+  parameters:
+    - name: id
+      in: path
+      description: Searched user id
+      required: true
+      schema:
+        type: int
+  security:
+    - token: 
+      - user
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            users: [
+              {
+                name: Administrator,
+                surname: Administracyjny,
+                email: admin@admin.pl,
+                username: admin
+              },
+            ]
