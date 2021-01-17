@@ -85,7 +85,7 @@ export default {
   font-size: 20px;
 }
 body {
-  background-image: url("background.png");
+  background-image: url("bac.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
