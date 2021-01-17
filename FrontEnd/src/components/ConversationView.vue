@@ -2,7 +2,7 @@
   <div class="container" id="main_container">
     <div class="row">
       <div class="col">
-        <p id="user_name">{{chatName}}</p>
+        <p id="user_name">{{ chatName }}</p>
       </div>
       <div class="col">
         <button
@@ -88,6 +88,7 @@ export default {
       return userId();
     },
 
+    // TODO: zrobic pobieranie chatu przy watchu i wtedy jest pobrane chatName i uzytkownicy
     getNameAndSurnameForMessage(message) {
       let self = this;
       if (self.usersList.get(message.senderId) === undefined) {
