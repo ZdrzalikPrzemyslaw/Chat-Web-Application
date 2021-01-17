@@ -1,5 +1,28 @@
 <template>
   <div class=".container" id="main_container">
+    <div v-for="user in searchedUsers" v-bind:key="user">
+      <div class="row" id="OneChat">
+        <div class="col sm-3">
+          <div class="row" id="UserName">
+            {{ user.name }}
+          </div>
+          <div class="row" id="UserSurname">
+            {{ user.surname }}
+          </div>
+        </div>
+        <div class="col sm-3">
+          <div class="row" id="but">
+            <input
+              type="button"
+              id="but"
+              v-on:click="addUserToChat(user.username)"
+              class="btn btn-sm btn-block sm-3"
+              value="+"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
     <div v-for="user in usersInChat" v-bind:key="user">
       <div class="row" id="OneChat">
         <div class="col sm-3">
@@ -39,12 +62,25 @@ export default {
   data() {
     return {
       usersInChat: [],
+      searchedUsers: [],
       chat: [],
     };
   },
   watch: {
     chatId: function () {
       this.getChatFromId();
+    },
+    usersFromSearch: {
+      deep: true,
+      handler() {
+        this.deleteAllUsersFromArrayFromChat();
+      },
+    },
+    usersInChat: {
+      deep: true,
+      handler() {
+        this.deleteAllUsersFromArrayFromChat();
+      },
     },
   },
   created: function () {},
@@ -66,6 +102,18 @@ export default {
         .catch(function (error) {
           console.log(error);
         });
+    },
+
+    deleteAllUsersFromArrayFromChat() {
+      this.searchedUsers = this.usersFromSearch;
+      var i = this.searchedUsers.length;
+      while (i--) {
+        for (const j in this.usersInChat) {
+          if (this.searchedUsers[i].id === this.usersInChat[j].id) {
+            this.searchedUsers.splice(i, 1);
+          }
+        }
+      }
     },
 
     deleteUserFromChat(userName) {
@@ -95,6 +143,8 @@ export default {
           console.log(error);
         });
     },
+
+    addUserToChat() {},
   },
 };
 </script>
@@ -111,7 +161,7 @@ export default {
   color: black;
 }
 
-#UserName {
+#UserSurname {
   font-weight: bold;
   padding: 5px 0;
 }
