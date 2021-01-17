@@ -15,6 +15,8 @@ tags:
     description: Searching user data in the database
   - name: Chat
     description: All operations regarding chats
+  - name: ChatId
+    description: Search chat by id
   - name: Message
     description: All operations regarding messages
   - name: Users
@@ -34,6 +36,8 @@ paths:
     $ref: paths/message.yaml
   /chat/users:
     $ref: paths/users.yaml
+  /chat/id:
+    $ref: paths/chatId.yaml
   /search/id:
     $ref: paths/searchId.yaml
 components:
