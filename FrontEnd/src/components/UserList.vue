@@ -100,9 +100,7 @@ export default {
 
     deleteAllUsersFromArrayFromChat() {
       this.searchedUsers = this.usersFromSearch;
-      console.log(this.searchedUsers);
       var i = this.searchedUsers.length;
-      console.log(i);
       while (i--) {
         for (const j in this.usersInChat) {
           if (this.searchedUsers[i].id === this.usersInChat[j].id) {
@@ -154,15 +152,10 @@ export default {
           }
         )
         .then(function() {
-          for (const i in self.usersFromSearch) {
-            if (self.usersInChat[i].username === userName) {
-              self.usersInChat.splice(i, 1);
-              break;
-            }
-          }
-          for (const i in self.usersInChat) {
-            if (self.usersInChat[i].username === userName) {
-              self.usersInChat.push(self.usersInChat[i]);
+          for (const i in self.searchedUsers) {
+            if (self.searchedUsers[i].username === userName) {
+              self.usersInChat.push(self.searchedUsers[i]);
+              self.searchedUsers.splice(i, 1);
               break;
             }
           }
