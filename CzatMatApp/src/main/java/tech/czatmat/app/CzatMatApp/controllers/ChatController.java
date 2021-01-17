@@ -221,18 +221,17 @@ public class ChatController {
         return ResponseEntity.status(403).body(new MessageResponse("You don't have access to this message."));
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'SUPER_USER', 'ADMIN')")
     @Transactional
     @RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> addUsersToExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersRequest chatUsersRequest) {
         if (!chatsRepository.existsChatById(chatId)) {
             return ResponseEntity.status(404).body("Error: Chat not found");
         }
-        // TODO: 03.01.2021 Sprawdzać czy osoba zapraszająca do czatu jest w nim.
-
+        // TODO: 03.01.2021 Sprawdzać czy osoba zapraszając        
         for (var i : chatUsersRequest.getUsers()) {
             User user = userRepository.getUsersByUsername(i.getUsername())
                     .orElseThrow(() -> new RuntimeException("Error: User is not found."));
-
 
             if (!chatUsersRepository.existsByUserIdAndChatId(user.getID(), chatId)) {
                 ChatUser chatUser = new ChatUser(chatId, user.getID());

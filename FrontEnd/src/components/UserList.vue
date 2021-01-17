@@ -67,7 +67,7 @@ export default {
     };
   },
   watch: {
-    chatId: function () {
+    chatId: function() {
       this.getChatFromId();
     },
     usersFromSearch: {
@@ -76,14 +76,8 @@ export default {
         this.deleteAllUsersFromArrayFromChat();
       },
     },
-    usersInChat: {
-      deep: true,
-      handler() {
-        this.deleteAllUsersFromArrayFromChat();
-      },
-    },
   },
-  created: function () {},
+  created: function() {},
   methods: {
     getChatFromId() {
       let self = this;
@@ -95,18 +89,20 @@ export default {
         .get(process.env.VUE_APP_BACKEND_URL + "/chat/id" + "?" + params, {
           headers: authHeader(),
         })
-        .then(function (response) {
+        .then(function(response) {
           self.chat = response.data.chatsList[0];
           self.usersInChat = response.data.chatsList[0].userList;
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.log(error);
         });
     },
 
     deleteAllUsersFromArrayFromChat() {
       this.searchedUsers = this.usersFromSearch;
+      console.log(this.searchedUsers);
       var i = this.searchedUsers.length;
+      console.log(i);
       while (i--) {
         for (const j in this.usersInChat) {
           if (this.searchedUsers[i].id === this.usersInChat[j].id) {
@@ -131,7 +127,7 @@ export default {
             },
           }
         )
-        .then(function () {
+        .then(function() {
           for (const i in self.usersInChat) {
             if (self.usersInChat[i].username === userName) {
               self.usersInChat.splice(i, 1);
@@ -139,12 +135,42 @@ export default {
             }
           }
         })
-        .catch(function (error) {
+        .catch(function(error) {
           console.log(error);
         });
     },
 
-    addUserToChat() {},
+    addUserToChat(userName) {
+      let self = this;
+      const params = new URLSearchParams({
+        chatId: self.chatId,
+      }).toString();
+      axios
+        .post(
+          process.env.VUE_APP_BACKEND_URL + "/chat/users" + "?" + params,
+          { users: [{ username: userName }] },
+          {
+            headers: authHeader(),
+          }
+        )
+        .then(function() {
+          for (const i in self.usersFromSearch) {
+            if (self.usersInChat[i].username === userName) {
+              self.usersInChat.splice(i, 1);
+              break;
+            }
+          }
+          for (const i in self.usersInChat) {
+            if (self.usersInChat[i].username === userName) {
+              self.usersInChat.push(self.usersInChat[i]);
+              break;
+            }
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
   },
 };
 </script>

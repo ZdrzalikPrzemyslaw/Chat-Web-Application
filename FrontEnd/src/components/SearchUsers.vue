@@ -72,9 +72,7 @@ export default {
         });
     },
   },
-  // w created jest emitowanie calej listy, zeby na starcie sie ona pokazywala
   created: function () {
-    this.getChats();
   },
 };
 </script>
