@@ -10,7 +10,7 @@
         </div>
         <div class="form-group">
           <label htmlFor="password">Password</label>
-          <Field name="password" v-model="user.password" type="text" class="form-control sm-3" :class="{ 'is-invalid': errors.password }"/>
+          <Field name="password" type="password" v-model="user.password" class="form-control sm-3" :class="{ 'is-invalid': errors.password }"/>
           <div class="invalid-feedback">{{ errors.password }}</div>
         </div>
       <div class="container text-center" id="buttons">

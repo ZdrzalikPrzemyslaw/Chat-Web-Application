@@ -80,7 +80,7 @@ export default {
 
   mounted: function () {
     this.timer = setInterval(() => {
-      this.returnData();
+      this.getChatFromId();
     }, 15000);
   },
 
