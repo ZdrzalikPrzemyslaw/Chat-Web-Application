@@ -37,11 +37,11 @@ export default {
     };
   },
 
-  // mounted: function () {
-  //   this.timer = setInterval(() => {
-  //     this.returnData();
-  //   }, 1000);
-  // },
+  mounted: function () {
+    this.timer = setInterval(() => {
+      this.returnData();
+    }, 15000);
+  },
 
   methods: {
     returnData: function() {
@@ -78,9 +78,9 @@ export default {
     this.getChats();
   },
 
-  // beforeUnmount() {
-  //   clearInterval(this.timer);
-  // },
+  beforeUnmount() {
+    clearInterval(this.timer);
+  },
 };
 </script>
 
