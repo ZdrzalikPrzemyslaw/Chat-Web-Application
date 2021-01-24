@@ -2,7 +2,7 @@
   <div class="container" id="main_container">
     <div class="row">
       <div class="col">
-        <p id="user_name">{{ chatName }}</p>
+        <p id="chat_name">{{ chatName }}</p>
       </div>
       <div class="col">
         <button
@@ -29,7 +29,7 @@
         </p>
       </div>
       <div v-else class="container darker" id="theirMessage">
-        <p class="d-flex flex-row">
+        <p class="d-flex flex-row" id="user_name">
           {{ getNameAndSurnameForMessage(message) }}
         </p>
         <p class="d-flex flex-row">{{ message.text }}</p>
@@ -59,6 +59,12 @@ export default {
       messages: [],
       usersList: new Map(),
     };
+  },
+
+  mounted: function () {
+    this.timer = setInterval(() => {
+      this.getChatMessages();
+    }, 2000);
   },
 
   created() {
@@ -177,13 +183,16 @@ export default {
         });
     },
   },
+  beforeUnmount() {
+    clearInterval(this.timer);
+  },
 };
 </script>
 
 <style scoped>
 .container {
   border: 2px solid rgb(97, 95, 95);
-  background-color: rgba(212, 211, 211, 0.5);
+  background-color: rgba(240, 236, 236, 0.5);
   border-radius: 20px;
   padding: 8px 12px;
   margin: 5px 0px;
@@ -213,12 +222,16 @@ export default {
   font-size: 17px;
 }
 
-#user_name {
+#chat_name {
   text-align: start;
   font-weight: bold;
   padding: 2px 0;
   margin-left: 30px;
   margin-top: 5px;
   font-size: 25px;
+}
+
+#user_name {
+  font-size: 16px;
 }
 </style>

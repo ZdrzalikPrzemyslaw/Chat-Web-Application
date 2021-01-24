@@ -67,7 +67,7 @@ export default {
     };
   },
   watch: {
-    chatId: function() {
+    chatId: function () {
       this.getChatFromId();
     },
     usersFromSearch: {
@@ -77,7 +77,18 @@ export default {
       },
     },
   },
-  created: function() {},
+
+  mounted: function () {
+    this.timer = setInterval(() => {
+      this.getChatFromId();
+    }, 15000);
+  },
+
+  beforeUnmount() {
+    clearInterval(this.timer);
+  },
+
+  created: function () {},
   methods: {
     getChatFromId() {
       let self = this;
@@ -89,11 +100,11 @@ export default {
         .get(process.env.VUE_APP_BACKEND_URL + "/chat/id" + "?" + params, {
           headers: authHeader(),
         })
-        .then(function(response) {
+        .then(function (response) {
           self.chat = response.data.chatsList[0];
           self.usersInChat = response.data.chatsList[0].userList;
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -126,7 +137,7 @@ export default {
             },
           }
         )
-        .then(function() {
+        .then(function () {
           for (const i in self.usersInChat) {
             if (self.usersInChat[i].username === userName) {
               self.usersInChat.splice(i, 1);
@@ -134,7 +145,7 @@ export default {
             }
           }
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },
@@ -152,7 +163,7 @@ export default {
             headers: authHeader(),
           }
         )
-        .then(function() {
+        .then(function () {
           for (const i in self.searchedUsers) {
             if (self.searchedUsers[i].username === userName) {
               self.usersInChat.push(self.searchedUsers[i]);
@@ -161,7 +172,7 @@ export default {
             }
           }
         })
-        .catch(function(error) {
+        .catch(function (error) {
           console.log(error);
         });
     },

@@ -78,7 +78,7 @@ export default {
 </script>
 
 <style scoped>
-@import url("http://fonts.googleapis.com/css?family=Kaushan+Script");
+@import url("https://fonts.googleapis.com/css?family=Kaushan+Script");
 
 h1 {
   color: rgba(245, 245, 245, 0.8);

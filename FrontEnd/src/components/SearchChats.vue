@@ -37,11 +37,11 @@ export default {
     };
   },
 
-  // mounted: function () {
-  //   this.timer = setInterval(() => {
-  //     this.returnData();
-  //   }, 1000);
-  // },
+  mounted: function () {
+    this.timer = setInterval(() => {
+      this.returnData();
+    }, 15000);
+  },
 
   methods: {
     returnData: function() {
@@ -78,14 +78,14 @@ export default {
     this.getChats();
   },
 
-  // beforeUnmount() {
-  //   clearInterval(this.timer);
-  // },
+  beforeUnmount() {
+    clearInterval(this.timer);
+  },
 };
 </script>
 
 <style scoped>
-@import url("http://fonts.googleapis.com/css?family=Kaushan+Script");
+@import url("https://fonts.googleapis.com/css?family=Kaushan+Script");
 
 h1 {
   color: rgba(245, 245, 245, 0.8);
