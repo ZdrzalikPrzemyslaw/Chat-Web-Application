@@ -27,6 +27,10 @@
       "description": "All operations regarding chats"
     },
     {
+      "name": "ChatId",
+      "description": "Search chat by id"
+    },
+    {
       "name": "Message",
       "description": "All operations regarding messages"
     },
@@ -180,7 +184,7 @@
           "Search"
         ],
         "summary": "Search user",
-        "description": "Search user by name or/and surname",
+        "description": "Search user by name or/and surname. If the name and surname path parameters are equal then the value must either be contained in the name or the surname of the user. If the values are not equal then the name must contain the value provided in the name parameter and the surname of the user must contain the value provided in the surname parameter.",
         "operationId": "search",
         "parameters": [
           {
@@ -264,7 +268,7 @@
           "Search"
         ],
         "summary": "Search user",
-        "description": "Search user by name or/and surname",
+        "description": "Search user by name or/and surname The name must contain the value provided in the name parameter and the surname of the user must contain the value provided in the surname parameter.",
         "operationId": "search",
         "security": [
           {
@@ -849,6 +853,72 @@
             }
           },
           "required": true
+        }
+      }
+    },
+    "/chat/id": {
+      "get": {
+        "tags": [
+          "ChatId"
+        ],
+        "summary": "Find Chat",
+        "description": "Find Chat with given id",
+        "opearationId": "findChat",
+        "security": [
+          {
+            "token": [
+              "user"
+            ]
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Searched chat id",
+            "required": true,
+            "schema": {
+              "type": "int"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "example": {
+                  "chatsList": [
+                    {
+                      "userList": [
+                        {
+                          "name": "Administrator",
+                          "surname": "Administracyjny",
+                          "email": "admin@admin.pl",
+                          "username": "admin"
+                        },
+                        {
+                          "name": "Przemek",
+                          "surname": "Zdrzalik",
+                          "email": "p@z.pl",
+                          "username": "Przemek"
+                        },
+                        {
+                          "name": "Julia",
+                          "surname": "Szymanska",
+                          "email": "J@S.pl",
+                          "username": "Julia"
+                        }
+                      ],
+                      "chatName": "testowy",
+                      "lastMessageDate": "2020-12-29T18:27:27.550Z",
+                      "id": 1
+                    }
+                  ]
+                }
+              }
+            }
+          }
         }
       }
     },
