@@ -1,0 +1,2 @@
+Uruchomienie dokumentacji wymaga utworzenie serwera html w folderze, 
+przykładowo korzystając z pythona można uruchomić serwer komendą python -m http.server.

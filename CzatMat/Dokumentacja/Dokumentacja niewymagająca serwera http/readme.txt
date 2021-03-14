@@ -1,0 +1,1 @@
+W tym folderze znajduje się ta sama dokumentacja, spakowana do statycznej strony html. 
