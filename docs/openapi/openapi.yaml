@@ -1,0 +1,46 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: https://czatmat.azurewebsites.net/api
+  description: >
+    This is ChatMat API documentation.
+tags:
+  - name: Registration
+    description: Creating and modifying user data
+  - name: Login
+    description: User authentication
+  - name: Search
+    description: Searching user data in the database
+  - name: SearchId
+    description: Searching user data in the database
+  - name: Chat
+    description: All operations regarding chats
+  - name: ChatId
+    description: Search chat by id
+  - name: Message
+    description: All operations regarding messages
+  - name: Users
+    description: All operations regarding users
+servers:
+  - url: "https://czatmat.azurewebsites.net/api"
+paths:
+  /registration:
+    $ref: paths/registration.yaml
+  /login:
+    $ref: paths/login.yaml
+  /search:
+    $ref: paths/searchUsers.yaml
+  /chat:
+    $ref: paths/chat.yaml
+  /chat/message:
+    $ref: paths/message.yaml
+  /chat/users:
+    $ref: paths/users.yaml
+  /chat/id:
+    $ref: paths/chatId.yaml
+  /search/id:
+    $ref: paths/searchId.yaml
+components:
+  securitySchemes:
+    token:
+      $ref: components/securitySchemes/token.yaml

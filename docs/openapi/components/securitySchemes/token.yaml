@@ -1,0 +1,10 @@
+type: http
+scheme: bearer
+bearerFormat: JWT
+flows:
+  implicit:
+    authorizationUrl: https://czatmat.azurewebsites.net/api/login
+    scopes:
+      user: Base user
+      super_user: Super user
+      admin: admin

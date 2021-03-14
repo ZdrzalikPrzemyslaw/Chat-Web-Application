@@ -1,18 +1,25 @@
 <template>
-  <RegistrationForm  class="justify-center"/>
+  <RegistrationForm class="justify-center" />
 </template>
 
 <script>
 import RegistrationForm from "../components/RegistrationForm";
 export default {
-  name: 'Registration',
+  name: "Registration",
   components: {
-    RegistrationForm
-  }
-}
+    RegistrationForm,
+  },
+};
 </script>
 
 <style>
+body {
+  background-image: url("bac.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

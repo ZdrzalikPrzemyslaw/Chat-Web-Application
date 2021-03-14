@@ -1,0 +1,5 @@
+type: string
+maxLength: 2048
+example: 
+    message: Czesc to zmieniona wiadomosc
+

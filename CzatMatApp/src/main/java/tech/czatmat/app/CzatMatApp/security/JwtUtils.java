@@ -1,6 +1,7 @@
 package tech.czatmat.app.CzatMatApp.security;
 
 import io.jsonwebtoken.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
@@ -9,12 +10,11 @@ import java.util.Date;
 @Component
 public class JwtUtils {
 
-    // TODO: 03.12.2020 Zrobić żeby klucz i timeout bral sie z pliku
-    // @Value("${tech.czatMat.app.CzatMapApp.jwtSecret}")
-    private final String jwtSecret = "superScisleTajnyKlucz";
+    @Value("${jwt.secret}")
+    private String jwtSecret;
 
-    // @Value("${tech.czatMat.app.CzatMapApp.jwtExpirationMs}")
-    private final int jwtExpirationMs = 86400000;
+    @Value("${jwt.expirationMs}")
+    private int jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {
 

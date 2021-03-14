@@ -1,0 +1,15 @@
+
+type: object
+properties:
+  users:
+    description:  Array of users
+    type: array
+    example: [
+      {
+        username: Julia
+      },
+      {
+        username: Przemyslaw
+      }
+    ]
+  

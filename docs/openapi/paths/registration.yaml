@@ -1,0 +1,51 @@
+put:
+  tags:
+    - Registration
+  summary: Register new user
+  description: Register user.
+  operationId: registration    
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            message: User registered successfully!
+    '403':
+      description: User already exist or email is already in use!
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/User.yaml
+    description: Registration user object
+    required: true
+post:
+  tags:
+    - Registration
+  summary: Edit existing user
+  description: Only logged user can edit user's information.
+  operationId: editUser   
+  security:
+    - token: 
+      - user
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            message: User edited successfully!
+    '404':
+      description: User doesn't exist.
+      content:
+        application/json:
+          example:
+            message: User not found.
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/EditUser.yaml
+    description: Edited user data
+    required: true

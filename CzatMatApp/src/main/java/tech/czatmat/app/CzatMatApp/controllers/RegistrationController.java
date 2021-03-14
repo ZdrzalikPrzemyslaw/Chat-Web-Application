@@ -3,7 +3,10 @@ package tech.czatmat.app.CzatMatApp.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +18,7 @@ import tech.czatmat.app.CzatMatApp.dataClasses.roles.RoleRepository;
 import tech.czatmat.app.CzatMatApp.dataClasses.roles.RoleSource;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.User;
 import tech.czatmat.app.CzatMatApp.dataClasses.users.UserRepository;
+import tech.czatmat.app.CzatMatApp.payload.request.EditUserRequest;
 import tech.czatmat.app.CzatMatApp.payload.request.RegistrationRequest;
 import tech.czatmat.app.CzatMatApp.payload.response.MessageResponse;
 
@@ -34,7 +38,6 @@ public class RegistrationController {
     private PasswordEncoder passwordEncoder;
     @Autowired
     private AuthoritiesRepository authoritiesRepository;
-
     @Autowired
     private RoleRepository roleRepository;
 
@@ -42,7 +45,8 @@ public class RegistrationController {
         this.userRepository = userRepository;
     }
 
-    @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
+    @Transactional
+    @RequestMapping(value = "", method = RequestMethod.PUT, produces = "application/json")
     public ResponseEntity<?> createUser(@RequestBody RegistrationRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("User By That Login Already Exists"));
@@ -52,6 +56,7 @@ public class RegistrationController {
                     .badRequest()
                     .body(new MessageResponse("Error: Email is already in use!"));
         }
+
         User user = new User(request.getUsername(),
                 passwordEncoder.encode(request.getPassword()),
                 request.getName(),
@@ -59,36 +64,13 @@ public class RegistrationController {
                 request.getEmail(),
                 User.ENABLED
         );
-        Set<String> strRoles = request.getRole();
         Set<Role> roles = new HashSet<>();
 
 
-        if (strRoles == null) {
-            Role userRole = roleRepository.findByName(RoleSource.ROLE_USER)
-                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-            roles.add(userRole);
-        } else {
-            strRoles.forEach(role -> {
-                switch (role) {
-                    case RoleSource.ROLE_ADMIN:
-                        Role adminRole = roleRepository.findByName(RoleSource.ROLE_ADMIN)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(adminRole);
+        Role userRole = roleRepository.findByName(RoleSource.ROLE_USER)
+                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        roles.add(userRole);
 
-                        break;
-                    case RoleSource.ROLE_SUPER_USER:
-                        Role supRole = roleRepository.findByName(RoleSource.ROLE_SUPER_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(supRole);
-
-                        break;
-                    default:
-                        Role userRole = roleRepository.findByName(RoleSource.ROLE_USER)
-                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-                        roles.add(userRole);
-                }
-            });
-        }
         userRepository.save(user);
 
         for (var i : roles) {
@@ -98,14 +80,31 @@ public class RegistrationController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    // TODO: 27.11.2020 Ograniczyć możliwość używania zapytania
-    @RequestMapping(value = "/get_users", method = RequestMethod.GET, produces = "application/json")
-    public Iterable<User> getUsers() {
-        return userRepository.findAll();
-    }
+    @Transactional
+    @RequestMapping(value = "", method = RequestMethod.POST, produces = "application/json")
+    public ResponseEntity<?> editUser(@RequestBody EditUserRequest request) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.getUsersByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("Error: User is not found."));
 
-    @RequestMapping(value = "/przyklad", method = RequestMethod.GET, produces = "application/json")
-    public String getPrzyklad() {
-        return "Siema Registration";
+        if (userRepository.existsByUsername(user.getUsername())) {
+            User newUser = new User(user);
+            if (request.getName() != null) {
+                newUser.setName(request.getName());
+            }
+            if (request.getSurname() != null) {
+                newUser.setSurname(request.getSurname());
+            }
+            if (request.getEmail() != null) {
+                newUser.setEmail(request.getEmail());
+            }
+            if (request.getNewPassword() != null && request.getOldPassword() != null && passwordEncoder.matches(request.getOldPassword(), user.getPassword())) {
+                newUser.setPassword(passwordEncoder.encode(request.getNewPassword()));
+            }
+
+            return ResponseEntity.ok(new MessageResponse("User edited successfully!"));
+        }
+
+        return ResponseEntity.status(404).body(new MessageResponse("User not found."));
     }
 }

@@ -1,0 +1,26 @@
+type: object
+properties:
+  name:
+    description: User first name
+    type: string
+    maxLength: 50
+    example: John
+  surname:
+    description: User last name
+    type: string
+    maxLength: 50
+    example: Smith
+  email:
+    $ref: ./Email.yaml
+  oldPassword:
+    description: User supplied old password
+    type: string
+    minLength: 6
+    maxLength: 40
+    example: john123
+  newPassword:
+    description: User supplied new password
+    type: string
+    minLength: 6
+    maxLength: 40
+    example: John321

@@ -14,6 +14,12 @@ const routes = [
   },
   {
     path: '/',
+     redirect: {
+       name: 'Login'
+      },
+  },
+  {
+    path: '/home',
     name: 'Home',
     component: Home
   },
@@ -36,14 +42,11 @@ router.beforeEach((to, from, next) => {
   // redirect to login page if not logged in and trying to access a restricted page
   const publicPages = ['/login', '/registration'];
   const authRequired = !publicPages.includes(to.path);
-  // TODO:
-  // const loggedIn = localStorage.getItem('user');
-  const loggedIn = true;
-
+  const loggedIn = localStorage.getItem('user'); // szukamy usera w local storage, zeby sprawdzic czy jest
+                                                     // zalogowany, jesli nie to nie moze wejsc poza /login i /register
   if (authRequired && !loggedIn) {
     return next('/login');
   }
-
   next();
 })
 

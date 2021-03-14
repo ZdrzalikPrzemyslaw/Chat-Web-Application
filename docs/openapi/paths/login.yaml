@@ -1,0 +1,35 @@
+post:
+  tags:
+    - Login
+  summary: Login existing user
+  description: Authenticate user
+  operationId: login  
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            token: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTYwOTY4ODY3NSwiZXhwIjoxNjA5Nzc1MDc1fQ.LsfajPZSZgnpfHR2tvsSvgn5nHdF4lkOltRB-BGN5W34zMfgmK8wqAhMwRLHCSDXjRG4aHLJLi5xBDkf6AuVMw
+            type: Bearer
+            id: 1
+            username: admin
+            name: Administrator
+            surname: Administracyjny
+            email: admin@admin.pl
+            roles: [
+                  ROLE_ADMIN,
+                  ROLE_USER,
+                  ROLE_SUPER_USER
+              ]
+            accessToken: eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTYwOTY4ODY3NSwiZXhwIjoxNjA5Nzc1MDc1fQ.LsfajPZSZgnpfHR2tvsSvgn5nHdF4lkOltRB-BGN5W34zMfgmK8wqAhMwRLHCSDXjRG4aHLJLi5xBDkf6AuVMw
+            tokenType: Bearer
+    '401':
+      description: Unable to authenticate
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/Login.yaml
+    description: Registration user object
+    required: true

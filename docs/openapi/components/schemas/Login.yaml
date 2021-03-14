@@ -1,0 +1,16 @@
+type: object
+properties:
+  username:
+    description: User supplied username
+    type: string
+    minLength: 3
+    maxLength: 30
+    required: true
+    example: admin
+  password:
+    description: User supplied password
+    type: string
+    minLength: 6
+    maxLength: 40
+    required: true
+    example: admin
