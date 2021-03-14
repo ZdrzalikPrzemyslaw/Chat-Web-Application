@@ -32,7 +32,7 @@ logging.level.org.springframework.jdbc.core=DEBUG
 # DB
 spring.datasource.url=your-db-url
 spring.datasource.username=your-username
-spring.datasource.password=yourt-password
+spring.datasource.password=your-password
 
 jwt.secret= your-secret-key
 jwt.expirationMs= 864000000
