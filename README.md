@@ -1,5 +1,3 @@
-
-
 <h1 align="center">Cloud_Computing</h1>
 <div align="center">
 
@@ -19,7 +17,7 @@
 A web chat application hosted on Azure cloud services. 
 
 <p align="center">
-  <img src="https://user-images.githubusercontent.com/57731778/111081829-750c4080-8505-11eb-9f9f-687c38f2c592.gif" >
+  <img src="https://user-images.githubusercontent.com/45401422/111082433-8440bd80-8508-11eb-87fa-5861b639fdf4.gif" >
 </p>
 
 ## 🔑 Prerequisites <a name = "prerequisites"></a>
