@@ -2,7 +2,9 @@ get:
   tags:
     - Search
   summary: Search user
-  description: Search user by name or/and surname
+  description: Search user by name or/and surname. 
+    If the name and surname path parameters are equal then the value must either be contained in the name or the surname of the user.
+    If the values are not equal then the name must contain the value provided in the name parameter and the surname of the user must contain the value provided in the surname parameter.
   operationId: search
   parameters:
     - name: name
@@ -69,6 +71,7 @@ post:
     - Search
   summary: Search user
   description: Search user by name or/and surname
+   The name must contain the value provided in the name parameter and the surname of the user must contain the value provided in the surname parameter.
   operationId: search 
   security:
     - token: 

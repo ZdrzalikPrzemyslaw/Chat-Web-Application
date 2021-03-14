@@ -5,7 +5,7 @@
       v-for="chat in sortArrays(this.chats)"
       v-bind:key="chat"
       id="OneChat"
-      @click="this.onClickChat(chat.id)"
+      @click="this.onClickChat(chat)"
     >
       <div class="row" id="UserName">
         {{ chat.chatName }}
@@ -25,16 +25,30 @@ export default {
   props: {
     chats: Array,
   },
+  watch: {
+    chats: function () {
+      if (this.chats[0]) {
+        let chat = this.sortArrays(this.chats)[0];
+        this.$emit("search-event", chat.id);
+              this.$emit("search-event-name", chat.chatName);
+      }
+    },
+  },
+
   data() {
     return {};
+  },
+  created: function () {
+    this.$emit("search-event", null);
   },
   methods: {
     sortArrays(arrays) {
       return _.orderBy(arrays, "lastMessageDate", "desc");
     },
-    onClickChat: function (chatId) {
-      this.$emit("search-event", chatId);
-      console.log("event emitted chat id to display", chatId);
+    onClickChat: function (chat) {
+      this.$emit("search-event", chat.id);
+      console.log(chat.chatName);
+      this.$emit("search-event-name", chat.chatName);
     },
     addZero: function (i) {
       if (i < 10) {
@@ -73,7 +87,7 @@ export default {
   text-align: left;
   cursor: pointer;
   width: 100%;
-  background: #d4d4d4;
+  background: rgba(245, 245, 245, 0.5);
   margin: 10px 5px 5px 50px;
   border-radius: 10px;
   color: black;

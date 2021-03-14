@@ -90,7 +90,7 @@ export default {
     register: function() {
       let self = this;
       axios
-        .post(process.env.VUE_APP_BACKEND_URL + "/registration", {
+        .put(process.env.VUE_APP_BACKEND_URL + "/registration", {
             username: self.user.username,
             password: self.user.password,
             name: self.user.name,
@@ -122,7 +122,7 @@ h2 {
   border: 1px solid gray;
   border-radius: 10px;
   padding: 10px 30px;
-  background: #dcdcdc;
+  background: rgba(245, 245, 245, 0.5);
 }
 
 #buttons > button {

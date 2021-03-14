@@ -33,6 +33,9 @@ public class SearchUsersController {
     @Transactional
     @RequestMapping(value = "", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<?> getUsersByNameAndSurname(@RequestParam(value = "name", required = false, defaultValue = "") String name, @RequestParam(value = "surname", required = false, defaultValue = "") String surname) {
+        if (name.equals(surname)) {
+            return ResponseEntity.ok(new SearchMultipleUsersResponse(userRepository.getUsersByNameContainsOrSurnameContains(name, surname)));
+        }
         return ResponseEntity.ok(new SearchMultipleUsersResponse(userRepository.getUsersByNameContainsAndSurnameContains(name, surname)));
     }
 
@@ -41,6 +44,13 @@ public class SearchUsersController {
     public ResponseEntity<?> getUsersByNameAndSurname(@RequestBody SearchNameSurnameRequest searchNameSurnameRequest) {
         return ResponseEntity.ok(new SearchMultipleUsersResponse(userRepository.getUsersByNameContainsAndSurnameContains(searchNameSurnameRequest.getName(), searchNameSurnameRequest.getSurname())));
     }
+
+    @Transactional
+    @RequestMapping(value = "/id", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<?> getUsersById(@RequestParam(value = "id", required = true) int id) {
+        return ResponseEntity.ok(new SearchMultipleUsersResponse(userRepository.getUsersByID(id)));
+    }
+
 
 
 }

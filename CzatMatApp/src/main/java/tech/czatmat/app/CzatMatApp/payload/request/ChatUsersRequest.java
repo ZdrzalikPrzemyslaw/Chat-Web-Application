@@ -29,5 +29,12 @@ public class ChatUsersRequest {
         public String getUsername() {
             return username;
         }
+
+        @Override
+        public String toString() {
+            return "ChatSubRequest{" +
+                    "username='" + username + '\'' +
+                    '}';
+        }
     }
 }

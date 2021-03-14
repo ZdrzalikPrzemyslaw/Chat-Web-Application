@@ -6,11 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tech.czatmat.app.CzatMatApp.dataClasses.chat.Chat;
 import tech.czatmat.app.CzatMatApp.dataClasses.chat.ChatsRepository;
 import tech.czatmat.app.CzatMatApp.dataClasses.chat.chat_users.ChatUser;
@@ -100,6 +96,29 @@ public class ChatController {
             }
         }
 
+        return ResponseEntity.ok(new GetChatsResponse(list));
+    }
+
+    @Transactional
+    @RequestMapping(value = "/id", method = RequestMethod.GET, produces = "application/json")
+    public ResponseEntity<?> findChatById(@RequestParam(value = "id", required = true) int chatId) {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        User user = userRepository.getUsersByUsername(userDetails.getUsername())
+                .orElseThrow(() -> new RuntimeException("Error: User is not found."));
+
+        List<GetChatsResponse.ChatResponseData> list = new ArrayList<>();
+
+        var j = chatsRepository.getChatById(chatId);
+        if (j.isPresent()) {
+            for (var i : chatsRepository.getChatByName(j.get().getName(), user.getID())) {
+                var message = messagesRepository.getTop1ByChatIdOrderByCreatedAtDesc(i.getId());
+                if (message.isPresent()) {
+                    list.add(new GetChatsResponse.ChatResponseData(userRepository.getUsersFromChat(i.getId()), i.getName(), message.get().getCreatedAt(), i.getId()));
+                } else {
+                    list.add(new GetChatsResponse.ChatResponseData(userRepository.getUsersFromChat(i.getId()), i.getName(), i.getCreatedAt(), i.getId()));
+                }
+            }
+        }
         return ResponseEntity.ok(new GetChatsResponse(list));
     }
 
@@ -202,18 +221,17 @@ public class ChatController {
         return ResponseEntity.status(403).body(new MessageResponse("You don't have access to this message."));
     }
 
+    @PreAuthorize("hasAnyRole('USER', 'SUPER_USER', 'ADMIN')")
     @Transactional
     @RequestMapping(value = "/users", method = RequestMethod.POST, produces = "application/json")
     public ResponseEntity<?> addUsersToExistingChat(@RequestParam("chatId") int chatId, @RequestBody ChatUsersRequest chatUsersRequest) {
         if (!chatsRepository.existsChatById(chatId)) {
             return ResponseEntity.status(404).body("Error: Chat not found");
         }
-        // TODO: 03.01.2021 Sprawdzać czy osoba zapraszająca do czatu jest w nim.
-
+        // TODO: 03.01.2021 Sprawdzać czy osoba zapraszając
         for (var i : chatUsersRequest.getUsers()) {
             User user = userRepository.getUsersByUsername(i.getUsername())
                     .orElseThrow(() -> new RuntimeException("Error: User is not found."));
-
 
             if (!chatUsersRepository.existsByUserIdAndChatId(user.getID(), chatId)) {
                 ChatUser chatUser = new ChatUser(chatId, user.getID());

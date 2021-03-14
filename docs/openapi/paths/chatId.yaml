@@ -1,0 +1,49 @@
+get:
+  tags:
+    - ChatId
+  summary: Find Chat
+  description: Find Chat with given id
+  opearationId: findChat
+  security:
+    - token: 
+      - user
+  parameters:
+    - name: id
+      in: path
+      description: Searched chat id
+      required: true
+      schema:
+        type: int
+  responses:
+    '200':
+      description: Success
+      content:
+        application/json:
+          example:
+            chatsList: [
+              {
+                userList: [
+                  {
+                    name: Administrator,
+                    surname: Administracyjny,
+                    email: admin@admin.pl,
+                    username: admin
+                  },
+                  {
+                    name: Przemek,
+                    surname: Zdrzalik,
+                    email: p@z.pl,
+                    username: Przemek
+                  },
+                  {
+                    name: Julia,
+                    surname: Szymanska,
+                    email: J@S.pl,
+                    username: Julia
+                  }
+                ],
+                chatName: testowy,
+                lastMessageDate: 2020-12-29T18:27:27.550+00:00,
+                id: 1
+              }
+            ]

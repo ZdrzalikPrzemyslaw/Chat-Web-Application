@@ -17,6 +17,10 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Iterable<User> getUsersByNameContainsAndSurnameContains(String name, String surname);
 
+    Iterable<User> getUsersByNameContainsOrSurnameContains(String name, String surname);
+
+    Iterable<User> getUsersByID(int id);
+
     @Query("select u.* from users u where u.id in (select cu.user_id from chat_users cu where cu.chat_id = :chatId)")
     Iterable<User> getUsersFromChat(@Param("chatId") int chatId);
 }
